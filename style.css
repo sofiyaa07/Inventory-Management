@@ -106,6 +106,7 @@ a {
 /* mock list */
 .list {
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .list a {
