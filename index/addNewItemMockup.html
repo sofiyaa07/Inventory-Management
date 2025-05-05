@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Details Mockup</title>
+    <link rel="stylesheet" href="stylesAddItem.css">
+    
+</head>
+<body>
+    <div class="item-box">
+        <div class="header-row">
+            <button class="back">←</button>
+            <label>Inventory</label>
+        </div>
+
+        <div class="content-row">
+            <div class="upload-image">
+                <h2>Upload Image</h2>
+                <input type="file" id="imageInput" accept="image/*" style ="cursor: pointer;" >
+            </div>
+
+            <div class="right-panel">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Add name here...">
+
+                <div class="stock-row">
+                    <label>Stock: </label>
+                    <input type="number" value="">
+                    <label for="threshold">Threshold:</label>
+                    <input type="number" id="stock" name="stock" value="">
+                </div>
+
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" value="Add model here..">
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" value="Add location here...">
+
+                <label>Notes</label>
+                <textarea placeholder="Add any notes here..."></textarea>
+
+                <a href="#" >Order more</a>
+
+                <div class="button-row">
+                    <button class="save">Save</button>
+                    <button class="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
