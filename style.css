@@ -10,11 +10,12 @@
 /* universal styles*/
 
 /* something about this just doesn't apply styles like width */
-#back-butt {
-    margin: 20px;
+.nav-butt {
+    margin: 10px;
+    margin-left: 20px;
     background-color: white;
-    border: 3px solid black;
-    width: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
 
 }
 
@@ -51,13 +52,11 @@ a {
 
 ::-webkit-scrollbar-track {
     background-color: rgb(239, 239, 239);
-    border: 2px solid black;
 
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: rgb(206, 206, 206);
-    border: 2px solid rgb(143, 143, 143);
 
 }
 
@@ -89,7 +88,6 @@ a {
     justify-content: center;
 
     font-weight: bold;
-    border: 3px solid black;
     vertical-align: middle;
     background-color: white;
     height: 80%;
@@ -120,7 +118,6 @@ a {
 
 .list img {
     max-height: 40px;
-    border: 2px solid black;
 
 }
 
@@ -137,7 +134,7 @@ a {
     height: 80vh;
     width: 100vh;
     background-color: white;
-    border: 3px solid black;
+    border: 1px solid black;
 }
 
 #low-stock {
@@ -146,12 +143,11 @@ a {
     height: 60vh;
     display: grid;
     grid-template: repeat(5, 1fr) / repeat(8, 1fr);
-    border: 3px solid red;
+    border: 1px solid red;
     background-color: white;
 }
 
 #low-stock a {
-    border: 1px solid black;
     color: rgb(33, 0, 0);
     overflow: hidden;
     background-color: white;
@@ -174,22 +170,26 @@ a {
 
 /* shelves */
 
-.shelf {
-    display: grid;
-    background-color: lightgrey;
-    margin: 2.5vh;
-    border: 3px solid black;
-    overflow: scroll;
-    overflow-x: hidden;
-    scrollbar-color: red;
+.shelf #empty-container {
+    background-color: rgb(155, 155, 155);
 }
 
-.shelf a {
+/* all the shelves in the back */
+.shelf {
+    display: grid;
+    background-color: rgb(155, 155, 155);
+    margin: 2.5vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.back-shelf a {
     overflow: hidden;
     background-color: white;
-    border: 2px solid black;
     grid-column-end: span 5;
-    min-height: 60px;
+    grid-row-end: span 3;
+    min-height: 90px;
+    border: 1px solid grey;
     /* the columns are weird numbers because the boxes are weird sizes */
 }
 
@@ -198,32 +198,84 @@ a {
 }
 
 .shelf .large-container {
-    grid-row-end: span 2;
+    grid-row-end: span 4;
     grid-column-end: span 8;
+    min-height: 120px;
 }
 
 .shelf .large-wide-container {
-    grid-row-end: span 2;
+    grid-row-end: span 4;
     grid-column-end: span 16;
+    min-height: 120px;
 }
 
 #left-shelf {
     /* sets the size of the grid */
+    border: 1px solid grey;
     margin-left: 10vh;
     width: 50vh;
     height: 80vh;
-    grid-template: repeat(17, 1fr) / repeat(20, 1fr);
+    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
 }
 
 #center-shelf {
+    border: 1px solid grey;
     width: 100vh;
     height: 80vh;
-    grid-template: repeat(17, 1fr) / repeat(40, 1fr);
+    grid-template: repeat(34, 1fr) / repeat(40, 1fr);
 }
 
 #right-shelf {
+    border: 1px solid grey;
     margin-right: 10vh;
     width: 50vh;
     height: 80vh;
-    grid-template: repeat(17, 1fr) / repeat(20, 1fr);
+    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
+}
+
+/* storage in the front */
+#blue-shelf {
+    width: 100vh;
+    height: 80vh;
+    grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+    border: 1px solid rgb(58, 59, 129);
+}
+
+#blue-shelf a {
+    overflow: hidden;
+    background-color: white;
+    min-height: 90px;
+    border: 1px solid rgb(58, 59, 129);
+}
+
+
+#grey-shelf {
+    width: 100vh;
+    height: 80vh;
+    grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+    border: 1px solid rgb(58, 59, 129);
+}
+
+#grey-shelf a {
+    overflow: hidden;
+    background-color: white;
+    min-height: 90px;
+    border: 1px solid grey;
+}
+
+
+/* on hover effects because they all have different levels of specificity */
+.shelf a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+#blue-shelf a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+#grey-shelf a:hover {
+    background-color: aliceblue;
+    color: darkblue;
 }
