@@ -1,2 +1,2 @@
-#Computer Engineering Inventory Management
+Computer Engineering Inventory Management
 Web app in html, CSS, JavaScript
