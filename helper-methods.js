@@ -36,11 +36,27 @@ export function sortStockAsc(arr) {
     */
     // Make comparator function for stock, ascending
     let stockAsc = arr.sort((a, b) => {
-        let nameA = a.stock;
-        let nameB = b.stock;
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
+        let stockA = a.stock;
+        let stockB = b.stock;
+        if (stockA < stockB) return -1;
+        if (stockA > stockB) return 1;
         return 0;
     });
     return stockAsc;
+}
+
+export function sortStockDiff(arr) {
+    /*
+    Input: array of part objects
+    Return: sorted array of part objects by (stock - threshold), low to high
+    */
+    // Make comparator function for (stock - threshold), ascending
+    let stockDiff = arr.sort((a, b) => {
+        let diffA = (a.stock - a.threshold);
+        let diffB = (b.stock - b.threshold);
+        if (diffA < diffB) return -1;
+        if (diffA > diffB) return 1;
+        return 0;
+    });
+    return stockDiff;
 }
