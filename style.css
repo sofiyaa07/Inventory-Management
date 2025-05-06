@@ -74,7 +74,7 @@ a {
     /* center items vertically */
     gap: 5vh;
     /* space between buttons */
-    height: 100vh;
+    height: 90vh;
     padding: 10vh;
 }
 
@@ -143,8 +143,8 @@ a {
     height: 60vh;
     display: grid;
     grid-template: repeat(5, 1fr) / repeat(8, 1fr);
-    border: 1px solid red;
-    background-color: white;
+    border: 3px solid red;
+    background-color: rgb(255, 226, 226);
 }
 
 #low-stock a {
@@ -181,6 +181,7 @@ a {
     margin: 2.5vh;
     overflow: scroll;
     overflow-x: hidden;
+    
 }
 
 .back-shelf a {
@@ -191,6 +192,7 @@ a {
     min-height: 90px;
     border: 1px solid grey;
     /* the columns are weird numbers because the boxes are weird sizes */
+
 }
 
 .shelf .wide-container {
