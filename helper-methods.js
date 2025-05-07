@@ -1,6 +1,6 @@
 export function makeShelf(numRows, numCols) {
     /*
-    Input: numRows, numCols 
+    Input: number of rows and number of columns 
     Returns: an array of arrays with dimensions numRows by numCols
     */
     var shelf = [];
@@ -91,4 +91,24 @@ export function sortStockDiff(arr) {
         return 0;
     });
     return stockDiff;
+}
+
+export function csvToObjects(csvStr) {
+    /*
+    Input: String from CSV file, with desired keys in first row and corresponding values for each object in the rows after
+    Return: list of objects
+    */
+    // Each part object is separated by a new line
+    const parts = csvStr.trim().split('\n');
+    // Each key in the header is separated by a comma
+    const keys = parts[0].split(',')
+    // map() goes over each element in parts
+    return parts.slice(1).map(part => {
+        const values = part.split(',');
+        return keys.reduce((obj, header, index) => {
+            // Match each object key to value 
+            obj[header] = values[index];
+            return obj;
+        }, {});
+    });
 }
