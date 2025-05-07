@@ -44,6 +44,11 @@ a {
     flex-direction: row;
 }
 
+.vert-container {
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* scrollbar stuff */
 ::-webkit-scrollbar {
@@ -65,7 +70,6 @@ a {
 }
 
 
-/* chat gpt code */
 .button-menu {
     display: flex;
     justify-content: center;
@@ -163,7 +167,10 @@ a {
     color: darkblue;
 }
 
-
+.add-part {
+    max-width: 50%;
+    align-self: center;
+}
 
 
 
