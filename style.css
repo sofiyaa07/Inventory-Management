@@ -44,6 +44,11 @@ a {
     flex-direction: row;
 }
 
+.vert-container {
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* scrollbar stuff */
 ::-webkit-scrollbar {
@@ -65,7 +70,6 @@ a {
 }
 
 
-/* chat gpt code */
 .button-menu {
     display: flex;
     justify-content: center;
@@ -163,15 +167,18 @@ a {
     color: darkblue;
 }
 
-
+.add-part {
+    max-width: 50%;
+    align-self: center;
+}
 
 
 
 
 /* shelves */
 
-.shelf #empty-container {
-    background-color: rgb(155, 155, 155);
+#empty-container {
+    background-color: rgb(155, 155, 155) !important;
 }
 
 /* all the shelves in the back */
@@ -235,6 +242,8 @@ a {
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
 }
 
+
+
 /* storage in the front */
 #blue-shelf {
     width: 100vh;
@@ -254,8 +263,13 @@ a {
 #grey-shelf {
     width: 100vh;
     height: 80vh;
-    grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+    grid-template: repeat(24, 1fr) / repeat(20, 1fr);
     border: 1px solid rgb(58, 59, 129);
+}
+
+.shelf #grey-large-container {
+    grid-row-end: span 6;
+    grid-column-end: span 5;
 }
 
 #grey-shelf a {
@@ -263,6 +277,8 @@ a {
     background-color: white;
     min-height: 90px;
     border: 1px solid grey;
+    grid-row-end: span 4;
+    grid-column-end: span 4;
 }
 
 
