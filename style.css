@@ -10,13 +10,24 @@
 /* universal styles*/
 
 /* something about this just doesn't apply styles like width */
+.tabs {
+    margin-left: 5vh;
+}
+
 .nav-butt {
-    margin: 10px;
-    margin-left: 20px;
     background-color: white;
     padding-left: 20px;
     padding-right: 20px;
+    font-weight: bold;
+    border: 3px solid black;
 
+}
+
+.pop-background {
+    background-color: white;
+    margin: 5vh;
+    margin-top: 0;
+    border: 3px solid black;
 }
 
 body {
@@ -138,7 +149,7 @@ a {
     height: 80vh;
     width: 100vh;
     background-color: white;
-    border: 1px solid black;
+    border: 3px solid black;
 }
 
 #low-stock {
@@ -188,6 +199,7 @@ a {
     margin: 2.5vh;
     overflow: scroll;
     overflow-x: hidden;
+    border: 3px solid black;
     
 }
 
@@ -220,23 +232,18 @@ a {
 
 #left-shelf {
     /* sets the size of the grid */
-    border: 1px solid grey;
-    margin-left: 10vh;
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
 }
 
 #center-shelf {
-    border: 1px solid grey;
     width: 100vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(40, 1fr);
 }
 
 #right-shelf {
-    border: 1px solid grey;
-    margin-right: 10vh;
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
@@ -249,7 +256,6 @@ a {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(8, 1fr) / repeat(8, 1fr);
-    border: 1px solid rgb(58, 59, 129);
 }
 
 #blue-shelf a {
@@ -264,7 +270,6 @@ a {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(24, 1fr) / repeat(20, 1fr);
-    border: 1px solid rgb(58, 59, 129);
 }
 
 .shelf #grey-large-container {
