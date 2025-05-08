@@ -7,6 +7,14 @@ body {
 .item-box {
     max-width: 900px;
     margin: auto;
+
+    max-width: 1200px; /* Set a consistent maximum width for all pages */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding around the content */
+    background-color: white; /* Optional: Set a consistent background color */
+    border: 1px solid #ccc; /* Optional: Add a border for consistency */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
 }
 
 .header-row {
@@ -83,43 +91,52 @@ textarea {
     display: flex;
     gap: 10px;
 }
-button, input[type="submit"] {
-    padding: 8px 12px;
-    border: none;
+
+
+button {
+    padding: 15px 12px;
+    border: solid 1px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace; 
 }
 
-button:hover, input[type="submit"]:hover {
-    background-color: red;
+input[type="submit"] {
+    width: 75px; 
+    padding: 15px 12px;
+    border: solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; 
 }
 
-.back { }
-
-
-.upload-image {
-    border: 2px dashed #ccc; 
-    padding: 30px; 
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    gap: 10px; 
-    margin-top: 10px;
-    text-align: center;
-    border-radius: 8px;
+input[type="text"] {
+    color: #ccc; 
+    font-family:'Courier New', Courier, monospace; 
 }
 
-h2 {
-    margin-bottom: 0px; /* Specific to Add Item */
+
+input[type="submit"]:hover {
+    background-color: rgb(200, 221, 245);
 }
 
-.link-row {
+
+.link-row , submit-link {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10px;                                                
+}
+
+.scrollable-links {
+    overflow: scroll; 
+    overflow-x: hidden; 
+    max-height: 200px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 .link-row a {
@@ -135,6 +152,27 @@ h2 {
 .link-row a:hover {
     background-color: aliceblue;
     color: darkblue;
+}
+
+button:hover {
+    background-color: red;
+}
+
+
+.upload-image {
+    border: 2px dashed #ccc; 
+    padding: 30px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+h2 {
+    margin-bottom: 0px; 
 }
 
 .item-changes img {
@@ -231,16 +269,27 @@ h2 {
     border-radius: 4px;
 }
 
-.hidden {
-    display: none;
-}
-nav {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    background-color: #eee;
-}
 
 hover {
     background-color: grey; 
+}
+
+
+/* scrollbar stuff */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(239, 239, 239);
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(152, 152, 152);
 }
