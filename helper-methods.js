@@ -1,3 +1,6 @@
+import Part from './part.js';
+
+
 export function makeShelf(numRows, numCols) {
     /*
     Input: number of rows and number of columns 
@@ -96,19 +99,47 @@ export function sortStockDiff(arr) {
 export function csvToObjects(csvStr) {
     /*
     Input: String from CSV file, with desired keys in first row and corresponding values for each object in the rows after
-    Return: list of objects
+    Return: list of part objects
     */
-    // Each part object is separated by a new line
+    // Each part object is separated by a new line, use trim to get rid of spaces
     const parts = csvStr.trim().split('\n');
     // Each key in the header is separated by a comma
-    const keys = parts[0].split(',')
+    const keys = parts[0].split(',').map(key => key.trim());
     // map() goes over each element in parts
     return parts.slice(1).map(part => {
         const values = part.split(',');
-        return keys.reduce((obj, header, index) => {
+        const partData = keys.reduce((obj, header, index) => {
             // Match each object key to value 
             obj[header] = values[index];
             return obj;
         }, {});
+
+        // Make part object, casting to number where needed
+        return new Part(
+            partData.name,
+            partData.model,
+            partData.location,
+            Number(partData.stock),
+            partData.notes,
+            partData.storeLinks,
+            partData.imgSrc,
+            Number(partData.threshold),
+            Number(partData.PART_ID),
+        );
+    });
+}
+
+export function readCSV(file) {
+    return new Promise((resolve, reject) => {
+        const fr = new FileReader();
+        fr.onload = (event) => {
+            resolve(event.target.result);
+        }
+
+        fr.onerror = (event) => {
+            reject(event.target.error);
+        }
+
+        fr.readAsText(file);
     });
 }

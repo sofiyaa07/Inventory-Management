@@ -1,5 +1,8 @@
 export default class Part {
-    constructor(name, model, location, stock, notes, storeLinks, imgSrc, threshold, PART_ID) {
+    // Track the number of part instances
+    static numParts = 0;
+
+    constructor(name, model, location, stock, notes, storeLinks, imgSrc, threshold) {
         this._name = name;
         this._model = model;
         this._location = location;
@@ -8,7 +11,11 @@ export default class Part {
         this._storeLinks = storeLinks;
         this._imgSrc = imgSrc;
         this._threshold = threshold;
-        this._PART_ID = PART_ID;
+
+        // Part counter
+        Part.numParts++;
+        this._PART_ID = Part.numParts;
+
     }
 
     get name() {
@@ -43,6 +50,10 @@ export default class Part {
         return this._threshold;
     }
 
+    get PART_ID() {
+        return this._PART_ID;
+    }
+
     set name(na) {
         this._name = na;
     }
@@ -70,4 +81,9 @@ export default class Part {
     set imgSrc(img) {
         this._imgSrc = img;
     }
+
+    set threshold(t) {
+        this._threshold = t;
+    }
+
 }
