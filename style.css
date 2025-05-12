@@ -92,6 +92,7 @@ a {
 }
 
 
+/* home */
 .button-menu {
     display: flex;
     justify-content: center;
@@ -119,6 +120,8 @@ a {
     width: 80%;
     text-align: center;
     position: relative;
+
+    border: 3px solid black;
 }
 
 
