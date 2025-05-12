@@ -20,6 +20,7 @@ body {
     background-color: rgb(200, 221, 245);
     margin-top: 20px;
     /* dumb solution that will probably break something else */
+    overflow-x: hidden; /* sneakily hides a lot of formatting errors oops */
 }
 
 a:visited {
