@@ -9,20 +9,6 @@
 
 /* universal styles*/
 
-/* something about this just doesn't apply styles like width */
-.tabs {
-    margin-left: 5vh;
-}
-
-.nav-butt {
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-weight: bold;
-    border: 3px solid black;
-
-}
-
 .pop-background {
     background-color: white;
     margin: 5vh;
@@ -50,10 +36,34 @@ a {
     color: black;
 }
 
+/* top button styling here */
 .page-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
+
+.page-specific-button { /* make buttons go on other side */
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10vh;
+}
+
+.tabs {
+    margin-left: 5vh;
+}
+
+.nav-butt {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    border: 3px solid black;
+
+}
+
+
 
 .vert-container {
     display: flex;
