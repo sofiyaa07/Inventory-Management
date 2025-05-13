@@ -9,20 +9,6 @@
 
 /* universal styles*/
 
-/* something about this just doesn't apply styles like width */
-.tabs {
-    margin-left: 5vh;
-}
-
-.nav-butt {
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-weight: bold;
-    border: 3px solid black;
-
-}
-
 .pop-background {
     background-color: white;
     margin: 5vh;
@@ -34,6 +20,7 @@ body {
     background-color: rgb(200, 221, 245);
     margin-top: 20px;
     /* dumb solution that will probably break something else */
+    overflow-x: hidden; /* sneakily hides a lot of formatting errors oops */
 }
 
 a:visited {
@@ -50,10 +37,34 @@ a {
     color: black;
 }
 
+/* top button styling here */
 .page-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
+
+.page-specific-button { /* make buttons go on other side */
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10vh;
+}
+
+.tabs {
+    margin-left: 5vh;
+}
+
+.nav-butt {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    border: 3px solid black;
+
+}
+
+
 
 .vert-container {
     display: flex;
@@ -81,12 +92,12 @@ a {
 }
 
 
+/* home */
 .button-menu {
     display: flex;
     justify-content: center;
     /* center items horizontally */
     align-items: center;
-    /* center items vertically */
     gap: 5vh;
     /* space between buttons */
     height: 90vh;
@@ -109,12 +120,18 @@ a {
     width: 80%;
     text-align: center;
     position: relative;
+
+    border: 3px solid black;
 }
 
 
 .button-menu img {
     max-height: 50%;
 }
+
+
+
+
 
 /* mock list */
 .list {
@@ -123,7 +140,6 @@ a {
 }
 
 .list a {
-    list-style-type: none;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -147,17 +163,17 @@ a {
 
     margin: 20px;
     height: 80vh;
-    width: 100vh;
+    width: 120vh;
     background-color: white;
     border: 3px solid black;
 }
 
 #low-stock {
     margin: 20px;
-    width: 100vh;
-    height: 60vh;
+    width: 80vh;
+    height: 80vh;
     display: grid;
-    grid-template: repeat(5, 1fr) / repeat(8, 1fr);
+    grid-template: repeat(6, 1fr) / repeat(6, 1fr);
     border: 3px solid red;
     background-color: rgb(255, 226, 226);
 }
@@ -179,8 +195,13 @@ a {
 }
 
 .add-part {
-    max-width: 50%;
-    align-self: center;
+    justify-content: center;
+}
+
+input {
+    border: 3px solid black;
+    width: 50vh;
+    font-weight: bold;
 }
 
 
@@ -192,7 +213,7 @@ a {
     background-color: rgb(155, 155, 155) !important;
 }
 
-/* all the shelves in the back */
+/* all the shelves */
 .shelf {
     display: grid;
     background-color: rgb(155, 155, 155);
@@ -230,20 +251,20 @@ a {
     min-height: 120px;
 }
 
-#left-shelf {
+.left-shelf {
     /* sets the size of the grid */
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
 }
 
-#center-shelf {
+.center-shelf {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(40, 1fr);
 }
 
-#right-shelf {
+.right-shelf {
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
@@ -252,13 +273,13 @@ a {
 
 
 /* storage in the front */
-#blue-shelf {
+.blue-shelf {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(8, 1fr) / repeat(8, 1fr);
 }
 
-#blue-shelf a {
+.blue-shelf a {
     overflow: hidden;
     background-color: white;
     min-height: 90px;
@@ -266,18 +287,24 @@ a {
 }
 
 
-#grey-shelf {
+.grey-shelf {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(24, 1fr) / repeat(20, 1fr);
 }
 
-.shelf #grey-large-container {
+/* different sizes */
+.shelf .grey-large-container {
     grid-row-end: span 6;
     grid-column-end: span 5;
 }
 
-#grey-shelf a {
+.shelf .grey-largest-container {
+    grid-row-end: span 6;
+    grid-column-end: span 20;
+}
+
+.grey-shelf a {
     overflow: hidden;
     background-color: white;
     min-height: 90px;
@@ -293,12 +320,7 @@ a {
     color: darkblue;
 }
 
-#blue-shelf a:hover {
-    background-color: aliceblue;
-    color: darkblue;
-}
-
-#grey-shelf a:hover {
+.grey-shelf a:hover {
     background-color: aliceblue;
     color: darkblue;
 }
