@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import Part from './part.js';
 
 
@@ -103,6 +104,7 @@ export function csvToObjects(csvStr) {
     */
     // Each part object is separated by a new line, use trim to get rid of spaces
     const parts = csvStr.trim().split('\n');
+    console.log(parts);
     // Each key in the header is separated by a comma
     const keys = parts[0].split(',').map(key => key.trim());
     // map() goes over each element in parts
@@ -124,12 +126,16 @@ export function csvToObjects(csvStr) {
             partData.storeLinks,
             partData.imgSrc,
             Number(partData.threshold),
-            Number(partData.PART_ID),
         );
     });
 }
 
 export function readCSV(file) {
+    /*
+    Input: CSV file to read
+    Return: contents of CSV file as a String
+    */
+    // Promise is a placeholder object for the CSV file contents
     return new Promise((resolve, reject) => {
         const fr = new FileReader();
         fr.onload = (event) => {
@@ -142,4 +148,16 @@ export function readCSV(file) {
 
         fr.readAsText(file);
     });
+}
+
+export async function writeToCSV(filePath, str) {
+    /*
+    Input: path to CSV file and string to append
+    */
+    try {
+        await fs.appendFile(filePath, `${str}\n`, 'utf-8');
+        console.log(`${str} appended.`);
+    } catch(err) {
+        console.log('Error appending str: ', err);
+    }
 }
