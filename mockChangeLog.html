@@ -1,40 +1,40 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Change Log</title>
     <link rel="stylesheet" href="styleMockup.css">
-    
 </head>
 <body>
-    <section id="changeLog"  
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <a href="mock.html" class="nav">Home</a>
+        <input type="search" placeholder="Search..." class="nav">
+    </div>
+
+    <!-- Change Log Section -->
+    <section id="changeLog">
         <div class="item-box">
-            <div class="header-row">
-                <a href="mock.html" class="back">← Home</a>
-            </div>
 
-            <form id="form" class="search-form">
-                <input type="search" id="query" name="q" placeholder="Search..." class=""search-bar>
-                <button class="search button">Search</button>
-            </form>
-
-            <!-- Individual items -->
-        <div class="item-changes">
-            <div class="item-row">
-                <img src="Arduino.jpg">
-                <div class="item-details">
-                    <label for="item1">Arduino Uno REV3</label>
-                    <label for="date">-3 (January 3, 2025)</label>
+            <!-- Individual Item Changes -->
+            <div class="item-changes">
+                <div class="item-row">
+                    <img src="Arduino.jpg" alt="Arduino Uno">
+                    <div class="item-details">
+                        <label for="item1">Arduino Uno REV3</label>
+                        <label for="date1">-3 (January 3, 2025)</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="item-row">
-                <img src="Arduino.jpg">
-                <div class="item-details">
-                    <label for="item2">Arduino Mega 2560</label>
-                    <label for="date">+5 (January 5, 2025)</label>
+                <div class="item-row">
+                    <img src="Arduino.jpg" alt="Arduino Mega">
+                    <div class="item-details">
+                        <label for="item2">Arduino Mega 2560</label>
+                        <label for="date2">+5 (January 5, 2025)</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </section>
 </body>
- </html> 
+</html>

@@ -5,6 +5,9 @@ body {
 
 }
 
+a:visited {
+    color: black;
+}
 
 a:hover {
     background-color: aliceblue;
@@ -27,13 +30,19 @@ a:hover {
     text-decoration: none; /* Removes the underline */
     
 }
+.tabs input[type="search"] {
+    width: 30%;  
+    height: 30px;
+
+}
 
 .item-box {
     margin: 0 auto; /* Center the content horizontally */
-    background-color: white; /* Optional: Set a consistent background color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    background-color: white; 
     border: 3px solid black;
+    overflow: scroll; 
     overflow-x: hidden; 
+
     height: 80vh;
 
 
@@ -53,7 +62,6 @@ img {
     width: 400px;
     height: auto;  
     object-fit: cover;  
-    border-radius: 6px;
     border: 1px solid #ddd;
     flex-shrink: 0;
 }
@@ -62,6 +70,14 @@ img {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    flex-grow: 1;
+}
+
+
+.order-right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     flex-grow: 1;
 }
 
@@ -81,38 +97,29 @@ input, textarea {
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace; 
     border: 1px solid #ccc;
-    border-radius: 4px;
     resize: vertical;
 }
 
-.button-row {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
 
 
 button {
-    padding: 15px 12px;
+    padding: 13px 16px;
+    background-color: #ccc; 
     border: solid 1px;
-    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace; 
 }
 
 input[type="submit"] {
-    width: 75px; 
-    padding: 15px 12px;
+    padding: 9px 12px;
     border: solid 1px;
-    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace; 
 }
 
-input[type="text"] {
-    color: #ccc; 
+input[type="text"], input[type="number"]{
     font-family:'Courier New', Courier, monospace; 
 }
 
@@ -122,10 +129,9 @@ input[type="submit"]:hover {
 }
 
 
-.link-row , submit-link {
+.link-row {
     display: flex;
     align-items: center;
-    gap: 10px;
     margin-bottom: 10px;                                                
 }
 
@@ -134,17 +140,17 @@ input[type="submit"]:hover {
     overflow-x: hidden; 
     max-height: 200px;
     padding: 10px 15px;
-    border: 1px solid #ccc;
+    border: 3px solid black;
 }
 
 .link-row a {
     flex-grow: 1;
     color: black;
+    font-weight: bold; 
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
-    border-radius: 4px;
-    border: 1px solid black;
+    border: 1px solid #ccc;
 }
 
 
@@ -161,21 +167,12 @@ button:hover {
     gap: 10px; 
     margin-top: 10px;
     text-align: center;
-    border-radius: 8px;
 }
 
 h2 {
     margin-bottom: 0px; 
 }
 
-.item-changes img {
-    width: 50px;
-    height: auto;  
-    object-fit: cover;  
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    flex-shrink: 0;
-}
 
 .item-changes {
     display: flex; 
@@ -183,14 +180,6 @@ h2 {
     gap: 15px; 
     margin-top: 20px; 
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.search form {
-    display: flex; 
-    gap: 10px; 
-    margin-bottom: 20px; 
 }
 
 .search-bar {
@@ -198,30 +187,36 @@ h2 {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
 } 
 
-.search-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: #2db365;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
 .search-button:hover {
-    background-color: #249a50; /* Slightly darker green on hover */
+        background-color: aliceblue;
+        color: darkblue;
+    }
+.submit-link {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
+
+.submit-link input[type="text"] {
+    flex-grow: 1;
+    width: 100%;
+    border: 3px solid black; 
+    font-weight: bold; 
+}
+
 
 /* Individual item rows */
 .item-changes {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .item-row {
@@ -229,35 +224,41 @@ h2 {
     align-items: center;
     gap: 15px;
     padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
     background-color: #fff;
 }
 
 .item-row img {
     width: 50px;
-    height: 50px;
     object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
+    border: none;
 }
 
 .item-details {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: column;   
 }
 
-.item-details label {
-    font-size: 13px;
-    color: #333;
+/* Style for item subtitles */
+.item-details label:first-of-type {
+    font-size: 16px; 
+    font-weight: bold;  
+    color: #000;  
 }
 
+/* Style for the date part */
+.item-details label:last-of-type {
+    font-size: 13px;  
+    font-weight: normal; 
+    color: #555;  
+}
+
+/* search bar */
   form {
     padding: 8px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 
