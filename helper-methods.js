@@ -150,14 +150,26 @@ export function readCSV(file) {
     });
 }
 
-export async function writeToCSV(filePath, str) {
+async function writeToCSV(filePath, str) {
     /*
     Input: path to CSV file and string to append
     */
     try {
-        await fs.appendFile(filePath, `${str}\n`, 'utf-8');
+        await fs.appendFile(filePath, `\n${str}`, 'utf-8');
         console.log(`${str} appended.`);
     } catch(err) {
         console.log('Error appending str: ', err);
     }
+}
+
+export function addObjectInfoToCSV(obj, filePath) {
+    /*
+    Input: Part Object and CSV filePath
+    */
+    let vals = Object.values(obj).map(value => value.toString());
+    // Convert to String
+    let valsStr = JSON.stringify(vals);
+    // Get rid of quotes and square brackets before writing to CSV
+    valsStr = valsStr.replace(/["\[\]]/g, '');
+    writeToCSV(filePath, valsStr);
 }
