@@ -30,13 +30,19 @@ a:hover {
     text-decoration: none; /* Removes the underline */
     
 }
+.tabs input[type="search"] {
+    width: 30%;  
+    height: 30px;
+
+}
 
 .item-box {
     margin: 0 auto; /* Center the content horizontally */
-    background-color: white; /* Optional: Set a consistent background color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    background-color: white; 
     border: 3px solid black;
+    overflow: scroll; 
     overflow-x: hidden; 
+
     height: 80vh;
 
 
@@ -97,7 +103,8 @@ input, textarea {
 
 
 button {
-    padding: 13px 12px;
+    padding: 13px 16px;
+    background-color: #ccc; 
     border: solid 1px;
     cursor: pointer;
     font-weight: bold;
@@ -125,7 +132,6 @@ input[type="submit"]:hover {
 .link-row {
     display: flex;
     align-items: center;
-    gap: 10px;
     margin-bottom: 10px;                                                
 }
 
@@ -134,16 +140,17 @@ input[type="submit"]:hover {
     overflow-x: hidden; 
     max-height: 200px;
     padding: 10px 15px;
-    border: 1px solid #ccc;
+    border: 3px solid black;
 }
 
 .link-row a {
     flex-grow: 1;
     color: black;
+    font-weight: bold; 
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid black;
+    border: 1px solid #ccc;
 }
 
 
@@ -166,13 +173,6 @@ h2 {
     margin-bottom: 0px; 
 }
 
-.item-changes img {
-    width: 50px;
-    height: auto;  
-    object-fit: cover;  
-    border: 1px solid #ddd;
-    flex-shrink: 0;
-}
 
 .item-changes {
     display: flex; 
@@ -180,13 +180,6 @@ h2 {
     gap: 15px; 
     margin-top: 20px; 
     padding: 8px;
-    border: 1px solid #ccc;
-}
-
-.search form {
-    display: flex; 
-    gap: 10px; 
-    margin-bottom: 20px; 
 }
 
 .search-bar {
@@ -197,18 +190,11 @@ h2 {
     box-sizing: border-box;
 } 
 
-.search-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: #2db365;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
 
 .search-button:hover {
-    background-color: #249a50; /* Slightly darker green on hover */
-}
+        background-color: aliceblue;
+        color: darkblue;
+    }
 .submit-link {
     display: flex;
     width: 100%;
@@ -220,11 +206,8 @@ h2 {
 .submit-link input[type="text"] {
     flex-grow: 1;
     width: 100%;
-    box-sizing: border-box;
-}
-
-.submit-link input[type="submit"] {
-    white-space: nowrap;
+    border: 3px solid black; 
+    font-weight: bold; 
 }
 
 
@@ -233,7 +216,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .item-row {
@@ -241,32 +224,41 @@ h2 {
     align-items: center;
     gap: 15px;
     padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
     border: 1px solid #ccc;
     background-color: #fff;
 }
 
 .item-row img {
     width: 50px;
-    height: 50px;
     object-fit: cover;
-    border: 1px solid #ddd;
+    border: none;
 }
 
 .item-details {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: column;   
 }
 
-.item-details label {
-    font-size: 13px;
-    color: #333;
+/* Style for item subtitles */
+.item-details label:first-of-type {
+    font-size: 16px; / 
+    font-weight: bold;  
+    color: #000;  
 }
 
+/* Style for the date part */
+.item-details label:last-of-type {
+    font-size: 13px;  
+    font-weight: normal; 
+    color: #555;  
+}
+
+/* search bar */
   form {
     padding: 8px;
     font-size: 14px;
-    border: 1px solid #ccc;
 }
 
 
