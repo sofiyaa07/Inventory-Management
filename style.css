@@ -198,6 +198,12 @@ a {
     justify-content: center;
 }
 
+input {
+    border: 3px solid black;
+    width: 50vh;
+    font-weight: bold;
+}
+
 
 
 
