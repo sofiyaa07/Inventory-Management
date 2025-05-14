@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+
+}
+
+/* universal styles*/
+
+.pop-background {
+    background-color: white;
+    margin: 5vh;
+    margin-top: 0;
+    border: 3px solid black;
+}
+
+body {
+    background-color: rgb(200, 221, 245);
+    margin-top: 20px;
+    /* dumb solution that will probably break something else */
+    overflow-x: hidden; /* sneakily hides a lot of formatting errors oops */
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* top button styling here */
+.page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.page-specific-button { /* make buttons go on other side */
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10vh;
+}
+
+.tabs {
+    margin-left: 5vh;
+}
+
+.nav-butt {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    border: 3px solid black;
+
+}
+
+
+
+.vert-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* scrollbar stuff */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(239, 239, 239);
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(152, 152, 152);
+}
+
+
+/* home */
+.button-menu {
+    display: flex;
+    justify-content: center;
+    /* center items horizontally */
+    align-items: center;
+    gap: 5vh;
+    /* space between buttons */
+    height: 90vh;
+    padding: 10vh;
+}
+
+
+.button-menu a {
+    /* changes the stuff to be flexboxed, then centers */
+    display: flex;
+    flex-direction: column;
+    /* changes to vertical aligment */
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    vertical-align: middle;
+    background-color: white;
+    height: 80%;
+    width: 80%;
+    text-align: center;
+    position: relative;
+
+    border: 3px solid black;
+}
+
+
+.button-menu img {
+    max-height: 50%;
+}
+
+
+
+
+
+/* mock list */
+.list {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.list a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.list img {
+    max-height: 40px;
+
+}
+
+.list p {
+    margin-left: 10px;
+}
+
+#inv-list {
+    display: flex;
+    flex-direction: column;
+    align-items: vertical;
+
+    margin: 20px;
+    height: 80vh;
+    width: 120vh;
+    background-color: white;
+    border: 3px solid black;
+}
+
+#low-stock {
+    margin: 20px;
+    width: 80vh;
+    height: 80vh;
+    display: grid;
+    grid-template: repeat(6, 1fr) / repeat(6, 1fr);
+    border: 3px solid red;
+    background-color: rgb(255, 226, 226);
+}
+
+#low-stock a {
+    color: rgb(33, 0, 0);
+    overflow: hidden;
+    background-color: white;
+    background-image: url("ilovebananas.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+}
+
+#low-stock a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+.add-part {
+    justify-content: center;
+}
+
+input {
+    border: 3px solid black;
+    width: 50vh;
+    font-weight: bold;
+}
+
+
+
+
+/* shelves */
+
+#empty-container {
+    background-color: rgb(155, 155, 155) !important;
+}
+
+/* all the shelves */
+.shelf {
+    display: grid;
+    background-color: rgb(155, 155, 155);
+    margin: 2.5vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    border: 3px solid black;
+    
+}
+
+.back-shelf a {
+    overflow: hidden;
+    background-color: white;
+    grid-column-end: span 5;
+    grid-row-end: span 3;
+    min-height: 90px;
+    border: 1px solid grey;
+    /* the columns are weird numbers because the boxes are weird sizes */
+
+}
+
+.shelf .wide-container {
+    grid-column-end: span 10;
+}
+
+.shelf .large-container {
+    grid-row-end: span 4;
+    grid-column-end: span 8;
+    min-height: 120px;
+}
+
+.shelf .large-wide-container {
+    grid-row-end: span 4;
+    grid-column-end: span 16;
+    min-height: 120px;
+}
+
+.left-shelf {
+    /* sets the size of the grid */
+    width: 50vh;
+    height: 80vh;
+    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
+}
+
+.center-shelf {
+    width: 100vh;
+    height: 80vh;
+    grid-template: repeat(34, 1fr) / repeat(40, 1fr);
+}
+
+.right-shelf {
+    width: 50vh;
+    height: 80vh;
+    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
+}
+
+
+
+/* storage in the front */
+.blue-shelf {
+    width: 100vh;
+    height: 80vh;
+    grid-template: repeat(8, 1fr) / repeat(8, 1fr);
+}
+
+.blue-shelf a {
+    overflow: hidden;
+    background-color: white;
+    min-height: 90px;
+    border: 1px solid rgb(58, 59, 129);
+}
+
+
+.grey-shelf {
+    width: 100vh;
+    height: 80vh;
+    grid-template: repeat(24, 1fr) / repeat(20, 1fr);
+}
+
+/* different sizes */
+.shelf .grey-large-container {
+    grid-row-end: span 6;
+    grid-column-end: span 5;
+}
+
+.shelf .grey-largest-container {
+    grid-row-end: span 6;
+    grid-column-end: span 20;
+}
+
+.grey-shelf a {
+    overflow: hidden;
+    background-color: white;
+    min-height: 90px;
+    border: 1px solid grey;
+    grid-row-end: span 4;
+    grid-column-end: span 4;
+}
+
+
+/* on hover effects because they all have different levels of specificity */
+.shelf a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+.grey-shelf a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
