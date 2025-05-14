@@ -64,11 +64,14 @@ a {
 
 }
 
-
-
 .vert-container {
     display: flex;
     flex-direction: column;
+}
+
+button {
+    border: 3px solid black;
+    font-weight: bold;
 }
 
 
