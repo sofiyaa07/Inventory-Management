@@ -99,7 +99,6 @@ input, textarea {
 
 button {
     padding: 13px 16px;
-    background-color: #ccc; 
     border: solid 1px;
     cursor: pointer;
     font-weight: bold;
@@ -148,9 +147,22 @@ input[type="submit"]:hover {
     border: 1px solid #ccc;
 }
 
+.delete {
+    background-color: #f19c9a; 
+}
 
-button:hover {
+.select {
+    background-color: #a4d4a4; 
+}
+
+.delete:hover {
     background-color: red;
+    border: 1px solid #888;
+    background-color: #ddd;
+}
+
+.select:hover {
+    background-color: green;
 }
 
 .upload-image {
