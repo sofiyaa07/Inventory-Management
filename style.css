@@ -150,9 +150,15 @@ button {
     margin-left: 8px;
 }
 
-.list img {
-    max-height: 40px;
+.list div { /* box that the image is in */
+    width: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.list img { /* makes sure the image isn't too tall */
+    height: 40px;
 }
 
 .list p {
@@ -203,7 +209,7 @@ button {
 
 input {
     border: 3px solid black;
-    width: 50vh;
+    width: 40vh;
     font-weight: bold;
 }
 
@@ -259,18 +265,23 @@ input {
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
+    overflow-y: scroll;
 }
 
 .center-shelf {
     width: 100vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(40, 1fr);
+        overflow-y: scroll;
+
 }
 
 .right-shelf {
     width: 50vh;
     height: 80vh;
     grid-template: repeat(34, 1fr) / repeat(20, 1fr);
+        overflow-y: scroll;
+
 }
 
 
