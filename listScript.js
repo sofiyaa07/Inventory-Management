@@ -53,7 +53,7 @@ let parts = [
 
 
 // action listener for the search button
-// document.getElementById("search-button").onclick = refreshList();
+document.getElementById("search-button").addEventListener("click", refreshList);
 
 // inventory-by-list
 function refreshList() {
