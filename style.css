@@ -151,7 +151,7 @@ button {
 }
 
 .list div { /* box that the image is in */
-    width: 10vh;
+    width: 7.5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,31 +172,45 @@ button {
 
     margin: 20px;
     height: 80vh;
-    width: 120vh;
+    width: 150vh;
     background-color: white;
     border: 3px solid black;
 }
 
 #low-stock {
+    display: flex;
+    flex-direction: column;
+    align-items: vertical;
+
     margin: 20px;
-    width: 80vh;
     height: 80vh;
-    display: grid;
-    grid-template: repeat(6, 1fr) / repeat(6, 1fr);
-    border: 3px solid red;
-    background-color: rgb(255, 226, 226);
-}
-
-#low-stock a {
-    color: rgb(33, 0, 0);
-    overflow: hidden;
+    width: 90vh;
     background-color: white;
-    background-image: url("ilovebananas.jpg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: bottom;
+    border: 3px solid rgb(255, 62, 62);
+}
+
+/* 
+#low-stock a {
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    border: 2px solid red;
+    padding: 6px;
 
 }
+
+#low-stock div {
+    width: 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#low-stock img {
+    height: 100%;
+}
+*/
 
 #low-stock a:hover {
     background-color: aliceblue;
