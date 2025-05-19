@@ -53,11 +53,11 @@ function refreshList() {
 
         // creates a link, and an img. adds img to the link, the adds link to the list
         const a = document.createElement("a");
-        a.href = "item-details.html";
+        a.href = "../item-details.html";
         const p = document.createElement("p");
         const div = document.createElement("div");
         const img = document.createElement("img");
-        img.src = "Arduino.jpg" // replace with parts[i].img, or whatever it's called
+        img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
         const text = document.createTextNode(parts[i].name);
         p.appendChild(text); // adds text to <p>
         div.appendChild(img) // adds img to <div>
@@ -75,14 +75,14 @@ function refreshLowStock() {
     for (let i = 0; i < lowStockParts.length; i++) {
         // creates an a element for each LOW-STOCK PART (diff array)
         const a = document.createElement("a");
-        a.href = "item-details.html";
+        a.href = "../item-details.html";
 
         // adds img src=part[i].image and the div that surrounds it
         const div = document.createElement("div");
         const img = document.createElement("img");
         div.appendChild(img);
         a.appendChild(div);
-        img.src = "Arduino.jpg";
+        img.src = "../Arduino.jpg";
 
         // adds text to a p, and then to the a
         const p = document.createElement("p");

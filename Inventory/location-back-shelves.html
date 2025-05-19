@@ -3,7 +3,8 @@
 
 <head>
     <title>Inventory By Location</title>
-    <link href="style.css" type="text/css" rel="stylesheet">
+    <link href="../style.css" type="text/css" rel="stylesheet">
+    <link href="location-style.css" type="text/css" rel="stylesheet">
 
 </head>
 
@@ -11,7 +12,7 @@
 
     <div class="page-container tabs">
         <div class="page-container">
-            <a href="main-menu.html" class="nav-butt">Home</a>
+            <a href="../main-menu.html" class="nav-butt">Home</a>
             <a href="inventory-by-list.html" class="nav-butt">List</a>
         </div>
 
@@ -28,7 +29,10 @@
         <div class="page-container">
             <div class="shelf back-shelf left-shelf" id="shelf-6"> <!--68 items to fill-->
                 <a href="item-details.html" id="A1">
-                    A1
+                    <div>
+                        <img src="Arduino.jpg">
+                    </div>
+                    <p>A1</p>
                 </a>
                 <a href="item-details.html" id="B1">
                     B1
@@ -461,6 +465,9 @@
 
 
     </div>
+
+    <!--scripts-->
+    <script src="./locationScript.js"></script>
 
 
 </body>
