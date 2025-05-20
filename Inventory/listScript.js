@@ -1,3 +1,17 @@
+/* things to add:
+    - need to get search bar working
+        - most likely, when search is clicked, takes the text from the field,
+        and using that makes a new array with only parts that have whatever's
+        in the text field as name.
+        - therefore, need new "refresh page" function that takes an array
+        - array is by default, "get array from helpers", but changes depending
+        on sort method (default is alphabetical), or search
+
+
+*/
+
+
+
 // need a part array to work
 
 let parts = [
@@ -22,24 +36,6 @@ let parts = [
 ];
 
 let lowStockParts = [];
-
-
-// // Read in CSV file (CSV -> str -> obj)
-// const csvPath = './Part Database - Sheet1.csv';
-// async function loadParts() {
-//     try {
-//         const csvFile = await fetch(csvPath);
-//         const csvString = await csvFile.text();
-//         console.log('CSV read.');
-
-//         // Separate CSV string into key value pairs 
-//         parts = helpers.csvToObjects(csvString);
-
-//     } catch (err) {
-//         console.error('Error reading file: ', err);
-//     }
-// }
-
 
 // action listener for the search button
 document.getElementById("search-button").addEventListener("click", refreshList);
@@ -101,7 +97,7 @@ function fillLowStockArray() { // fills the lowStockParts array
     let counter = 0;
 
     for (let i = 0; i < parts.length; i++) {
-        if (parts[i].stock < 5) {
+        if (parts[i].stock < parts[i].threshold) {
             lowStockParts[counter] = parts[i];
             counter++;
         }
