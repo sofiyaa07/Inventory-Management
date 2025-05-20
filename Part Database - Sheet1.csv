@@ -1,0 +1,9 @@
+name,model,location,stock,notes,storeLinks,imgSrc,threshold
+Arduino Uno REV3,ARD_A000066,shelf1[0][0],50,note,https...,image-location.jpg,10
+Arduino GIGA Display Shield,ARD_A000166,shelf1[0][1],40,note,https...,image-location.jpg,25
+Portenta Vision Shield - Ethernet,ARD_A000166,shelf1[0][2],30,note,https...,image-location.jpg,5
+Arduino MKR Mem Shield,ARD_A000266,shelf1[1][0],20,note,https...,image-location.jpg,10
+NodeMCU ESP8266,ARD_A000266,shelf1[1][1],10,note,https...,image-location.jpg,5
+Arduino Nano 33 BLE Rev2 with headers,ABX00072,1,2,35,note,https...,image-location.jpg,25,6
+Arduino Nano 33 BLE Rev2 with headers,ABX00072,1,2,35,note,https...,image-location.jpg,25,8
+Arduino Nano 33 BLE Rev2 with headers,ABX00072,1,2,35,note,https...,image-location.jpg,25,9
