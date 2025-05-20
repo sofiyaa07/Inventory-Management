@@ -38,7 +38,7 @@
     border: 3px solid black;
 }
 
-#low-stock {
+#low-stock-container {
     display: flex;
     flex-direction: column;
     align-items: vertical;
@@ -73,7 +73,7 @@
 }
 */
 
-#low-stock a:hover {
+#low-stock-container a:hover {
     background-color: aliceblue;
     color: darkblue;
 }

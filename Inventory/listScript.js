@@ -69,7 +69,7 @@ function refreshList() {
 }
 
 function refreshLowStock() {
-    document.getElementById("low-stock").innerHTML = ""; // clears previous list
+    document.getElementById("low-stock-container").innerHTML = ""; // clears previous list
     fillLowStockArray();
 
     for (let i = 0; i < lowStockParts.length; i++) {
@@ -92,7 +92,7 @@ function refreshLowStock() {
         a.appendChild(p);
 
         // adds a to the low-stock div
-        document.getElementById("low-stock").appendChild(a);
+        document.getElementById("low-stock-container").appendChild(a);
     }
 
 }
