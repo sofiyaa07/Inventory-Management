@@ -15,7 +15,7 @@
 // need a part array to work
 
 let parts = [
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4", threshold: 5},
     { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
     { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
     { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },

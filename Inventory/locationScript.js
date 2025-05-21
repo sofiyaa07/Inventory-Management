@@ -9,6 +9,28 @@
 
 // need a part array to work (placehodler under)
 const parts = [
+    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "4", threshold: 5 },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "4", threshold: 5 },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[2][2]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[3][2]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[2][3]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[3][3]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][4]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[3][4]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[2][5]", stock: "4" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][7]", stock: "4" },
+
+    
     { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-1[0][0]", stock: "4" },
     { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[1][0]", stock: "4" },
     { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[2][0]", stock: "4" },
@@ -198,10 +220,13 @@ function fillShelves() {
 
     for (let i = 0; i < allShelves.length; i++) {
         if (allShelves[i] != null) {
-            if (i == 0 || i == 1 || i == 6) { // inelegant but works, 1, 2, 7
+            if (i == 0) { // 0 shelf (aka. locationless)
+                stockEmptyShelf(allShelves[i]);
+            }
+            else if (i == 1 || i == 2 || i == 7) { // inelegant but works, 1, 2, 7
                 stockShelves(allShelves[i], 8);
             }
-            else if (i == 2 || i == 3 || i == 4) { // 3, 4, 5 (grey)
+            else if (i == 3 || i == 4 || i == 5) { // 3, 4, 5 (grey)
                 stockShelves(allShelves[i], 5);
             }
             else { // shelf 6 and 8 go here
@@ -210,20 +235,43 @@ function fillShelves() {
         }
     }
 
-
 }
+
+// special exception for empty shelf: does not check location
+function stockEmptyShelf(shelf) {
+    if (document.getElementById("shelf-0")) { // checks if the shelf exists before clearing
+        document.getElementById("shelf-0").innerHTML = "";
+
+    }
+    else {
+        return 0;
+    }
+
+    for (let i = 0; i < shelf.length; i++) {
+        if (shelf[i].stock < shelf[i].threshold) {
+            addNewUnit(shelf[i], true);
+
+        }
+        else {
+            addNewUnit(shelf[i], false);
+
+        }
+    }
+}
+
+
 
 // splits the giant array into more manageable ones, based on shelf
 function splitPartsByShelf() {
     // splits parts into different arrays: one for each shelf
     for (let i = 0; i < parts.length; i++) {
-        const correctedShelf = getShelf(parts[i]) - 1;
+        const currShelf = getShelf(parts[i]);
 
-        if (!allShelves[correctedShelf]) {
-            allShelves[correctedShelf] = [];
+        if (!allShelves[currShelf]) {
+            allShelves[currShelf] = [];
         }
 
-        allShelves[correctedShelf].push(parts[i]);
+        allShelves[currShelf].push(parts[i]);
     }
 
 }
