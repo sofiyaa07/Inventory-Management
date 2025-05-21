@@ -34,7 +34,7 @@ a:hover {
 
 
 .item-box {
-    margin: 0 auto; /* Center the content horizontally */
+    margin: 0 auto; 
     background-color: white; 
     border: 3px solid black;
     overflow: scroll; 
@@ -48,7 +48,7 @@ a:hover {
     gap: 30px;
     background-color: white;
     padding: 20px;
-    height: calc(100% - 40px);  
+    height: calc(100% - 40px); 
 
 }
 
@@ -92,6 +92,7 @@ input, textarea {
     font-weight: bold; 
     font-family: 'Courier New', Courier, monospace; 
     border: 1px solid #ccc;
+    height: 10px; 
     resize: vertical;
 }
 
@@ -106,10 +107,12 @@ button {
 
 input[type="submit"] {
     padding: 9px 12px;
-    border: solid 1px;
+    border: solid 3px;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace; 
+    height: 32px;
+    
 }
 
 input[type="text"], input[type="number"]{
@@ -136,6 +139,7 @@ input[type="submit"]:hover {
     border: 3px solid black;
 }
 
+/* text for link rows */
 .link-row a {
     flex-grow: 1;
     color: black;
@@ -146,20 +150,20 @@ input[type="submit"]:hover {
     border: 1px solid #ccc;
 }
 
-.delete {
+.delete, .cancel {
     background-color: #f19c9a; 
 }
 
-.select {
+.select, .received {
     background-color: #a4d4a4; 
 }
 
-.delete:hover {
+.delete:hover, .cancel:hover{
     background-color: red;
     border: 1px solid #888;
 }
 
-.select:hover {
+.select:hover, .received:hover {
     background-color: green;
 }
 
@@ -206,23 +210,25 @@ h2 {
 
 
 /* Container for item rows */
-.item-row-container {
+/* .item-row-container {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    margin-bottom: 20px;
     border: 3px solid black; 
     margin-left: 20px; 
     margin-right: 20px; 
-}
+} */
 
 /* Individual item rows (name, date, image) */
+
 .item-row {
     display: flex;
     align-items: center;
-    gap: 15px;
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
+    gap: 10px
 }
 
 .item-row:hover{
@@ -231,25 +237,26 @@ h2 {
 }
 
 .item-row img {
-    width: 50px;
+    width: 70px;
     object-fit: cover;
     border: none;
 }
 
 .item-details {
     display: flex;
-    flex-direction: column;   
+    flex-direction: column; 
+    flex-grow: 1;   
 }
 
 /* Style for item subtitles */
-.item-details label:first-of-type {
+.item-details  {
     font-size: 16px; 
     font-weight: bold;  
     color: #000;  
 }
 
 /* Style for the date part */
-.item-details label:last-of-type {
+.item-details label[for="received-date"], .item-details label[for="ordered-date"]  {
     font-size: 13px;  
     font-weight: normal; 
     color: #555;  
@@ -259,11 +266,6 @@ h2 {
   form {
     padding: 8px;
     font-size: 14px;
-}
-
-
-hover {
-    background-color: grey; 
 }
 
 
