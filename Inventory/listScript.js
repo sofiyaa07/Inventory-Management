@@ -62,7 +62,7 @@ function refreshList() {
         a.appendChild(p); // adds text to <a>
 
         // add event listener
-        a.addEventListener("click", () => changeCurrentPart(parts[i]));
+        // a.addEventListener("click", () => changeCurrentPart(parts[i]));
 
         document.getElementById("inv-list").appendChild(a);
     }
