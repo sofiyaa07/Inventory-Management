@@ -36,6 +36,7 @@ let parts = [
 ];
 
 let lowStockParts = [];
+let currentPart = {};
 
 // action listener for the search button
 document.getElementById("search-button").addEventListener("click", refreshList);
@@ -59,6 +60,10 @@ function refreshList() {
         div.appendChild(img) // adds img to <div>
         a.appendChild(div); // adds div to <a>
         a.appendChild(p); // adds text to <a>
+
+        // add event listener
+        a.addEventListener("click", () => changeCurrentPart(parts[i]));
+
         document.getElementById("inv-list").appendChild(a);
     }
 
@@ -102,7 +107,18 @@ function fillLowStockArray() { // fills the lowStockParts array
             counter++;
         }
     }
+
 }
+
+// // things to be exported
+// export function getCurrentPart() {
+//     return currentPart;
+// }
+
+// function changeCurrentPart(part) {
+//     currentPart = part;
+// }
+
 
 // start of document scripts
 refreshList();
