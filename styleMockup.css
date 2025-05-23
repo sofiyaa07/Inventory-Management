@@ -111,13 +111,15 @@ button {
 }
 
 input[type="submit"] {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
     padding: 9px 12px;
     border: solid 3px;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace; 
-    height: 32px;
-    
+    height: 32px;    
 }
 
 input[type="text"], input[type="number"]{
@@ -204,13 +206,13 @@ h2 {
     width: 100%;
     gap: 10px;
     margin-top: 10px;
+    
 }
 
 .submit-link input[type="text"] {
     flex-grow: 1;
     width: 100%;
     border: 3px solid black; 
-    font-weight: bold; 
 }
 
 
