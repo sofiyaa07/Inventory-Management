@@ -10,39 +10,40 @@
         <div class="tabs">
             <a href="Inventory/inventory-by-list.html" class="nav">Inventory</a>
             <a href="order-more.html" class="nav">Order More</a>
-
         </div>
 
         <div class="item-box">
-    
             <div class="content-row">
-                <img src="Arduino.jpg">
+                <img src="Arduino.jpg" id="image">
 
                 <div class="right-panel">
-                    <h2 id="name">Arduino Uno REV3</h2>
+
+                    <div class= "part-info"= ></div>
+
+                    <h2 id="name" id="name">hi</h2>
 
                     <label for="stock">Stock:</label>
-                    <input type="number" id="stock" name="stock" value="3">
+                    <input type="number" id="stock" name="stock" value="">
 
                     <label for="threshold">Threshold:</label>
-                    <input type="number" id="threshold" name="threshold" value="3">
+                    <input type="number" id="threshold" name="threshold" value="">
     
                     <label for="model">Model:</label>
-                    <input type="text" id="model" name="model" value="ARD_A000066">
+                    <input type="text" id="model" name="model" value="">
     
                     <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" value="Shelf A">
+                    <input type="text" id=""location" name="location" value="">
     
-                    <label>Notes</label>
-                    <textarea id="notes" placeholder="Add any notes here..."></textarea>
-
-                    <label for="location">Location:</label>
-    
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" placeholder="Add any notes here..."></textarea>       
     
                 </div>
             </div>
         </div>
     </section>
 
+    <script type="module" src="item.js"></script>
+
 </body>
+
 </html>

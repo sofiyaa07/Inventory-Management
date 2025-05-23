@@ -37,7 +37,7 @@ a:hover {
     margin: 0 auto; 
     background-color: white; 
     border: 3px solid black;
-    overflow: scroll; 
+    overflow: auto; 
     overflow-x: hidden; 
     height: 80vh;
 }
@@ -96,6 +96,11 @@ input, textarea {
     resize: vertical;
 }
 
+textarea {
+    height: auto; 
+    overflow: auto; 
+}
+
 
 button {
     padding: 13px 16px;
@@ -132,7 +137,7 @@ input[type="submit"]:hover {
 }
 
 .scrollable-links {
-    overflow: scroll; 
+    overflow: auto; 
     overflow-x: hidden; 
     max-height: 60%;  
     padding: 10px 15px;
