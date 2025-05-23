@@ -14,32 +14,9 @@
 
 // need a part array to work
 
-let parts = [
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4", threshold: 5},
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-
-];
+import { parts, setCurrentPart } from "../partArray.js";  
 
 let lowStockParts = [];
-let currentPart = {};
-
-// action listener for the search button
-document.getElementById("search-button").addEventListener("click", refreshList);
 
 // inventory-by-list
 function refreshList() {
@@ -62,7 +39,7 @@ function refreshList() {
         a.appendChild(p); // adds text to <a>
 
         // add event listener
-        // a.addEventListener("click", () => changeCurrentPart(parts[i]));
+        a.addEventListener("click", () => setCurrentPart(parts[i])); // i can't test tihs yet
 
         document.getElementById("inv-list").appendChild(a);
     }
@@ -89,7 +66,7 @@ function refreshLowStock() {
         const p = document.createElement("p");
 
         // this is different so the line break works (\n doesn't print in html)
-        p.innerHTML = `${lowStockParts[i].name}<br>Stock: ${lowStockParts[i].stock}`;        
+        p.innerHTML = `${lowStockParts[i].name}<br>Stock: ${lowStockParts[i].stock}`;
         a.appendChild(p);
 
         // adds a to the low-stock div
@@ -121,5 +98,12 @@ function fillLowStockArray() { // fills the lowStockParts array
 
 
 // start of document scripts
-refreshList();
-refreshLowStock();
+
+document.addEventListener("DOMContentLoaded", () => {
+    // action listener for the search button
+    document.getElementById("search-button").addEventListener("click", refreshList);
+
+    refreshList();
+    refreshLowStock();
+
+});
