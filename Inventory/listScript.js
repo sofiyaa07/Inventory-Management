@@ -11,31 +11,54 @@
 */
 
 // need a part array to work
-import { parts, setCurrentPart } from "../partArray.js";  
-import * as helpers from "../helper-methods.js";
+import { setCurrentPart } from "../partArray.js";  
+import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc } from "./sortMethods.js";
 
+
+let parts = [
+    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: "1" },
+    { name: "Brduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "2" },
+    { name: "Crduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "3" },
+    { name: "Drduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "4", threshold: 5 },
+    { name: "Erduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "5", threshold: 5 },
+    { name: "Frduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "6" },
+    { name: "Grduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "7" },
+    { name: "Hrduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "8" },
+    { name: "Irduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "20" },
+    { name: "Jrduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "9" },
+    { name: "Krduino Uno REV3,ARD_A000066", location: "shelf-0[2][2]", stock: "10" },
+    { name: "Lrduino Uno REV3,ARD_A000066", location: "shelf-0[3][2]", stock: "41" },
+    { name: "Mrduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "42" },
+    { name: "Nrduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "43" },
+    { name: "Orduino Uno REV3,ARD_A000066", location: "shelf-0[2][3]", stock: "44" },
+    { name: "Prduino Uno REV3,ARD_A000066", location: "shelf-0[3][3]", stock: "45" },
+    { name: "Qrduino Uno REV3,ARD_A000066", location: "shelf-0[0][4]", stock: "46" },
+    { name: "Rrduino Uno REV3,ARD_A000066", location: "shelf-0[3][4]", stock: "47" },
+    { name: "Srduino Uno REV3,ARD_A000066", location: "shelf-0[2][5]", stock: "48" },
+    { name: "Trduino Uno REV3,ARD_A000066", location: "shelf-0[0][7]", stock: "49" },
+];
 let lowStockParts = [];
 let sortedParts = [];
 
 
 // sort options
 function getAlphaAsc() {
-    sortedParts = helpers.sortAlphaAsc(parts);
+    sortedParts = sortAlphaAsc(parts);
     refreshList();
 }
 
 function getAlphaDesc() {
-    sortedParts = helpers.sortAlphaDesc(parts);
+    sortedParts = sortAlphaDesc(parts);
     refreshList();
 }
 
 function getStockAsc() {
-    sortedParts = helpers.sortStockAsc(parts);
+    sortedParts = sortStockAsc(parts);
     refreshList();
 }
 
 function getStockDesc() {
-    sortedParts = helpers.sortStockDesc(parts);
+    sortedParts = sortStockDesc(parts);
     refreshList();
 }
 
@@ -61,13 +84,12 @@ function refreshList() {
         a.appendChild(p); // adds text to <a>
 
         // add event listener
-        // a.addEventListener("click", () => setCurrentPart(sortedParts[i])); // i can't test tihs yet
+        a.addEventListener("click", () => setCurrentPart(sortedParts[i])); // i can't test tihs yet
 
         document.getElementById("inv-list").appendChild(a);
     }
 
 }
-
 
 function refreshLowStock() {
     document.getElementById("low-stock-container").innerHTML = ""; // clears previous list
@@ -98,7 +120,6 @@ function refreshLowStock() {
 
 }
 
-
 function fillLowStockArray() { // fills the lowStockParts array
     let counter = 0;
 
@@ -117,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => { // waits until page is ful
     // action listener for the search button
     document.getElementById("search-button").addEventListener("click", refreshList);
 
-    // all the sort options
+    // // all the sort options
     document.getElementById("sort-alpha").addEventListener("click", getAlphaAsc);
     document.getElementById("sort-desc-alpha").addEventListener("click", getAlphaDesc);
     document.getElementById("sort-stock").addEventListener("click", getStockAsc);
