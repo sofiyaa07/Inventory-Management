@@ -212,4 +212,7 @@ function getRow(part) {
 
 
 // on start run these methods:
-fillShelves();
+document.addEventListener("DOMContentLoaded", () => {
+    fillShelves();
+
+});

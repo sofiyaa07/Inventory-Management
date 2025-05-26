@@ -10,19 +10,41 @@
 
 */
 
-
-
 // need a part array to work
-
 import { parts, setCurrentPart } from "../partArray.js";  
+import * as helpers from "../helper-methods.js";
 
 let lowStockParts = [];
+let sortedParts = [];
+
+
+// sort options
+function getAlphaAsc() {
+    sortedParts = helpers.sortAlphaAsc(parts);
+    refreshList();
+}
+
+function getAlphaDesc() {
+    sortedParts = helpers.sortAlphaDesc(parts);
+    refreshList();
+}
+
+function getStockAsc() {
+    sortedParts = helpers.sortStockAsc(parts);
+    refreshList();
+}
+
+function getStockDesc() {
+    sortedParts = helpers.sortStockDesc(parts);
+    refreshList();
+}
+
 
 // inventory-by-list
 function refreshList() {
     document.getElementById("inv-list").innerHTML = ""; // clears previous list
 
-    for (let i = 0; i < parts.length; i++) {
+    for (let i = 0; i < sortedParts.length; i++) {
         // creates a new element, then adds it to inv-list
 
         // creates a link, and an img. adds img to the link, the adds link to the list
@@ -32,19 +54,20 @@ function refreshList() {
         const div = document.createElement("div");
         const img = document.createElement("img");
         img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
-        const text = document.createTextNode(parts[i].name);
+        const text = document.createTextNode(sortedParts[i].name);
         p.appendChild(text); // adds text to <p>
         div.appendChild(img) // adds img to <div>
         a.appendChild(div); // adds div to <a>
         a.appendChild(p); // adds text to <a>
 
         // add event listener
-        a.addEventListener("click", () => setCurrentPart(parts[i])); // i can't test tihs yet
+        // a.addEventListener("click", () => setCurrentPart(sortedParts[i])); // i can't test tihs yet
 
         document.getElementById("inv-list").appendChild(a);
     }
 
 }
+
 
 function refreshLowStock() {
     document.getElementById("low-stock-container").innerHTML = ""; // clears previous list
@@ -75,6 +98,7 @@ function refreshLowStock() {
 
 }
 
+
 function fillLowStockArray() { // fills the lowStockParts array
     let counter = 0;
 
@@ -87,23 +111,19 @@ function fillLowStockArray() { // fills the lowStockParts array
 
 }
 
-// // things to be exported
-// export function getCurrentPart() {
-//     return currentPart;
-// }
-
-// function changeCurrentPart(part) {
-//     currentPart = part;
-// }
-
 
 // start of document scripts
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded
     // action listener for the search button
     document.getElementById("search-button").addEventListener("click", refreshList);
 
-    refreshList();
+    // all the sort options
+    document.getElementById("sort-alpha").addEventListener("click", getAlphaAsc);
+    document.getElementById("sort-desc-alpha").addEventListener("click", getAlphaDesc);
+    document.getElementById("sort-stock").addEventListener("click", getStockAsc);
+    document.getElementById("sort-desc-stock").addEventListener("click", getStockDesc);
+
+    getAlphaAsc();
     refreshLowStock();
 
 });
