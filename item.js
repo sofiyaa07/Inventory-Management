@@ -29,35 +29,3 @@ function loadItemDetails(Part) {
 
 
 loadItemDetails(part1);
-// loadOrderMorePage(part1);
-
-
-
-// let parts = [
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "4", threshold: 5, notes: "cool"},
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "4" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-//     { name: "Arduino Uno REV3", model: "ARD_A000066", location: "shelf1[0][0]", stock: "10" },
-
-// ];
-
-// document.getElementById("name").textContent = parts[0].name; // Use textContent for <h2>
-// document.getElementById("stock").value = parts[0].stock; 
-// document.getElementById("threshold").value = parts[0].threshold; 
-// document.getElementById("model").value = parts[0].model; 
-// document.getElementById("location").value = parts[0].location; 
-// document.getElementById("notes").textContent = parts[0].notes; 
-

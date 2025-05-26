@@ -66,6 +66,8 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
 
   }
 
+
+  //handles new link input after clicking submit button 
   function submitButton() {
     //add event listener for submit button
     const submitButton = document.querySelector('.submit-link input[type="submit"]');
@@ -74,11 +76,20 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
             const newLinkInput = document.getElementById('addLink'); //assign newLinkInput to user input in the 'addLink' text field
             if (newLinkInput.value) { //if there is a value to newLinkInput, 
                 try {
+
+
+                    //add code to update array; 
+
+
                     const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); //extract domain from url 
                     const newRow = createLinkRow(newLinkInput.value, domain); //pass domain as link name
                     const container = document.querySelector('.scrollable-links');
                     container.appendChild(newRow); //add new row to scrollable-links container
                     newLinkInput.value = ""; //clear input field
+
+                     //add buttons
+                    selectButton();
+                    deleteButton(); 
                 } catch (e) {
                     alert("Please enter a valid URL."); //alert for invalid input 
                 }
