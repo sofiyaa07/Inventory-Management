@@ -11,11 +11,11 @@
 */
 
 // need a part array to work
-import { setCurrentPart } from "../partArray.js";  
+import { setCurrentPart } from "../partArray.js";  // import parts here (but not now because testing)
 import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc } from "./sortMethods.js";
 
 
-let parts = [
+let parts = [ // TEMP ARRAY
     { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: "1" },
     { name: "Brduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "2" },
     { name: "Crduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "3" },
