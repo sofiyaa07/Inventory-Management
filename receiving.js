@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const row = clicked.closest(".item-row"); //set row variable specific row containing clicked button 
                 const orderConfirmed = confirm("Confirm order received and move to history?"); //confirmation window 
                 if (orderConfirmed) { //if user confirms, removes row from receiving 
+                    //NEEDS TO LOG DATE TO FORWARD TO ORDER HISTORY 
                     //NEEDS TO FORWARD IT TO ORDER HISTORY 
                     row.remove();
                 }
