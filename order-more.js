@@ -108,7 +108,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
                 alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`); //displays quantity
 
               //SHOULD LOG CURRENT DATE WHEN FORWARDING TO RECEIVING TAB 
-
+              const date = new Date();  //get current date and time
                 window.location.href = "receiving.html"; //opens receiving tab 
             } else if (quantity !== null) {
                 alert("Please enter a valid number."); //else alerts invalid input 
