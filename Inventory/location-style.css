@@ -65,7 +65,7 @@
 
 
 /* specific shelves */
-.shelf .wide-container {
+/* .shelf .wide-container {
     grid-column-end: span 10;
 }
 
@@ -79,13 +79,13 @@
     grid-row-end: span 4;
     grid-column-end: span 16;
     min-height: 120px;
-}
+} */
 
 .back-shelf a {
     overflow: hidden;
     background-color: white;
-    grid-column-end: span 5;
-    grid-row-end: span 3;
+    /* grid-column-end: span 5;
+    grid-row-end: span 3; */
     min-height: 90px;
     border: 1px solid grey;
     /* the columns are weird numbers because the boxes are weird sizes */
@@ -96,23 +96,21 @@
     /* sets the size of the grid */
     width: 50vh;
     height: 80vh;
-    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
-    overflow-y: scroll;
+    grid-template: repeat(17, 1fr) / repeat(4, 1fr);
+
 }
 
 .center-shelf {
     width: 100vh;
     height: 80vh;
-    grid-template: repeat(34, 1fr) / repeat(40, 1fr);
-    overflow-y: scroll;
+    grid-template: repeat(17, 1fr) / repeat(8, 1fr);
 
 }
 
 .right-shelf {
     width: 50vh;
     height: 80vh;
-    grid-template: repeat(34, 1fr) / repeat(20, 1fr);
-    overflow-y: scroll;
+    grid-template: repeat(17, 1fr) / repeat(4, 1fr);
 
 }
 
@@ -136,10 +134,20 @@
 .grey-shelf {
     width: 100vh;
     height: 80vh;
-    grid-template: repeat(24, 1fr) / repeat(20, 1fr);
+    grid-template: repeat(5, 1fr) / repeat(5, 1fr);
 }
 
-/* different sizes */
+.grey-shelf a {
+    overflow: hidden;
+    background-color: white;
+    min-height: 90px;
+    border: 1px solid grey;
+    /* grid-row-end: span 4;
+    grid-column-end: span 4; */
+}
+
+/* 
+ different sizes 
 .shelf .grey-large-container {
     grid-row-end: span 6;
     grid-column-end: span 5;
@@ -148,16 +156,8 @@
 .shelf .grey-largest-container {
     grid-row-end: span 6;
     grid-column-end: span 20;
-}
+} */
 
-.grey-shelf a {
-    overflow: hidden;
-    background-color: white;
-    min-height: 90px;
-    border: 1px solid grey;
-    grid-row-end: span 4;
-    grid-column-end: span 4;
-}
 
 
 /* on hover effects because they all have different levels of specificity */
