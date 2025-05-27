@@ -18,10 +18,10 @@ function fillShelves() {
             if (i == 0) { // 0 shelf (aka. locationless)
                 stockEmptyShelf(allShelves[i]);
             }
-            else if (i == 1 || i == 2 || i == 7) { // inelegant but works, 1, 2, 7
+            else if (i == 1 || i == 2 || i == 7) { // inelegant but works
                 stockShelves(allShelves[i], 8);
             }
-            else if (i == 3 || i == 4 || i == 5) { // 3, 4, 5 (grey)
+            else if (i == 3 || i == 4 || i == 5) { // (grey)
                 stockShelves(allShelves[i], 5);
             }
             else { // shelf 6 and 8 go here
