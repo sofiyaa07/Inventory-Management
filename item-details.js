@@ -18,7 +18,7 @@ let parts = [
 
 function loadItemDetails(Part) {
     const i = 0; 
-    document.getElementById("name").textContent = parts[i].name; 
+    document.getElementById("name").textContent = parts[i].name;
     document.getElementById("stock").value = parts[i].stock; 
     document.getElementById("threshold").value = parts[i].threshold; 
     document.getElementById("model").value = parts[i].model; 
@@ -27,5 +27,4 @@ function loadItemDetails(Part) {
     document.getElementById("image").src = parts[i].imgSrc; 
 }
 
-
-loadItemDetails(part1);
+    loadItemDetails(part1);
