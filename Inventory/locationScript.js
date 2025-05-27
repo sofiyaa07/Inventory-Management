@@ -194,7 +194,7 @@ function getShelf(part) {
 }
 
 // returns second section of location string
-function getColumn(part) {A
+function getColumn(part) {
     const open = part.location.indexOf('[');
     const close = part.location.indexOf(']');
     return parseInt(part.location.substring(open + 1, close));
