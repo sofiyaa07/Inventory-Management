@@ -77,3 +77,22 @@ export function sortStockDiff(arr) {
     });
     return stockDiff;
 }
+
+export function sortByName(arr, searchString) {
+    /*
+    Input: array of part objects and a search
+    Return: array of part objects only including objects with search string in their name
+    */
+    searchString = searchString.toLowerCase();
+    let newArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        const name = arr[i].name.toLowerCase();
+
+        if (name.includes(searchString)) {
+            newArr.push(arr[i]);
+        }
+    }
+    
+    return newArr;
+}

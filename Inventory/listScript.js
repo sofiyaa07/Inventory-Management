@@ -12,7 +12,7 @@
 
 // need a part array to work
 import { setCurrentPart } from "../partArray.js";  // import parts here (but not now because testing)
-import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc } from "./sortMethods.js";
+import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc, sortByName } from "./sortMethods.js";
 
 
 let parts = [ // TEMP ARRAY
@@ -59,6 +59,12 @@ function getStockAsc() {
 
 function getStockDesc() {
     sortedParts = sortStockDesc(parts);
+    refreshList();
+}
+
+function getSearchList() {
+    const query = document.getElementById("search-bar").value;
+    sortedParts = sortByName(parts, query);
     refreshList();
 }
 
@@ -136,7 +142,7 @@ function fillLowStockArray() { // fills the lowStockParts array
 // start of document scripts
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded
     // action listener for the search button
-    document.getElementById("search-button").addEventListener("click", refreshList);
+    document.getElementById("search-button").addEventListener("click", getSearchList);
 
     // // all the sort options
     document.getElementById("sort-alpha").addEventListener("click", getAlphaAsc);
