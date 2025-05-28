@@ -1,30 +1,18 @@
+// btw this code breaks if you access item details BEFORE any of the list stuff
 
-import Part from './part.js';
 
-const part1 = new Part(
-    "Arduino Mega 2560",
-    "ARD_A000067",
-    "shelf2[1][0]",
-    10, //stock 
-    "Important part", //notes
-    ["https://store.arduino.cc"], //link
-    "arduinoMega.jpg", //picture
-    3
-);
 
-let parts = [
-    part1 
-]
+// parses the string from local storage into an object
+const currentPart = JSON.parse(localStorage.getItem("currentPart"));
 
-function loadItemDetails(Part) {
-    const i = 0; 
-    document.getElementById("name").textContent = parts[i].name;
-    document.getElementById("stock").value = parts[i].stock; 
-    document.getElementById("threshold").value = parts[i].threshold; 
-    document.getElementById("model").value = parts[i].model; 
-    document.getElementById("location").value = parts[i].location; 
-    document.getElementById("notes").textContent = parts[i].notes; 
-    document.getElementById("image").src = parts[i].imgSrc; 
+function loadItemDetails() {
+    document.getElementById("name").textContent = currentPart.name;
+    document.getElementById("stock").value = currentPart.stock; 
+    document.getElementById("threshold").value = currentPart.threshold; 
+    document.getElementById("model").value = currentPart.model; 
+    document.getElementById("location").value = currentPart.location; 
+    document.getElementById("notes").textContent = currentPart.notes; 
+    document.getElementById("image").src = currentPart.imgSrc; 
 }
 
-    loadItemDetails(part1);
+loadItemDetails();

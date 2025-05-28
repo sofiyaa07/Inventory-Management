@@ -78,7 +78,6 @@ function refreshList() {
 
         // creates a link, and an img. adds img to the link, the adds link to the list
         const a = document.createElement("a");
-        a.href = "../item-details.html";
         const p = document.createElement("p");
         const div = document.createElement("div");
         const img = document.createElement("img");
@@ -89,8 +88,13 @@ function refreshList() {
         a.appendChild(div); // adds div to <a>
         a.appendChild(p); // adds text to <a>
 
+        a.href = "#";
         // add event listener
-        a.addEventListener("click", () => setCurrentPart(sortedParts[i])); // i can't test tihs yet
+        a.addEventListener("click", () => { // sets local storage current part
+            localStorage.setItem("currentPart", JSON.stringify(sortedParts[i]));
+            // stringify  sets the object to a string so it can be properly stored
+            window.location.href = "../item-details.html"; // THEN redirects
+        });
 
         document.getElementById("inv-list").appendChild(a);
     }
@@ -104,7 +108,14 @@ function refreshLowStock() {
     for (let i = 0; i < lowStockParts.length; i++) {
         // creates an a element for each LOW-STOCK PART (diff array)
         const a = document.createElement("a");
-        a.href = "../item-details.html";
+
+        // same as above
+        a.addEventListener("click", () => { // sets local storage current part
+            localStorage.setItem("currentPart", JSON.stringify(lowStockParts[i]));
+            // stringify  sets the object to a string so it can be properly stored
+            window.location.href = "../item-details.html"; // THEN redirects
+        });
+
 
         // adds img src=part[i].image and the div that surrounds it
         const div = document.createElement("div");

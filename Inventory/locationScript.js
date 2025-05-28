@@ -132,7 +132,6 @@ function addNewUnit(part, isLowStock) {
     // (copied from listScript)
     // creates a link, and an img. adds img to the link, the adds link to the list
     const a = document.createElement("a");
-    a.href = "../item-details.html";
     const p = document.createElement("p");
     const div = document.createElement("div");
     const img = document.createElement("img");
@@ -156,8 +155,13 @@ function addNewUnit(part, isLowStock) {
     const shelfId = `shelf-${getShelf(part)}`;
     document.getElementById(shelfId).appendChild(a);
 
-    a.addEventListener("click", () => setCurrentPart(part)); // i can't test tihs yet
-    
+    a.href = "#";
+    // same as list scripts, but changed parameter
+    a.addEventListener("click", () => { // sets local storage current part
+        localStorage.setItem("currentPart", JSON.stringify(part));
+        // stringify  sets the object to a string so it can be properly stored
+        window.location.href = "../item-details.html"; // THEN redirects
+    });
 
     if (isLowStock) {
         a.id = "low-stock";
@@ -165,23 +169,27 @@ function addNewUnit(part, isLowStock) {
 }
 
 
-function addBlankUnit(part) {
+function addBlankUnit(part) { // adds the NEXT valid location, not the current one (need to fix)
     // much simpler. creates a blank unit, adds the empty container id
     const a = document.createElement("a");
-    a.href = "../add-new-item.html";
     a.id = "empty-container";
 
     // when passed into add-new-item, it should only take the location
-    a.addEventListener("click", () => setCurrentPart(part)); // i can't test tihs yet
+    a.href = "#";
+    // same as list scripts, no stringify necessary
 
+    a.addEventListener("click", () => { // sets local storage current part
+        localStorage.setItem("emptyLocation", part.location);
+        window.location.href = "../add-new-item.html"; // THEN redirects
+    });
 
     // adds a to the specific shelf div
     const shelfId = `shelf-${getShelf(part)}`;
     document.getElementById(shelfId).appendChild(a);
 
-    
 
-    
+
+
 
 }
 
