@@ -112,7 +112,8 @@ function stockShelves(shelf, numCol) {
 
         }
         else {
-            addBlankUnit(shelf[i]);
+            const placement = `shelf-${getShelf(shelf[i])}[${currentCol}][${currentRow}]`;
+            addBlankUnit(placement);
             i--; // goes backward in the loop until the incorrect unit is placed
         }
 
@@ -169,7 +170,7 @@ function addNewUnit(part, isLowStock) {
 }
 
 
-function addBlankUnit(part) { // adds the NEXT valid location, not the current one (need to fix)
+function addBlankUnit(placement) { // adds the NEXT valid location, not the current one (need to fix)
     // much simpler. creates a blank unit, adds the empty container id
     const a = document.createElement("a");
     a.id = "empty-container";
@@ -179,12 +180,13 @@ function addBlankUnit(part) { // adds the NEXT valid location, not the current o
     // same as list scripts, no stringify necessary
 
     a.addEventListener("click", () => { // sets local storage current part
-        localStorage.setItem("emptyLocation", part.location);
+        localStorage.setItem("emptyLocation", placement);
         window.location.href = "../add-new-item.html"; // THEN redirects
     });
 
-    // adds a to the specific shelf div
-    const shelfId = `shelf-${getShelf(part)}`;
+    // adds a to the specific shelf div, uses strings instead of objects
+    const bracket = placement.indexOf('['); // copy of getShelf, but with string
+    const shelfId = `shelf-${placement.substring(6, bracket)}`;
     document.getElementById(shelfId).appendChild(a);
 
 
