@@ -1,11 +1,4 @@
 /* things to add:
-    - need to get search bar working
-        - most likely, when search is clicked, takes the text from the field,
-        and using that makes a new array with only parts that have whatever's
-        in the text field as name.
-        - therefore, need new "refresh page" function that takes an array
-        - array is by default, "get array from helpers", but changes depending
-        on sort method (default is alphabetical), or search
 
 
 */
