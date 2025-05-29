@@ -1,9 +1,4 @@
 import Part from './part.js';
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = 'https://osqumjjtyugcndoeahyb.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
 
 const part1 = new Part(
     "Arduino Mega 2560",
