@@ -1,0 +1,20 @@
+{
+  "name": "inventory-management",
+  "version": "1.0.0",
+  "main": "add-new-item.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sofiyaa07/Inventory-Management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sofiyaa07/Inventory-Management/issues"
+  },
+  "homepage": "https://github.com/sofiyaa07/Inventory-Management#readme",
+  "description": ""
+}
