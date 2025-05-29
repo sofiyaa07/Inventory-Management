@@ -48,24 +48,6 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
   
     return row; 
   }
-  
-  function loadOrderMorePage(part) {
-    const container = document.querySelector('.scrollable-links'); //set container to scrollable-links section 
-    container.innerHTML = ""; //clear existing content
-  
-    //create row for each store link of part 
-    part.storeLinks.forEach(linkUrl => {
-      const row = createLinkRow(linkUrl); //call createLinkRow function passing url 
-      container.appendChild(row); //add row to container 
-    });
-   
-    //call button functions 
-    submitButton(); 
-    selectButton(); 
-    deleteButton(); 
-
-  }
-
 
   //handles new link input after clicking submit button 
   function submitButton() {
@@ -76,8 +58,6 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
             const newLinkInput = document.getElementById('addLink'); //assign newLinkInput to user input in the 'addLink' text field
             if (newLinkInput.value) { //if there is a value to newLinkInput, 
                 try {
-
-
                     //add code to update array; 
 
 
@@ -106,9 +86,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
             const quantity = prompt("How many would you like to order?"); //assign quantity to user input to prompt
             if (quantity && !isNaN(quantity) && Number(quantity) > 0) { //if user inputs valid number
                 alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`); //displays quantity
-
-              //SHOULD LOG CURRENT DATE WHEN FORWARDING TO RECEIVING TAB 
-              const date = new Date();  //get current date and time
+                const date = new Date();  //get current date and time
                 window.location.href = "receiving.html"; //opens receiving tab 
             } else if (quantity !== null) {
                 alert("Please enter a valid number."); //else alerts invalid input 
@@ -131,7 +109,63 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
         });
     });
   }
+
   
+  function loadOrderMorePage(part) {
+    document.getElementById("image").src = part1.imgSrc; 
+    document.getElementById("name").textContent = part1.name;
+
+
+    const container = document.querySelector('.scrollable-links'); //set container to scrollable-links section 
+    container.innerHTML = ""; //clear existing content
+  
+    //create row for each store link of part 
+    part.storeLinks.forEach(linkUrl => {
+      const row = createLinkRow(linkUrl); //call createLinkRow function passing url 
+      container.appendChild(row); //add row to container 
+    });
+   
+    //call button functions 
+    submitButton(); 
+    selectButton(); 
+    deleteButton(); 
+
+  }
+
+  // function addToReceiving(part, date) {
+  //   // const model = part.model; 
+  //   // const name = part.name; 
+  //   // const date = date; 
+
+  //   const image = createElement('img'); 
+  //   image.src = part.image; 
+
+  //   const row = createElement('div');
+  //   row.classList.add('item-row')
+  //   document.createElement('img'); 
+
+  //   const name = document.createElement('label');  
+  //   name.textContent = "name name name"; 
+  //   name.htmlFor = "name"; 
+
+  //   const dateQuantity = document.createElement('label');  
+  //   dateQuantity.textContent= "date date date"; 
+  //   dateQuantity.htmlFor = "ordered-date"; 
+
+  //   const receivedButton = document.createElement('button');  
+  //   receivedButton.textContent = 'Received';
+  //   receivedButton.classList.add('received');  
+  //   receivedButton.title='Confirm order received'; 
+
+  //   const cancelButton = document.createElement('button'); 
+  //   cancelButton.textContent = 'Cancel';
+  //   cancelButton.classList.add('cancel'); 
+  //   cancelButton.title='Cancel order';  
+    
+  //   row.appendChild(name, dateQuantity, receivedButton, cancelButton); 
+
+
+  // }
   
   document.addEventListener('DOMContentLoaded', () => {
     loadOrderMorePage(part1);

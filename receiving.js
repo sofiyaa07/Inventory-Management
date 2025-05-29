@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    
     //ADD LOGIC TO FORWARD TO ORDER HISTORY TAB 
     let orderStatus = ""; 
 
