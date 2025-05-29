@@ -137,40 +137,40 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
 
   }
 
-  function addToReceiving(part, date) {
-    // const model = part.model; 
-    // const name = part.name; 
-    // const date = date; 
+  // function addToReceiving(part, date) {
+  //   // const model = part.model; 
+  //   // const name = part.name; 
+  //   // const date = date; 
 
-    const image = createElement('img'); 
-    image.src = part.image; 
+  //   const image = createElement('img'); 
+  //   image.src = part.image; 
 
-    const row = createElement('div');
-    row.classList.add('item-row')
-    document.createElement('img'); 
+  //   const row = createElement('div');
+  //   row.classList.add('item-row')
+  //   document.createElement('img'); 
 
-    const name = document.createElement('label');  
-    name.textContent = "name name name"; 
-    name.htmlFor = "name"; 
+  //   const name = document.createElement('label');  
+  //   name.textContent = "name name name"; 
+  //   name.htmlFor = "name"; 
 
-    const dateQuantity = document.createElement('label');  
-    dateQuantity.textContent= "date date date"; 
-    dateQuantity.htmlFor = "ordered-date"; 
+  //   const dateQuantity = document.createElement('label');  
+  //   dateQuantity.textContent= "date date date"; 
+  //   dateQuantity.htmlFor = "ordered-date"; 
 
-    const receivedButton = document.createElement('button');  
-    receivedButton.textContent = 'Received';
-    receivedButton.classList.add('received');  
-    receivedButton.title='Confirm order received'; 
+  //   const receivedButton = document.createElement('button');  
+  //   receivedButton.textContent = 'Received';
+  //   receivedButton.classList.add('received');  
+  //   receivedButton.title='Confirm order received'; 
 
-    const cancelButton = document.createElement('button'); 
-    cancelButton.textContent = 'Cancel';
-    cancelButton.classList.add('cancel'); 
-    cancelButton.title='Cancel order';  
+  //   const cancelButton = document.createElement('button'); 
+  //   cancelButton.textContent = 'Cancel';
+  //   cancelButton.classList.add('cancel'); 
+  //   cancelButton.title='Cancel order';  
     
-    row.appendChild(name, dateQuantity, receivedButton, cancelButton); 
+  //   row.appendChild(name, dateQuantity, receivedButton, cancelButton); 
 
 
-  }
+  // }
   
   document.addEventListener('DOMContentLoaded', () => {
     loadOrderMorePage(part1);
