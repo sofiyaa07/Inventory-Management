@@ -4,9 +4,7 @@
 */
 
 // need a part array to work
-import { setCurrentPart } from "../partArray.js";  // import parts here (but not now because testing)
 import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc, sortByName } from "./sortMethods.js";
-
 
 let parts = [ // TEMP ARRAY
     { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: 1 },
@@ -30,6 +28,7 @@ let parts = [ // TEMP ARRAY
     { name: "Srduino Uno REV3,ARD_A000066", location: "shelf-0[2][5]", stock: 48 },
     { name: "Trduino Uno REV3,ARD_A000066", location: "shelf-0[0][7]", stock: 49 },
 ];
+
 let lowStockParts = [];
 let sortedParts = [];
 
@@ -74,7 +73,7 @@ function refreshList() {
         const p = document.createElement("p");
         const div = document.createElement("div");
         const img = document.createElement("img");
-        img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
+        img.src = "https://m.media-amazon.com/images/I/51-Cq1fuvzL._AC_SX679_.jpg" // replace with parts[i].imgSrc
         const text = document.createTextNode(sortedParts[i].name);
         p.appendChild(text); // adds text to <p>
         div.appendChild(img) // adds img to <div>

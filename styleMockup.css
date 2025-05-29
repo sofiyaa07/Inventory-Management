@@ -294,3 +294,15 @@ h2 {
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgb(152, 152, 152);
 }
+
+
+/* daniel code, for item-details.html */
+#save-item-info {
+    margin-top: 20px;
+    background-color: #a4d4a4; 
+
+}
+
+#save-item-info:hover {
+    background-color: green;
+}
