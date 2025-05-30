@@ -1,5 +1,5 @@
 /* things to add:
-  
+    - need to change how the functions at the bottom reads the array (new format is 1A1, ex)
 */
 
 // need a part array to work (placehodler under)
@@ -139,16 +139,8 @@ function addNewUnit(part, isLowStock) {
     img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
 
     // uses a short name, if there is one (not enough space for long name) <- bugged
-    const text = document.createTextNode(part.shortName);
-    const altText = document.createTextNode(part.name);
-
-    // adds everything to each other
-    if (part.shortName == undefined) {
-        p.appendChild(altText); // default name (will be ugly)
-    }
-    else {
-        p.appendChild(text); // short name (under like 10 characters/line)
-    }
+    const text = document.createTextNode(part.name);
+    p.appendChild(text); // short name (under like 10 characters/line)
 
     div.appendChild(img) // adds img to <div>
     a.appendChild(div); // adds div to <a>

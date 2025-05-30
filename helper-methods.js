@@ -173,3 +173,18 @@ export function addObjectInfoToCSV(obj, filePath) {
     valsStr = valsStr.replace(/["\[\]]/g, '');
     writeToCSV(filePath, valsStr);
 }
+
+// did not test yet (+ it just isn't complete)
+export function removeItemFromCSV(filePath, obj) {
+    /*
+    Input: Part object (singular) and CSV file path
+    Turns the object into a string, then searches each line of the CSV
+    for a matching string and removes it
+    */
+
+    let objAsString = JSON.stringify(obj);
+    // regex to remove brackets and quotes (shouldn't remove slashes)
+    objAsString = objAsString.replace(/["\[\]]/g, ''); // objAsString is how it's written in the CSV
+
+    // file reading stuff here
+}

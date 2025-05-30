@@ -22,8 +22,13 @@ function changePartInDatabase() {
     for (let i = 0; i < parts.length; i++) {
         if (parts[i] == currentPart) {
             parts[i] = changedPart;
+
+            // remove parts[i] from csv
+            // append changedPart
         }
     }
+
+    
 
     window.alert("Changes saved!");
 }

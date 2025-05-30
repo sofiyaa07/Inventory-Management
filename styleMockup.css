@@ -12,33 +12,36 @@ a:hover {
 
 
 .tabs {
-    display:flex; 
-    gap: 0px; 
+    display: flex;
+    gap: 0px;
 }
+
 .nav {
     background-color: white;
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
     font-size: 20px;
-    color: black; 
+    color: black;
     border: 3px solid black;
-    text-decoration: none; /* Removes the underline */
-    
+    text-decoration: none;
+    /* Removes the underline */
+
 }
+
 .tabs input[type="search"] {
-    width: 30%;  
+    width: 30%;
     height: 30px;
 }
 
 
 
 .item-box {
-    margin: 0 auto; 
-    background-color: white; 
+    margin: 0 auto;
+    background-color: white;
     border: 3px solid black;
-    overflow: auto; 
-    overflow-x: hidden; 
+    overflow: auto;
+    overflow-x: hidden;
     height: 80vh;
 }
 
@@ -48,14 +51,14 @@ a:hover {
     gap: 30px;
     background-color: white;
     padding: 20px;
-    height: calc(100% - 40px); 
+    height: calc(100% - 40px);
 
 }
 
 img {
     width: 400px;
-    height: auto;  
-    object-fit: cover;  
+    height: auto;
+    object-fit: cover;
     border: 1px solid #ddd;
     flex-shrink: 0;
 }
@@ -86,19 +89,20 @@ label {
     display: block;
 }
 
-input, textarea {
+input,
+textarea {
     padding: 8px;
     font-size: 14px;
-    font-weight: bold; 
-    font-family: 'Courier New', Courier, monospace; 
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
     border: 1px solid #ccc;
-    height: 10px; 
+    height: 10px;
     resize: vertical;
 }
 
 textarea {
-    height: auto; 
-    overflow: auto; 
+    height: auto;
+    overflow: auto;
 }
 
 
@@ -107,23 +111,24 @@ button {
     border: solid 1px;
     cursor: pointer;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace; 
+    font-family: 'Courier New', Courier, monospace;
 }
 
 input[type="submit"] {
-    display: flex; 
+    display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 9px 12px;
     border: solid 3px;
     cursor: pointer;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace; 
-    height: 32px;    
+    font-family: 'Courier New', Courier, monospace;
+    height: 32px;
 }
 
-input[type="text"], input[type="number"]{
-    font-family:'Courier New', Courier, monospace; 
+input[type="text"],
+input[type="number"] {
+    font-family: 'Courier New', Courier, monospace;
 }
 
 
@@ -135,13 +140,13 @@ input[type="submit"]:hover {
 .link-row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;                                                
+    margin-bottom: 10px;
 }
 
 .scrollable-links {
-    overflow: auto; 
-    overflow-x: hidden; 
-    max-height: 60%;  
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 60%;
     padding: 10px 15px;
     border: 3px solid black;
 }
@@ -150,69 +155,74 @@ input[type="submit"]:hover {
 .link-row a {
     flex-grow: 1;
     color: black;
-    font-weight: bold; 
+    font-weight: bold;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     border: 1px solid #ccc;
 }
 
-.delete, .cancel {
-    background-color: #f19c9a; 
+.delete,
+.cancel {
+    background-color: #f19c9a;
 }
 
-.select, .received {
-    background-color: #a4d4a4; 
+.select,
+.received {
+    background-color: #a4d4a4;
 }
 
-.delete:hover, .cancel:hover{
+.delete:hover,
+.cancel:hover {
     background-color: red;
     border: 1px solid #888;
 }
 
-.select:hover, .received:hover {
+.select:hover,
+.received:hover {
     background-color: green;
 }
 
 .upload-image {
-    border: 2px dashed #ccc; 
-    padding: 30px; 
+    border: 2px dashed #ccc;
+    padding: 30px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
-    gap: 10px; 
+    gap: 10px;
     margin-top: 10px;
     text-align: center;
 }
 
 h2 {
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
 }
 
 .search-bar {
-    flex-grow: 1;  
+    flex-grow: 1;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-} 
+}
 
 
 .search-button:hover {
-        background-color: aliceblue;
-        color: darkblue;
-    }
+    background-color: aliceblue;
+    color: darkblue;
+}
+
 .submit-link {
     display: flex;
     width: 100%;
     gap: 10px;
     margin-top: 10px;
-    
+
 }
 
 .submit-link input[type="text"] {
     flex-grow: 1;
     width: 100%;
-    border: 3px solid black; 
+    border: 3px solid black;
 }
 
 
@@ -238,7 +248,7 @@ h2 {
     gap: 10px
 }
 
-.item-row:hover{
+.item-row:hover {
     background-color: aliceblue;
     color: darkblue;
 }
@@ -251,26 +261,27 @@ h2 {
 
 .item-details {
     display: flex;
-    flex-direction: column; 
-    flex-grow: 1;   
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 /* Style for item subtitles */
-.item-details  {
-    font-size: 16px; 
-    font-weight: bold;  
-    color: #000;  
+.item-details {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
 }
 
 /* Style for the date part */
-.item-details label[for="received-date"], .item-details label[for="ordered-date"]  {
-    font-size: 13px;  
-    font-weight: normal; 
-    color: #555;  
+.item-details label[for="received-date"],
+.item-details label[for="ordered-date"] {
+    font-size: 13px;
+    font-weight: normal;
+    color: #555;
 }
 
 /* search bar */
-  form {
+form {
     padding: 8px;
     font-size: 14px;
 }
@@ -299,7 +310,7 @@ h2 {
 /* daniel code, for item-details.html */
 #save-item-info {
     margin-top: 20px;
-    background-color: #a4d4a4; 
+    background-color: #a4d4a4;
 
 }
 

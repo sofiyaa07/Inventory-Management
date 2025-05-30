@@ -2,7 +2,7 @@
 // will use helper methods to get the array
 
 export const parts = [
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: "1" },
+    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "1",  threshold: 5},
     { name: "Brduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "2" },
     { name: "Crduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "3" },
     { name: "Drduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "4", threshold: 5 },
