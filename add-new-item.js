@@ -15,14 +15,14 @@ function loadItemDetails() {
 function addItem() {
 
     try {
-        document.getElementById("name").textContent = currentPart.name;
-        document.getElementById("stock").value = currentPart.stock;
-        document.getElementById("threshold").value = currentPart.threshold;
-        document.getElementById("model").value = currentPart.model;
-        document.getElementById("location").value = currentPart.location;
-        document.getElementById("notes").textContent = currentPart.notes;
-        document.getElementById("imageInput").src = currentPart.imgSrc;
-        document.getElementById("store-links").textContent = currentPart.storeLinks;
+        currentPart.name = document.getElementById("name").textContent
+        currentPart.stock = document.getElementById("stock").value;
+        currentPart.threshold = document.getElementById("threshold").value;
+        currentPart.model = document.getElementById("model").value;
+        currentPart.location = document.getElementById("location").value;
+        currentPart.notes = document.getElementById("notes").textContent;
+        currentPart.imgSrc = document.getElementById("imageInput").src;
+        currentPart.storeLinks = document.getElementById("store-links").textContent;
 
         // fetch info from the server (backendServer.js)
         fetch(serverLocation, {
@@ -42,9 +42,11 @@ function addItem() {
 
 }
 
+    loadItemDetails();
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadItemDetails();
 
     document.getElementById("save-item-info").addEventListener("click", addItem);
 
