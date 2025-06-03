@@ -1,0 +1,16 @@
+{
+  "name": "inventory-management",
+  "version": "1.0.0",
+  "main": "backendServer.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backendServer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

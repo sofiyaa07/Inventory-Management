@@ -11,7 +11,6 @@
     <section id="addItem">
         <div class="tabs">
             <a href="#" onclick="history.back()" class="nav">Back</a>
-            <a href="order-more.html" class="nav">Order More</a>
         </div>
         <div class="item-box">
 
@@ -38,7 +37,13 @@
                     <input type="text" id="location" name="location" placeholder="Add location here...">
 
                     <label>Notes</label>
-                    <textarea placeholder="Add any notes here..."></textarea>
+                    <textarea id="notes" placeholder="Add any notes here..."></textarea>
+
+                    <label>Store Links</label>
+                    <textarea id="store-links" placeholder="Add any links here, seperated by | characters (ex. link1.com|link2.com)"></textarea>
+
+                    <button id="save-item-info">Save Changes</button>
+
 
                 </div>
             </div>

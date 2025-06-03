@@ -1,10 +1,11 @@
 // btw this code breaks if you access item details BEFORE any of the list stuff
 import { parts } from "./partArray.js";
+import Part from "./part.js";
 
 
 // parses the string from local storage into an object
 const currentPart = JSON.parse(localStorage.getItem("currentPart"));
-let changedPart = {};
+let changedPart = new Part;
 
 function saveChanges() {
     changedPart.name = document.getElementById("name").textContent;
@@ -13,7 +14,7 @@ function saveChanges() {
     changedPart.model = document.getElementById("model").value;
     changedPart.location = document.getElementById("location").value;
     changedPart.notes = document.getElementById("notes").textContent;
-    changedPart.imsSrc = document.getElementById("image").src;
+    changedPart.imgSrc = document.getElementById("imageInput").src;
 
     changePartInDatabase();
 }
@@ -41,7 +42,7 @@ function loadItemDetails() {
     document.getElementById("model").value = currentPart.model; 
     document.getElementById("location").value = currentPart.location; 
     document.getElementById("notes").textContent = currentPart.notes; 
-    document.getElementById("image").src = currentPart.imgSrc; 
+    document.getElementById("imageInput").src = currentPart.imgSrc; 
 }
 
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded

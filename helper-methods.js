@@ -175,7 +175,7 @@ export function addObjectInfoToCSV(obj, filePath) {
 }
 
 // did not test yet (+ it just isn't complete)
-export function removeItemFromCSV(filePath, obj) {
+export function removeItemFromCSV(obj, filePath) {
     /*
     Input: Part object (singular) and CSV file path
     Turns the object into a string, then searches each line of the CSV
