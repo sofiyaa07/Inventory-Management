@@ -6,9 +6,13 @@
 
 import express from 'express'; // sets up express to make server stuff easier
 import fs from 'fs'; // sets up node file stuff
-import path from 'path'; // sets up node paths (not using right now, but still useful)
+import { csvToObjects, addObjectInfoToCSV } from './helper-methods.js';
+// import path from 'path'; // sets up node paths (not using right now, but still useful)
 const app = express(); // creates an express app to handle http requests (client side asks server for info)
-export const PORT = 3000; // defines the port (aka, where the server is)
+export const PORT = 3000; // defines the port (aka, where the server is)fs
+
+import cors from 'cors'; //prevents browsers from screaming at the code for being unsafe or something
+app.use(cors());
 
 // middleware (it's a middleman)
 // parses strings sent over by front end back into objects
@@ -20,13 +24,11 @@ app.post("/save", (request, response) => {
     const data = request.body; // stores the data that's sent
 
     // formats the data to be written in the file
-    const stringData = JSON.stringify(data);
-    const formattedData = stringData.replace(/["\[\]{}]/g, '');
-
+    const formattedData = "\n"+addObjectInfoToCSV(data);
 
     // parameters: file path, the thing to be written, and a callback function
     // callback -> calls this function when file runs, in this case, checks for error
-    fs.writeFile("Part Database - Sheet2.csv", formattedData, (err) => { // testing with a 2nd file for now
+    fs.appendFile("Part Database - Sheet2.csv", formattedData, (err) => { // testing with a 2nd file for now
         if (err) {
             console.error('Error writing file:', err);
             return response.status(500).send('Failed to write data');
@@ -47,12 +49,8 @@ app.get('/load', (request, response) => {
             return response.status(500).send('Failed to read data');
         }
 
-        // if no error, responds with the parsed file data (what was read)
-        formattedData = "{ "
-        formattedData += fileData;
-        formattedData += " }";
-
-        response.json(JSON.parse(formattedData)); // responds with an object
+        const csvObject = csvToObjects(fileData); // from helper-methods
+        response.json(JSON.parse(csvObject)); // responds with an object
     });
 });
 

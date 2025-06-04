@@ -116,19 +116,25 @@ export function csvToObjects(csvStr) {
             return obj;
         }, {});
 
-        // Make part object, casting to number where needed
+        // links are separated by " | ", store separately in array
+        const allLinks = partData.storeLinks;
+        const breakpoint = " | ";
+        const splitLinks = allLinks.split(breakpoint);
+
         return new Part(
             partData.name,
             partData.model,
             partData.location,
             Number(partData.stock),
             partData.notes,
-            partData.storeLinks,
+            splitLinks,
             partData.imgSrc,
             Number(partData.threshold),
         );
     });
 }
+
+
 
 export function readCSV(file) {
     /*
@@ -162,16 +168,16 @@ async function writeToCSV(filePath, str) {
     }
 }
 
-export function addObjectInfoToCSV(obj, filePath) {
+export function addObjectInfoToCSV(obj) {
     /*
-    Input: Part Object and CSV filePath
+    Input: Part Object
     */
     let vals = Object.values(obj).map(value => value.toString());
     // Convert to String
     let valsStr = JSON.stringify(vals);
     // Get rid of quotes and square brackets before writing to CSV
     valsStr = valsStr.replace(/["\[\]]/g, '');
-    writeToCSV(filePath, valsStr);
+    return valsStr;
 }
 
 // did not test yet (+ it just isn't complete)

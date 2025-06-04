@@ -67,7 +67,7 @@ export default class Part {
     }
 
     set stock(num) {
-        this._stock += num;
+        this._stock = num;
     }
 
     set notes(no) {

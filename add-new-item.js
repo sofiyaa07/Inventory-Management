@@ -2,8 +2,7 @@ import Part from './part.js';
 
 // only does anything for inventory-by-location
 const placement = localStorage.getItem("emptyLocation");
-const PORT = 3000;
-const serverLocation = `http://localhost:${PORT}`;
+const serverLocation = `http://localhost:3000`;
 
 let currentPart = new Part;
 
@@ -13,17 +12,23 @@ function loadItemDetails() {
 }
 
 // takes all the info from the page into a new part on the csv
-function addItem() {
+function saveItemInfo() {
+    currentPart.name = document.getElementById("name").value;
+    currentPart.stock = document.getElementById("stock").value;
+    currentPart.threshold = document.getElementById("threshold").value;
+    currentPart.model = document.getElementById("model").value;
+    currentPart.location = document.getElementById("location").value;
+    currentPart.notes = document.getElementById("notes").value;
+    currentPart.imgSrc = document.getElementById("imageInput").files[0];
+    
+    // links are separated by " | ", store separately in array
+    const allLinks = document.getElementById("store-links").value;
+    const breakpoint = " | ";
+    currentPart.storeLinks = allLinks.split(breakpoint);
 
-    try {
-        currentPart.name = document.getElementById("name").textContent
-        currentPart.stock = document.getElementById("stock").value;
-        currentPart.threshold = document.getElementById("threshold").value;
-        currentPart.model = document.getElementById("model").value;
-        currentPart.location = document.getElementById("location").value;
-        currentPart.notes = document.getElementById("notes").textContent;
-        currentPart.imgSrc = document.getElementById("imageInput").src;
-        currentPart.storeLinks = document.getElementById("store-links").textContent;
+    console.log(currentPart);
+
+    try { // not entering this code right now
 
         // fetch info from the server (backendServer.js)
         fetch(`${serverLocation}/save`, {
@@ -51,6 +56,6 @@ function addItem() {
 
 document.addEventListener("DOMContentLoaded", () => {
     loadItemDetails();
-    document.getElementById("save-item-info").addEventListener("click", addItem);
+    document.getElementById("save-item-info").addEventListener("click", saveItemInfo);
 
 });
