@@ -7,7 +7,7 @@
 import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc, sortByName } from "./sortMethods.js";
 
 let parts = [ // TEMP ARRAY
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-0[0][0]", stock: 1 },
+    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", stock: 1, threshold: 5, location: "shelf-0[0][0]", imgSrc: "Arduino.jpg", storeLinks: ["https://google.com", "https://google.com"] },
     { name: "Brduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: 2 },
     { name: "Crduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: 3 },
     { name: "Drduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: 4, threshold: 5 },

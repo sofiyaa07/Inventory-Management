@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     orderStatus = "cancelled"
                     const date = new Date();  //get current date and time
                     row.remove(); 
-                    alert("Order canceled.");
+                    alert("Order cancelled.");
                 }
             } //end of if
 
