@@ -2,11 +2,11 @@
 // working on commenting this, and changing the code to include the helper methods
 
 // import file writing and reading from helper-methods
-import { csvToObjects, readCSV, writeToCSV, addObjectInfoToCSV, removeItemFromCSV } from './helper-methods';
+// (do later)
 
-const express = require('express'); // sets up express to make server stuff easier
-const fs = require('fs'); // sets up node file stuff
-const path = require('path'); // sets up node paths
+import express from 'express'; // sets up express to make server stuff easier
+import fs from 'fs'; // sets up node file stuff
+import path from 'path'; // sets up node paths (not using right now, but still useful)
 const app = express(); // creates an express app to handle http requests (client side asks server for info)
 export const PORT = 3000; // defines the port (aka, where the server is)
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 // whenever data is sent to the backend to be saved
-app.post("./Part Database - Sheet1.csv", (request, response) => {
+app.post("/save", (request, response) => {
     const data = request.body; // stores the data that's sent
 
     // formats the data to be written in the file
@@ -48,7 +48,11 @@ app.get('/load', (request, response) => {
         }
 
         // if no error, responds with the parsed file data (what was read)
-        response.json(JSON.parse(fileData)); // responds with an object
+        formattedData = "{ "
+        formattedData += fileData;
+        formattedData += " }";
+
+        response.json(JSON.parse(formattedData)); // responds with an object
     });
 });
 

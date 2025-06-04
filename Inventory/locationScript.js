@@ -173,8 +173,10 @@ function addBlankUnit(placement) { // adds the NEXT valid location, not the curr
 
     a.addEventListener("click", () => { // sets local storage current part
         localStorage.setItem("emptyLocation", placement);
+        console.log(placement);
         window.location.href = "../add-new-item.html"; // THEN redirects
     });
+    
 
     // adds a to the specific shelf div, uses strings instead of objects
     const bracket = placement.indexOf('['); // copy of getShelf, but with string

@@ -1,14 +1,15 @@
 import Part from './part.js';
-import { PORT } from "./backendServer.js";
 
 // only does anything for inventory-by-location
-const partLocation = localStorage.getItem("emptyLocation");
+const placement = localStorage.getItem("emptyLocation");
+const PORT = 3000;
 const serverLocation = `http://localhost:${PORT}`;
 
 let currentPart = new Part;
 
 function loadItemDetails() {
-    document.getElementById("location").value = partLocation;
+    document.getElementById("location").value = placement;
+    console.log(placement);
 }
 
 // takes all the info from the page into a new part on the csv
@@ -25,9 +26,12 @@ function addItem() {
         currentPart.storeLinks = document.getElementById("store-links").textContent;
 
         // fetch info from the server (backendServer.js)
-        fetch(serverLocation, {
+        fetch(`${serverLocation}/save`, {
             // sends the data to the serverLocation
             method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(currentPart),
         });
 
@@ -42,12 +46,11 @@ function addItem() {
 
 }
 
-    loadItemDetails();
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    loadItemDetails();
     document.getElementById("save-item-info").addEventListener("click", addItem);
 
 });
