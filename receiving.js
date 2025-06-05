@@ -46,6 +46,8 @@ function receivedButton() {
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
                 alert("Order marked as received.");
+                //WRITE TO DATABASE!!!!!!!! (WITH DATE)
+
             }
         });
     });
@@ -61,6 +63,7 @@ function cancelButton() {
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
                 alert("Order cancelled.");
+                //WRITE TO DATABASE!!!!!!!! (WITH DATE)
             }
         });
     });
@@ -82,12 +85,12 @@ function loadReceivingPage(incomingOrder) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const incomingOrder = [ // TEMP ARRAY
-        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", orderedDate: "June 5 2025" },
-        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", orderedDate: "June 4 2024" },
-        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", orderedDate: "June 3 2023" },
-        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", orderedDate: "June 2 2022" },
-        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", orderedDate: "June 1 2021" },
-        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", orderedDate: "May 31 2020" }
+        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", orderedDate: "May 5 2025" },
+        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", orderedDate: "May 4 2024" },
+        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", orderedDate: "May 3 2023" },
+        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", orderedDate: "May 2 2022" },
+        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", orderedDate: "May 1 2021" },
+        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", orderedDate: "April 30 2020" }
     ];
 
     loadReceivingPage(incomingOrder); // Load receiving page with incoming orders
