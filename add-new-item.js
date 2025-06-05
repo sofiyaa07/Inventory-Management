@@ -19,12 +19,8 @@ function saveItemInfo() {
     currentPart.model = document.getElementById("model").value;
     currentPart.location = document.getElementById("location").value;
     currentPart.notes = document.getElementById("notes").value;
-    currentPart.imgSrc = document.getElementById("imageInput").files[0];
-    
-    // links are separated by " | ", store separately in array
-    const allLinks = document.getElementById("store-links").value;
-    const breakpoint = " | ";
-    currentPart.storeLinks = allLinks.split(breakpoint);
+    currentPart.imgSrc = document.getElementById("url-image-input").value;
+    currentPart.storeLinks = document.getElementById("store-links").value;
 
     console.log(currentPart);
 

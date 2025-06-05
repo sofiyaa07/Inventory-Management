@@ -75,8 +75,10 @@ function splitPartsByShelf() {
 
 // this needs a SORTED array, going in the order of shelf>column>row
 function stockShelves(shelf, numCol) {
+    const numberOfCellsPerShelf = [64, 64, 30, 30, 30, 68, 136, 68];
+
     // 1. clears the previous shelf
-    const shelfId = `shelf-${getShelf(shelf[1])}`;
+    const shelfId = `shelf-${getShelf(shelf[0])}`;
 
     if (document.getElementById(shelfId)) { // checks if the shelf exists before clearing
         document.getElementById(shelfId).innerHTML = "";
@@ -91,6 +93,7 @@ function stockShelves(shelf, numCol) {
     // adds a blank space
     let currentCol = 0;
     let currentRow = 0;
+    let totalCells = 0;
 
     for (let i = 0; i < shelf.length; i++) { // for each part
         // loops around the columns AND rows. needs num columns (not rows)
@@ -109,12 +112,16 @@ function stockShelves(shelf, numCol) {
                 addNewUnit(shelf[i], false);
 
             }
+            totalCells++;
 
         }
         else {
-            const placement = `shelf-${getShelf(shelf[i])}[${currentCol}][${currentRow}]`;
+            // fromCharCode gets the associated string from the ascii code
+            const placement = `${getShelf(shelf[i])}[${String.fromCharCode(currentCol + 65)}][${currentRow}]`;
             addBlankUnit(placement);
             i--; // goes backward in the loop until the incorrect unit is placed
+            totalCells++;
+
         }
 
         // at the end, increments current column, then if it's too high, rests
@@ -124,6 +131,29 @@ function stockShelves(shelf, numCol) {
             currentRow++; // increments row since going left to right, up down
         }
     }
+
+
+    // // fills the rest of the shelf with blank units
+    // console.log(totalCells);
+
+    // if (totalCells < numberOfCellsPerShelf[getShelf(shelf[0])]) {
+    //     const numShelvesToBeFilled = numberOfCellsPerShelf[getShelf(shelf[0])] - totalCells;
+
+    //     console.log("Filling "+numShelvesToBeFilled+" Shelves");
+
+    //     for (let i = 0; i < numShelvesToBeFilled; i++) {
+    //         const placement = `${getShelf(shelf[i])}[${String.fromCharCode(currentCol + 65)}][${currentRow}]`;
+    //         addBlankUnit(placement);
+
+    //         currentCol++;
+    //         if (currentCol >= numCol) {
+    //             currentCol = 0;
+    //             currentRow++; // increments row since going left to right, up down
+    //         }
+    //     }
+    // }
+
+    // ABVE DOESN"T WORK
 
 }
 
@@ -136,7 +166,7 @@ function addNewUnit(part, isLowStock) {
     const p = document.createElement("p");
     const div = document.createElement("div");
     const img = document.createElement("img");
-    img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
+    img.src = part.imgSrc; // replace with parts[i].img, or whatever it's called
 
     // uses a short name, if there is one (not enough space for long name) <- bugged
     const text = document.createTextNode(part.name);
@@ -176,11 +206,10 @@ function addBlankUnit(placement) { // adds the NEXT valid location, not the curr
         console.log(placement);
         window.location.href = "../add-new-item.html"; // THEN redirects
     });
-    
+
 
     // adds a to the specific shelf div, uses strings instead of objects
-    const bracket = placement.indexOf('['); // copy of getShelf, but with string
-    const shelfId = `shelf-${placement.substring(6, bracket)}`;
+    const shelfId = `shelf-${placement.charAt(0)}`;
     document.getElementById(shelfId).appendChild(a);
 
 
@@ -193,24 +222,18 @@ function addBlankUnit(placement) { // adds the NEXT valid location, not the curr
 
 // returns first section of location string
 function getShelf(part) {
-    const bracket = part.location.indexOf('[');
-    return parseInt(part.location.substring(6, bracket));
+    return parseInt(part.location.charAt(0));
 }
 
 // returns second section of location string
 function getColumn(part) {
-    const open = part.location.indexOf('[');
-    const close = part.location.indexOf(']');
-    return parseInt(part.location.substring(open + 1, close));
+    console.log(parseInt(part.location.charAt(1).charCodeAt(0)) - 65);
+    return parseInt(part.location.charAt(1).charCodeAt(0)) - 65;
 }
 
 // returns third section of location string
 function getRow(part) {
-    // basically makes constants for each index, then returns the single digit
-    const firstClose = part.location.indexOf(']');
-    const secondOpen = part.location.indexOf('[', firstClose);
-    const secondClose = part.location.indexOf(']', secondOpen);
-    return parseInt(part.location.substring(secondOpen + 1, secondClose));
+    return parseInt(part.location.substring(2));
 }
 
 

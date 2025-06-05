@@ -17,7 +17,8 @@
             <div class="content-row">
                 <div class="upload-image">
                     <h2>Upload Image</h2>
-                    <input type="file" id="imageInput" accept="image/*" style="cursor: pointer;">
+                    <!-- <input type="file" id="imageInput" accept="image/*" style="cursor: pointer;"> -->
+                    <input type="url" id="url-image-input" style="cursor: pointer;" placeholder="Paste image url here">
                 </div>
 
                 <div class="right-panel">
@@ -34,7 +35,7 @@
                     <input type="text" id="model" name="model" placeholder="Add model here...">
 
                     <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" placeholder="Add location here, shelf-#[column][row] (ex. shelf-4[3][3])">
+                    <input type="text" id="location" name="location" placeholder="Add location here, [SHELF#][COLUMN][ROW] (ex. 1A0 -- shelf 1, 1st column, 1st row)">
 
                     <label>Notes</label>
                     <textarea id="notes" placeholder="Add any notes here..."></textarea>

@@ -177,6 +177,7 @@ export function addObjectInfoToCSV(obj) {
     let valsStr = JSON.stringify(vals);
     // Get rid of quotes and square brackets before writing to CSV
     valsStr = valsStr.replace(/["\[\]]/g, '');
+
     return valsStr;
 }
 

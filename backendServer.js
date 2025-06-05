@@ -22,6 +22,7 @@ app.use(express.json());
 // whenever data is sent to the backend to be saved
 app.post("/save", (request, response) => {
     const data = request.body; // stores the data that's sent
+    // supplier links and image srouce don't work
 
     // formats the data to be written in the file
     const formattedData = "\n"+addObjectInfoToCSV(data);
@@ -53,6 +54,15 @@ app.get('/load', (request, response) => {
         response.json(JSON.parse(csvObject)); // responds with an object
     });
 });
+
+/* edit part info by deleting the row of edited part, then append new info
+app.get('/update', (request, response) => {
+    const lines = fs.readFileSyn
+
+    
+})
+
+*/
 
 // logs the port
 app.listen(PORT, () => {

@@ -1,5 +1,4 @@
 // btw this code breaks if you access item details BEFORE any of the list stuff
-import { parts } from "./partArray.js";
 import Part from "./part.js";
 
 
@@ -14,25 +13,14 @@ function saveChanges() {
     changedPart.model = document.getElementById("model").value;
     changedPart.location = document.getElementById("location").value;
     changedPart.notes = document.getElementById("notes").textContent;
-    changedPart.imgSrc = document.getElementById("imageInput").src;
+    changedPart.imgSrc = document.getElementById("image").src;
 
-    changePartInDatabase();
-}
-
-function changePartInDatabase() {
-    for (let i = 0; i < parts.length; i++) {
-        if (parts[i] == currentPart) {
-            parts[i] = changedPart;
-
-            // remove parts[i] from csv
-            // append changedPart
-        }
-    }
-
-    
+    changePartInDatabase(); // replace this with backendServer things - for now, doesn't do anything
 
     window.alert("Changes saved!");
 }
+
+
 
 
 function loadItemDetails() {
@@ -42,7 +30,7 @@ function loadItemDetails() {
     document.getElementById("model").value = currentPart.model; 
     document.getElementById("location").value = currentPart.location; 
     document.getElementById("notes").textContent = currentPart.notes; 
-    document.getElementById("imageInput").src = currentPart.imgSrc; 
+    document.getElementById("image").src = currentPart.imgSrc; 
 }
 
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded
