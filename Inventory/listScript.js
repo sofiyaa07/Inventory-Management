@@ -5,10 +5,8 @@
 
 // need a part array to work
 import { sortAlphaAsc, sortAlphaDesc, sortStockAsc, sortStockDesc, sortByName } from "./sortMethods.js";
-import { parts } from "../partArray.js";
+import { parts, getPartArray } from "../partArray.js";
 
-
-let lowStockParts = [];
 let sortedParts = [];
 
 
@@ -62,7 +60,7 @@ function refreshList() {
         a.href = "#";
         // add event listener
         a.addEventListener("click", () => { // sets local storage current part
-            localStorage.setItem("currentPart", JSON.stringify(sortedParts[i]));
+            sessionStorage.setItem("currentPart", JSON.stringify(sortedParts[i]));
             // stringify  sets the object to a string so it can be properly stored
             window.location.href = "../item-details.html"; // THEN redirects
         });
@@ -83,11 +81,11 @@ function refreshLowStock() {
             a.href = "#";
             // same as above
             a.addEventListener("click", () => { // sets local storage current part
-                localStorage.setItem("currentPart", JSON.stringify(parts[i]));
+                sessionStorage.setItem("currentPart", JSON.stringify(parts[i]));
                 // stringify  sets the object to a string so it can be properly stored
                 window.location.href = "../item-details.html"; // THEN redirects
             });
-            
+
 
 
             // adds img src=part[i].image and the div that surrounds it
@@ -115,6 +113,7 @@ function refreshLowStock() {
 
 // start of document scripts
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded
+
     // action listener for the search button
     document.getElementById("search-button").addEventListener("click", getSearchList);
 
@@ -124,7 +123,12 @@ document.addEventListener("DOMContentLoaded", () => { // waits until page is ful
     document.getElementById("sort-stock").addEventListener("click", getStockAsc);
     document.getElementById("sort-desc-stock").addEventListener("click", getStockDesc);
 
-    getAlphaAsc();
-    refreshLowStock();
+    getPartArray().then(() => {
+        getAlphaAsc();
+        refreshLowStock();
+        
+    }); // call at beginning to make sure array is updated
+
+
 
 });

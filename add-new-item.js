@@ -1,7 +1,7 @@
 import Part from './part.js';
 
 // only does anything for inventory-by-location
-const placement = localStorage.getItem("emptyLocation");
+const placement = sessionStorage.getItem("emptyLocation");
 const serverLocation = `http://localhost:3000`;
 
 let currentPart = new Part;

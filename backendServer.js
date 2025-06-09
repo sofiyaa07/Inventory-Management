@@ -1,6 +1,3 @@
-// this is chatgpt code
-// working on commenting this, and changing the code to include the helper methods
-
 // import file writing and reading from helper-methods
 // (do later)
 
@@ -22,7 +19,6 @@ app.use(express.json());
 // whenever data is sent to the backend to be saved
 app.post("/save", (request, response) => {
     const data = request.body; // stores the data that's sent
-    // supplier links and image srouce don't work
 
     // formats the data to be written in the file
     const formattedData = "\n"+addObjectInfoToCSV(data);
@@ -51,18 +47,28 @@ app.get('/load', (request, response) => {
         }
 
         const csvObject = csvToObjects(fileData); // from helper-methods
-        response.json(JSON.parse(csvObject)); // responds with an object
+        response.json(csvObject); // responds with an object
     });
 });
 
-/* edit part info by deleting the row of edited part, then append new info
+// edit part info by deleting the row of edited part, then append new info
 app.get('/update', (request, response) => {
-    const lines = fs.readFileSyn
+    const name = request.partName;
+    const updatedPart = request.body;
 
-    
-})
+    // split csv string at every new line
+    const lines = fs.readFileSync("Part Database - Sheet2.csv", 'utf8').split('\n');
+    // look for part's row by name (column 1)
+    const partLine = lines.filter(line => {
+        const columns = line.split(',');
+        return columns[0] !== name;
+    });
+    const newLine = updatedPart.join(',');
+    lines.push(newLine);
 
-*/
+    fs.writeFileSync(filePath, lines.join('\n'), 'utf8');
+    res.send('Part updated successfully');
+});
 
 // logs the port
 app.listen(PORT, () => {

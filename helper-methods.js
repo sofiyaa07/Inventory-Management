@@ -11,7 +11,7 @@ export function makeShelf(numRows, numCols) {
     for (var i = 0; i < numCols; i++) {
         shelf[i] = [];
         for (var j = 0; j < numRows; j++) {
-            shelf[i][j] = [i,j];
+            shelf[i][j] = [i, j];
         }
     }
     return shelf;
@@ -117,9 +117,13 @@ export function csvToObjects(csvStr) {
         }, {});
 
         // links are separated by " | ", store separately in array
-        const allLinks = partData.storeLinks;
-        const breakpoint = " | ";
-        const splitLinks = allLinks.split(breakpoint);
+        let splitLinks = [];
+        if (partData.storeLinks) {
+            const allLinks = partData.storeLinks;
+            const breakpoint = " | ";
+            splitLinks = allLinks.split(breakpoint);
+        }
+
 
         return new Part(
             partData.name,
@@ -163,7 +167,7 @@ async function writeToCSV(filePath, str) {
     try {
         await fs.appendFile(filePath, `\n${str}`, 'utf-8');
         console.log(`${str} appended.`);
-    } catch(err) {
+    } catch (err) {
         console.log('Error appending str: ', err);
     }
 }
