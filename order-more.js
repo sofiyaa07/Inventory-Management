@@ -58,9 +58,17 @@ function submitButton() {
             const newLinkInput = document.getElementById('addLink'); // Get user input
             if (newLinkInput.value) {
                 try {
+                    //add code to update array; 
+
                     const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain
                     const newRow = createLinkRow(newLinkInput.value, domain); // Create new row
                     const container = document.querySelector('.scrollable-links');
+                    
+                    const noLinksMessage = container.querySelector('.no-links-message'); //if "no links" is displayed, remove message when submitting a new link
+                    if (noLinksMessage) {
+                        noLinksMessage.remove(); 
+                    }
+                    
                     container.appendChild(newRow); // Add new row to container
                     newLinkInput.value = ""; // Clear input field
 
@@ -114,11 +122,17 @@ function loadOrderMorePage(part) {
     const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
     container.innerHTML = ""; // Clear existing content
     
-    if (part.storeLinks && part.storeLinks.length >0 )
-    part.storeLinks.forEach(linkUrl => {
-      const row = createLinkRow(linkUrl); // Create row for each link
-      container.appendChild(row); // Add row to container
-    });
+    if (part.storeLinks && part.storeLinks.length > 0 ) {
+        part.storeLinks.forEach(linkUrl => {
+        const row = createLinkRow(linkUrl); // Create row for each link
+        container.appendChild(row); // Add row to container
+        });
+    } else {
+        const noLinksMessage = document.createElement('p');
+        noLinksMessage.textContent = "No store links available.";
+        noLinksMessage.classList.add('no-links-message'); // Optional: Add a class for styling
+        container.appendChild(noLinksMessage);
+    }
 
     // Call button functions
     submitButton();
