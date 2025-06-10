@@ -28,7 +28,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
       const domain = new URL(linkUrl).hostname.replace('www.', ''); //remove www. from link 
       link.textContent = domain; //set text to domain 
     } catch (e) {
-      link.textContent = linkName;
+        link.textContent = linkName; 
     }
   
     const selectButton = document.createElement('button'); //create select button 
@@ -116,10 +116,10 @@ function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for lin
     document.getElementById("name").textContent = part1.name;
 
 
-    const container = document.querySelector('.scrollable-links'); //set container to scrollable-links section 
-    container.innerHTML = ""; //clear existing content
-  
-    //create row for each store link of part 
+    const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
+    container.innerHTML = ""; // Clear existing content
+    
+    if (part.storeLinks && part.storeLinks.length >0 )
     part.storeLinks.forEach(linkUrl => {
       const row = createLinkRow(linkUrl); //call createLinkRow function passing url 
       container.appendChild(row); //add row to container 

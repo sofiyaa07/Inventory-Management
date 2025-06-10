@@ -36,6 +36,21 @@ app.post("/save", (request, response) => {
     });
 });
 
+app.post("/order", (request, response) => {
+    const data = request.body; // stores the data that's sent
+
+    // parameters: file path, the thing to be written, and a callback function
+    // callback -> calls this function when file runs, in this case, checks for error
+    fs.appendFile("orderHistory.txt", data, (err) => { // testing with a 2nd file for now
+        if (err) {
+            console.error('Error writing file:', err);
+            return response.status(500).send('Failed to write data');
+        }
+
+        // if no error, sends the message that the data was saved
+        response.send('Data saved successfully');
+    });
+});
 
 // whenever data needs to be read from the csv 
 app.get('/load', (request, response) => {
@@ -52,7 +67,7 @@ app.get('/load', (request, response) => {
 });
 
 // edit part info by deleting the row of edited part, then append new info
-app.get('/update', (request, response) => {
+app.post('/update', (request, response) => {
     const name = request.partName;
     const updatedPart = request.body;
 
@@ -63,12 +78,14 @@ app.get('/update', (request, response) => {
         const columns = line.split(',');
         return columns[0] !== name;
     });
-    const newLine = updatedPart.join(',');
+    // add old name to updated part details
+    const newLine = name + ',' + updatedPart.join(',');
     lines.push(newLine);
 
     fs.writeFileSync(filePath, lines.join('\n'), 'utf8');
     res.send('Part updated successfully');
 });
+
 
 // logs the port
 app.listen(PORT, () => {

@@ -26,18 +26,18 @@ function saveChanges() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            partName: current.name,
+            partName: currentPart.name,
             body: JSON.stringify(changedPart),
         })
+        
+        window.alert("Changes saved!");
+
     }
 
     catch {
         window.alert("Error: Changes not saved");
     }
 
-    changePartInDatabase(); // replace this with backendServer things - for now, doesn't do anything
-
-    window.alert("Changes saved!");
 }
 
 

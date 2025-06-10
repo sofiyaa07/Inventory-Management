@@ -113,7 +113,7 @@ function stockShelves(shelf, numCol) {
         let unitRow = getRow(shelf[i]);
 
         // corrects for excess columns
-        if (unitCol > numCol) continue;
+        if (unitCol >= numCol) continue;
 
         if (unitCol === currentCol && unitRow === currentRow) {
             // 2.5. for each part, if low on stock, adds the low-stock id
@@ -146,22 +146,25 @@ function stockShelves(shelf, numCol) {
 
         amountOfIterations++;
         if (amountOfIterations > maxIterations) {
+            console.log("LOOP IS STUPID AND BROKE");
             break;
         }
 
     }
 
 
-    // // fills the rest of the shelf with blank units
+    // // // fills the rest of the shelf with blank units
+    // if (shelfId ==)
+    // const numberOfCellsPerShelf = [64, 64, 68, 68, 68, 68, 68, 68]
     // console.log(totalCells);
 
-    // if (totalCells < numberOfCellsPerShelf[getShelf(shelf[0])]) {
+    // if (amountOfIterations < numberOfCellsPerShelf[getShelf(shelf[0])]) {
     //     const numShelvesToBeFilled = numberOfCellsPerShelf[getShelf(shelf[0])] - totalCells;
 
     //     console.log("Filling "+numShelvesToBeFilled+" Shelves");
 
     //     for (let i = 0; i < numShelvesToBeFilled; i++) {
-    //         const placement = `${getShelf(shelf[i])}[${String.fromCharCode(currentCol + 65)}][${currentRow}]`;
+    //         const placement = `${getShelf(shelf[i])}${String.fromCharCode(currentCol + 65)}${currentRow}`;
     //         addBlankUnit(placement);
 
     //         currentCol++;

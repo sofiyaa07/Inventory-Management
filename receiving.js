@@ -1,7 +1,11 @@
+const serverLocation = `http://localhost:3000`;
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     //ADD LOGIC TO FORWARD TO ORDER HISTORY TAB 
-    let orderStatus = ""; 
+    let orderStatus = "";
 
     const itemRowContainer = document.querySelector('.item-row-container');
     if (itemRowContainer) { //add click listener to buttons 
@@ -15,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const orderConfirmed = confirm("Confirm order received and move to history?"); //confirmation window 
                 if (orderConfirmed) { //if user confirms, removes row from receiving 
                     const date = new Date();  //get current date and time
-                    orderStatus = "received"; 
+                    orderStatus = "received";
                     row.remove();
                 }
             }
@@ -26,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (confirmDelete) { //if user confirms, removes row from receiving
                     orderStatus = "cancelled"
                     const date = new Date();  //get current date and time
-                    row.remove(); 
+                    row.remove();
                     alert("Order canceled.");
                 }
             } //end of if
 
-            const date  = new Date(); //get current date and time
+            const date = new Date(); //get current date and time
             //FORWARD TO ORDER HISTORY PASSING ITEM, ORDERSTATUS (CANCELLED OR RECEIVED) AND DATE 
         });
     }

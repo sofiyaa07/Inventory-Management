@@ -11,7 +11,7 @@ export function makeShelf(numRows, numCols) {
     for (var i = 0; i < numCols; i++) {
         shelf[i] = [];
         for (var j = 0; j < numRows; j++) {
-            shelf[i][j] = [i, j];
+            shelf[i][j] = [i,j];
         }
     }
     return shelf;
@@ -104,7 +104,6 @@ export function csvToObjects(csvStr) {
     */
     // Each part object is separated by a new line, use trim to get rid of spaces
     const parts = csvStr.trim().split('\n');
-    console.log(parts);
     // Each key in the header is separated by a comma
     const keys = parts[0].split(',').map(key => key.trim());
     // map() goes over each element in parts
@@ -116,29 +115,19 @@ export function csvToObjects(csvStr) {
             return obj;
         }, {});
 
-        // links are separated by " | ", store separately in array
-        let splitLinks = [];
-        if (partData.storeLinks) {
-            const allLinks = partData.storeLinks;
-            const breakpoint = " | ";
-            splitLinks = allLinks.split(breakpoint);
-        }
-
-
+        // Make part object, casting to number where needed
         return new Part(
             partData.name,
             partData.model,
             partData.location,
             Number(partData.stock),
             partData.notes,
-            splitLinks,
+            partData.storeLinks,
             partData.imgSrc,
             Number(partData.threshold),
         );
     });
 }
-
-
 
 export function readCSV(file) {
     /*
@@ -167,14 +156,14 @@ async function writeToCSV(filePath, str) {
     try {
         await fs.appendFile(filePath, `\n${str}`, 'utf-8');
         console.log(`${str} appended.`);
-    } catch (err) {
+    } catch(err) {
         console.log('Error appending str: ', err);
     }
 }
 
-export function addObjectInfoToCSV(obj) {
+export function addObjectInfoToCSV(obj, filePath) {
     /*
-    Input: Part Object
+    Input: Part Object and CSV filePath
     */
     let vals = Object.values(obj).map(value => value.toString());
     // Convert to String
@@ -183,19 +172,4 @@ export function addObjectInfoToCSV(obj) {
     valsStr = valsStr.replace(/["\[\]]/g, '');
 
     return valsStr;
-}
-
-// did not test yet (+ it just isn't complete)
-export function removeItemFromCSV(obj, filePath) {
-    /*
-    Input: Part object (singular) and CSV file path
-    Turns the object into a string, then searches each line of the CSV
-    for a matching string and removes it
-    */
-
-    let objAsString = JSON.stringify(obj);
-    // regex to remove brackets and quotes (shouldn't remove slashes)
-    objAsString = objAsString.replace(/["\[\]]/g, ''); // objAsString is how it's written in the CSV
-
-    // file reading stuff here
 }
