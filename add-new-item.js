@@ -24,7 +24,7 @@ function saveItemInfo() {
 
     console.log(currentPart);
 
-    try { // not entering this code right now
+    try { 
 
         // fetch info from the server (backendServer.js)
         fetch(`${serverLocation}/save`, {
