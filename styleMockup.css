@@ -317,3 +317,8 @@ form {
 #save-item-info:hover {
     background-color: green;
 }
+
+/* makes the image fir the container, no weird cropping */
+#image {
+    object-fit: contain;
+}
