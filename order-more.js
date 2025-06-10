@@ -30,7 +30,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") {
         const domain = new URL(linkUrl).hostname.replace('www.', ''); // Remove www. from link
         link.textContent = domain; // Set text to domain
     } catch (e) {
-        link.textContent = linkName; // Fallback to linkName
+        link.textContent = linkName; 
     }
 
     const selectButton = document.createElement('button'); // Create select button
@@ -114,6 +114,7 @@ function loadOrderMorePage(part) {
     const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
     container.innerHTML = ""; // Clear existing content
     
+    if (part.storeLinks && part.storeLinks.length >0 )
     part.storeLinks.forEach(linkUrl => {
       const row = createLinkRow(linkUrl); // Create row for each link
       container.appendChild(row); // Add row to container
