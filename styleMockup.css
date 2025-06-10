@@ -226,6 +226,17 @@ h2 {
 }
 
 
+/* Container for item rows */
+/* .item-row-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 3px solid black; 
+    margin-left: 20px; 
+    margin-right: 20px; 
+} */
+
 /* Individual item rows (name, date, image) */
 
 .item-row {
@@ -262,8 +273,8 @@ h2 {
 }
 
 /* Style for the date part */
-.ordered-date,
-.received-date {
+.item-details label[for="received-date"],
+.item-details label[for="ordered-date"] {
     font-size: 13px;
     font-weight: normal;
     color: #555;
@@ -305,4 +316,9 @@ form {
 
 #save-item-info:hover {
     background-color: green;
+}
+
+/* makes the image fir the container, no weird cropping */
+#image {
+    object-fit: contain;
 }

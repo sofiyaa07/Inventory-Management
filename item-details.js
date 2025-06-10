@@ -1,13 +1,17 @@
 // btw this code breaks if you access item details BEFORE any of the list stuff
-import { parts } from "./partArray.js";
 
 
 // parses the string from local storage into an object
-const currentPart = JSON.parse(localStorage.getItem("currentPart"));
-let changedPart = {};
+const currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
+// receives currentPart as a plain object, properties have underscores before them
+
+
+const serverLocation = `http://localhost:3000`;
+let changedPart = currentPart; //assuming that name doesn't change (for now) = identify part by name
+
 
 function saveChanges() {
-    changedPart.name = document.getElementById("name").textContent;
+    // changedPart.name = document.getElementById("name").textContent;
     changedPart.stock = document.getElementById("stock").value;
     changedPart.threshold = document.getElementById("threshold").value;
     changedPart.model = document.getElementById("model").value;
@@ -15,34 +19,38 @@ function saveChanges() {
     changedPart.notes = document.getElementById("notes").textContent;
     changedPart.imgSrc = document.getElementById("image").src;
 
-    changePartInDatabase();
-}
+    try {
+        // fetch from backend server (if /update)
+        fetch(`${serverLocation}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            partName: currentPart.name,
+            body: JSON.stringify(changedPart),
+        })
+        
+        window.alert("Changes saved!");
 
-function changePartInDatabase() {
-    for (let i = 0; i < parts.length; i++) {
-        if (parts[i] == currentPart) {
-            parts[i] = changedPart;
-
-            // remove parts[i] from csv
-            // append changedPart
-        }
     }
 
-    
+    catch {
+        window.alert("Error: Changes not saved");
+    }
 
-    window.alert("Changes saved!");
 }
 
 
-function loadItemDetails() {
-    const name = currentPart.name; 
-    document.getElementById("name").textContent = name.substring(0, name.indexOf(','));
-    document.getElementById("stock").value = currentPart.stock; 
-    document.getElementById("threshold").value = currentPart.threshold; 
-    document.getElementById("model").value = name.substring(name.indexOf(',')+1); 
-    document.getElementById("location").value = currentPart.location; 
-    document.getElementById("notes").textContent = currentPart.notes; 
-    document.getElementById("image").src = currentPart.imgSrc; 
+
+
+function loadItemDetails() { // just takes the part from local storage
+    document.getElementById("name").textContent = currentPart._name;
+    document.getElementById("stock").value = currentPart._stock; 
+    document.getElementById("threshold").value = currentPart._threshold; 
+    document.getElementById("model").value = currentPart._model; 
+    document.getElementById("location").value = currentPart._location; 
+    document.getElementById("notes").textContent = currentPart._notes; 
+    document.getElementById("image").src = currentPart._imgSrc; 
 }
 
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded

@@ -1,213 +1,36 @@
 // this is the file that most of the other js files access for info
 // will use helper methods to get the array
+import Part from "./part.js";
 
-export const parts = [
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "1",  threshold: 5 },
-    { name: "Brduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "2" },
-    { name: "Crduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "3" },
-    { name: "Drduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "4", threshold: 5 },
-    { name: "Erduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "5", threshold: 5 },
-    { name: "Frduino Uno REV3,ARD_A000066", location: "shelf-0[0][0]", stock: "6" },
-    { name: "Grduino Uno REV3,ARD_A000066", location: "shelf-0[2][0]", stock: "7" },
-    { name: "Hrduino Uno REV3,ARD_A000066", location: "shelf-0[3][0]", stock: "8" },
-    { name: "Irduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "4" },
-    { name: "Jrduino Uno REV3,ARD_A000066", location: "shelf-0[0][2]", stock: "9" },
-    { name: "Krduino Uno REV3,ARD_A000066", location: "shelf-0[2][2]", stock: "10" },
-    { name: "Lrduino Uno REV3,ARD_A000066", location: "shelf-0[3][2]", stock: "41" },
-    { name: "Mrduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "42" },
-    { name: "Nrduino Uno REV3,ARD_A000066", location: "shelf-0[0][3]", stock: "43" },
-    { name: "Orduino Uno REV3,ARD_A000066", location: "shelf-0[2][3]", stock: "44" },
-    { name: "Prduino Uno REV3,ARD_A000066", location: "shelf-0[3][3]", stock: "45" },
-    { name: "Qrduino Uno REV3,ARD_A000066", location: "shelf-0[0][4]", stock: "46" },
-    { name: "Rrduino Uno REV3,ARD_A000066", location: "shelf-0[3][4]", stock: "47" },
-    { name: "Srduino Uno REV3,ARD_A000066", location: "shelf-0[2][5]", stock: "48" },
-    { name: "Trduino Uno REV3,ARD_A000066", location: "shelf-0[0][7]", stock: "49" },
+const serverLocation = 'http://localhost:3000';
 
+export let parts = [
     
-    { name: "Urduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-1[0][0]", stock: "4" },
-    { name: "Vrduino Uno REV3,ARD_A000066", location: "shelf-1[1][0]", stock: "4" },
-    { name: "Wrduino Uno REV3,ARD_A000066", location: "shelf-1[2][0]", stock: "4" },
-    { name: "Xrduino Uno REV3,ARD_A000066", location: "shelf-1[3][0]", stock: "4", threshold: 5 },
-    { name: "Yrduino Uno REV3,ARD_A000066", location: "shelf-1[0][1]", stock: "4", threshold: 5 },
-    { name: "Zrduino Uno REV3,ARD_A000066", location: "shelf-1[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-1[1][7]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-2[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[3][0]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[0][1]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-2[1][7]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-3[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[3][0]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[0][1]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-3[1][7]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-4[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[3][0]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[0][1]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-4[1][7]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-5[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[3][0]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[0][1]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-5[1][7]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000066", shortName: "Arduino Uno", location: "shelf-6[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][0]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[0][1]", stock: "4", threshold: 5 },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][7]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[3][10]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000066", location: "shelf-6[1][13]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[0][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[6][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][7]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[3][10]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000077", location: "shelf-7[1][13]", stock: "4" },
-
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[0][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[2][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][0]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[0][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[2][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][1]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[0][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[2][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][2]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[0][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[2][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][3]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[0][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][4]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[2][5]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][7]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[3][10]", stock: "4" },
-    { name: "Arduino Uno REV3,ARD_A000088", location: "shelf-8[1][13]", stock: "4" },
-
-
 ];
 
-export let currentPart = {
-    name: "Arduino Uno REV3,ARD_A000088",
-    location: "shelf-8[1][13]",
-    stock: "4",
-};
+// needs to be called like, everywhere lol
+export function getPartArray() {
+    return fetch(`${serverLocation}/load`) // returns a promise (feedback)
+        .then(response => response.json()) // parses data into object array (?)
+        .then(data => {
+            // data: the part array that was read
+            const mapped = data.map(obj =>
+                new Part( // maps data to become Part objects specifically
+                    obj._name, obj._model, obj._location, obj._stock,
+                    obj._notes, obj._storeLinks, obj._imgSrc, obj._threshold
+                )
+            );
+            // sets parts to nothing, then adds
+            parts.length = 0;
+            parts.push(...mapped); // ... takes each item in array and uses the function on it
+            // (kinda like a loop, but simplified)
 
-export function setCurrentPart(newP) {
-    currentPart = newP;
+            console.log("partArray updated", parts);
+        })
+
+        // error handling
+        .catch(error => {
+            console.error("Error fetching part array:", error);
+        });
+
 }

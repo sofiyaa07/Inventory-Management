@@ -3,7 +3,7 @@
 */
 
 // need a part array to work (placehodler under)
-import { parts } from "../partArray.js";
+import { parts, getPartArray } from "../partArray.js";
 
 // array for arrays
 const allShelves = [];
@@ -11,6 +11,9 @@ const allShelves = [];
 
 // this is the one that's called. calls all the other functions by looping
 function fillShelves() {
+    console.log("shelves Filled")
+    console.log(parts);
+
     splitPartsByShelf();
 
     for (let i = 0; i < allShelves.length; i++) {
@@ -60,8 +63,15 @@ function stockEmptyShelf(shelf) {
 function splitPartsByShelf() {
     // splits parts into different arrays: one for each shelf
     for (let i = 0; i < parts.length; i++) {
+        // skip invalid parts
+        if (!parts[i] || !parts[i].location) continue;
+        else if (getShelf(parts[i]) < 0) continue;
+        else if (getRow(parts[i]) <= 0) continue;
+
+
         const currShelf = getShelf(parts[i]);
 
+        // sets up allShelves[i] if it's null
         if (!allShelves[currShelf]) {
             allShelves[currShelf] = [];
         }
@@ -76,7 +86,7 @@ function splitPartsByShelf() {
 // this needs a SORTED array, going in the order of shelf>column>row
 function stockShelves(shelf, numCol) {
     // 1. clears the previous shelf
-    const shelfId = `shelf-${getShelf(shelf[1])}`;
+    const shelfId = `shelf-${getShelf(shelf[0])}`;
 
     if (document.getElementById(shelfId)) { // checks if the shelf exists before clearing
         document.getElementById(shelfId).innerHTML = "";
@@ -90,7 +100,10 @@ function stockShelves(shelf, numCol) {
     // 2. takes the location of EACH PART -- if the location != the next location,
     // adds a blank space
     let currentCol = 0;
-    let currentRow = 0;
+    let currentRow = 1;
+    let totalCells = 0;
+    let amountOfIterations = 0;
+    const maxIterations = 300; // failsafe for infinite loop
 
     for (let i = 0; i < shelf.length; i++) { // for each part
         // loops around the columns AND rows. needs num columns (not rows)
@@ -98,6 +111,9 @@ function stockShelves(shelf, numCol) {
         // rows aren't needed because who cares if there's extras at the bottom
         let unitCol = getColumn(shelf[i]);
         let unitRow = getRow(shelf[i]);
+
+        // corrects for excess columns
+        if (unitCol >= numCol) continue;
 
         if (unitCol === currentCol && unitRow === currentRow) {
             // 2.5. for each part, if low on stock, adds the low-stock id
@@ -109,12 +125,16 @@ function stockShelves(shelf, numCol) {
                 addNewUnit(shelf[i], false);
 
             }
+            totalCells++;
 
         }
         else {
-            const placement = `shelf-${getShelf(shelf[i])}[${currentCol}][${currentRow}]`;
+            // fromCharCode gets the associated string from the ascii code
+            const placement = `${getShelf(shelf[i])}${String.fromCharCode(currentCol + 65)}${currentRow}`;
             addBlankUnit(placement);
             i--; // goes backward in the loop until the incorrect unit is placed
+            totalCells++;
+
         }
 
         // at the end, increments current column, then if it's too high, rests
@@ -123,7 +143,39 @@ function stockShelves(shelf, numCol) {
             currentCol = 0;
             currentRow++; // increments row since going left to right, up down
         }
+
+        amountOfIterations++;
+        if (amountOfIterations > maxIterations) {
+            console.log("LOOP IS STUPID AND BROKE");
+            break;
+        }
+
     }
+
+
+    // // // fills the rest of the shelf with blank units
+    // if (shelfId ==)
+    // const numberOfCellsPerShelf = [64, 64, 68, 68, 68, 68, 68, 68]
+    // console.log(totalCells);
+
+    // if (amountOfIterations < numberOfCellsPerShelf[getShelf(shelf[0])]) {
+    //     const numShelvesToBeFilled = numberOfCellsPerShelf[getShelf(shelf[0])] - totalCells;
+
+    //     console.log("Filling "+numShelvesToBeFilled+" Shelves");
+
+    //     for (let i = 0; i < numShelvesToBeFilled; i++) {
+    //         const placement = `${getShelf(shelf[i])}${String.fromCharCode(currentCol + 65)}${currentRow}`;
+    //         addBlankUnit(placement);
+
+    //         currentCol++;
+    //         if (currentCol >= numCol) {
+    //             currentCol = 0;
+    //             currentRow++; // increments row since going left to right, up down
+    //         }
+    //     }
+    // }
+
+    // ABVE DOESN"T WORK
 
 }
 
@@ -136,7 +188,7 @@ function addNewUnit(part, isLowStock) {
     const p = document.createElement("p");
     const div = document.createElement("div");
     const img = document.createElement("img");
-    img.src = "../Arduino.jpg" // replace with parts[i].img, or whatever it's called
+    img.src = part.imgSrc; // replace with parts[i].img, or whatever it's called
 
     // uses a short name, if there is one (not enough space for long name) <- bugged
     const text = document.createTextNode(part.name);
@@ -151,7 +203,7 @@ function addNewUnit(part, isLowStock) {
     a.href = "#";
     // same as list scripts, but changed parameter
     a.addEventListener("click", () => { // sets local storage current part
-        localStorage.setItem("currentPart", JSON.stringify(part));
+        sessionStorage.setItem("currentPart", JSON.stringify(part));
         // stringify  sets the object to a string so it can be properly stored
         window.location.href = "../item-details.html"; // THEN redirects
     });
@@ -172,13 +224,14 @@ function addBlankUnit(placement) { // adds the NEXT valid location, not the curr
     // same as list scripts, no stringify necessary
 
     a.addEventListener("click", () => { // sets local storage current part
-        localStorage.setItem("emptyLocation", placement);
+        sessionStorage.setItem("emptyLocation", placement);
+        console.log(placement);
         window.location.href = "../add-new-item.html"; // THEN redirects
     });
 
+
     // adds a to the specific shelf div, uses strings instead of objects
-    const bracket = placement.indexOf('['); // copy of getShelf, but with string
-    const shelfId = `shelf-${placement.substring(6, bracket)}`;
+    const shelfId = `shelf-${placement.charAt(0)}`;
     document.getElementById(shelfId).appendChild(a);
 
 
@@ -191,30 +244,27 @@ function addBlankUnit(placement) { // adds the NEXT valid location, not the curr
 
 // returns first section of location string
 function getShelf(part) {
-    const bracket = part.location.indexOf('[');
-    return parseInt(part.location.substring(6, bracket));
+    return parseInt(part.location.charAt(0));
 }
 
 // returns second section of location string
 function getColumn(part) {
-    const open = part.location.indexOf('[');
-    const close = part.location.indexOf(']');
-    return parseInt(part.location.substring(open + 1, close));
+    console.log(parseInt(part.location.charAt(1).charCodeAt(0)) - 65);
+    return parseInt(part.location.charAt(1).charCodeAt(0)) - 65;
 }
 
 // returns third section of location string
 function getRow(part) {
-    // basically makes constants for each index, then returns the single digit
-    const firstClose = part.location.indexOf(']');
-    const secondOpen = part.location.indexOf('[', firstClose);
-    const secondClose = part.location.indexOf(']', secondOpen);
-    return parseInt(part.location.substring(secondOpen + 1, secondClose));
+    return parseInt(part.location.substring(2));
 }
 
 
 
 // on start run these methods:
 document.addEventListener("DOMContentLoaded", () => {
-    fillShelves();
+    getPartArray().then(() => {
+        fillShelves();
+
+    });
 
 });
