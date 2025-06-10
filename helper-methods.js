@@ -104,7 +104,6 @@ export function csvToObjects(csvStr) {
     */
     // Each part object is separated by a new line, use trim to get rid of spaces
     const parts = csvStr.trim().split('\n');
-    console.log(parts);
     // Each key in the header is separated by a comma
     const keys = parts[0].split(',').map(key => key.trim());
     // map() goes over each element in parts
@@ -172,19 +171,4 @@ export function addObjectInfoToCSV(obj, filePath) {
     // Get rid of quotes and square brackets before writing to CSV
     valsStr = valsStr.replace(/["\[\]]/g, '');
     writeToCSV(filePath, valsStr);
-}
-
-// did not test yet (+ it just isn't complete)
-export function removeItemFromCSV(filePath, obj) {
-    /*
-    Input: Part object (singular) and CSV file path
-    Turns the object into a string, then searches each line of the CSV
-    for a matching string and removes it
-    */
-
-    let objAsString = JSON.stringify(obj);
-    // regex to remove brackets and quotes (shouldn't remove slashes)
-    objAsString = objAsString.replace(/["\[\]]/g, ''); // objAsString is how it's written in the CSV
-
-    // file reading stuff here
 }

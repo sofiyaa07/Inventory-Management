@@ -1,6 +1,5 @@
 import Part from './part.js';
 
-
 const part1 = new Part(
     "Arduino Mega 2560",
     "ARD_A000067",
@@ -14,117 +13,160 @@ const part1 = new Part(
     3
 );
 
-const currentPart = JSON.parse(localStorage.getItem("currentPart"));
 
-function createLinkRow(linkUrl, linkName = "Store Link") {
-    const row = document.createElement('div'); // Create div element
-    row.classList.add('link-row'); // Add to link-row class
-
-    const link = document.createElement('a'); // Create link element
-    link.href = linkUrl; // Set link address to linkUrl
-    link.target = "_blank"; // Open in new tab
-    link.textContent = linkName; // Set text of link to linkName
-
+function createLinkRow(linkUrl, linkName = "Store Link") { //creates row for link and buttons 
+    const row = document.createElement('div'); //create div element 
+    row.classList.add('link-row'); //add to link-row class 
+  
+    const link = document.createElement('a'); //create link element 
+    link.href = linkUrl;  //set link address to linkUrl
+    link.target = "_blank"; //open in new tab 
+    link.textContent = linkName; //set text of link to linkName 
+  
     // Extract domain for cleaner display
     try {
-        const domain = new URL(linkUrl).hostname.replace('www.', ''); // Remove www. from link
-        link.textContent = domain; // Set text to domain
+      const domain = new URL(linkUrl).hostname.replace('www.', ''); //remove www. from link 
+      link.textContent = domain; //set text to domain 
     } catch (e) {
-        link.textContent = linkName; // Fallback to linkName
+      link.textContent = linkName;
     }
-
-    const selectButton = document.createElement('button'); // Create select button
+  
+    const selectButton = document.createElement('button'); //create select button 
     selectButton.textContent = '✓';
-    selectButton.classList.add('select'); // Add to select class
-    selectButton.title = 'Select link'; // Set title
-
-    const deleteButton = document.createElement('button'); // Create delete button
+    selectButton.classList.add('select'); //add to select class 
+    selectButton.title='Select link'; //set title 
+  
+    const deleteButton = document.createElement('button'); //create delete button 
     deleteButton.textContent = 'x';
-    deleteButton.classList.add('delete'); // Add to delete class
-    deleteButton.title = 'Delete link'; // Set title
+    deleteButton.classList.add('delete'); //add to delete class 
+    selectButton.title='Delete link'; //set title 
 
-    // Add link and buttons to row
+    //add link and buttons to row 
     row.appendChild(link);
     row.appendChild(selectButton);
     row.appendChild(deleteButton);
+  
+    return row; 
+  }
 
-    return row;
-}
-
-function submitButton() {
+  //handles new link input after clicking submit button 
+  function submitButton() {
+    //add event listener for submit button
     const submitButton = document.querySelector('.submit-link input[type="submit"]');
-    if (submitButton) {
-        submitButton.addEventListener('click', () => {
-            const newLinkInput = document.getElementById('addLink'); // Get user input
-            if (newLinkInput.value) {
+    if (submitButton) { //if submit button used, 
+        submitButton.addEventListener('click', () => { //add click listener 
+            const newLinkInput = document.getElementById('addLink'); //assign newLinkInput to user input in the 'addLink' text field
+            if (newLinkInput.value) { //if there is a value to newLinkInput, 
                 try {
-                    const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain
-                    const newRow = createLinkRow(newLinkInput.value, domain); // Create new row
-                    const container = document.querySelector('.scrollable-links');
-                    container.appendChild(newRow); // Add new row to container
-                    newLinkInput.value = ""; // Clear input field
+                    //add code to update array; 
 
-                    // Add buttons
+
+                    const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); //extract domain from url 
+                    const newRow = createLinkRow(newLinkInput.value, domain); //pass domain as link name
+                    const container = document.querySelector('.scrollable-links');
+                    container.appendChild(newRow); //add new row to scrollable-links container
+                    newLinkInput.value = ""; //clear input field
+
+                     //add buttons
                     selectButton();
-                    deleteButton();
+                    deleteButton(); 
                 } catch (e) {
-                    alert("Please enter a valid URL."); // Alert for invalid input
+                    alert("Please enter a valid URL."); //alert for invalid input 
                 }
             }
         });
     }
-}
+  }
 
-function selectButton() {
-    const selectButtons = document.querySelectorAll(".select");
+  function selectButton () {
+    const selectButtons = document.querySelectorAll(".select"); 
 
     selectButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const quantity = prompt("How many would you like to order?");
-            if (quantity && !isNaN(quantity) && Number(quantity) > 0) {
-                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`);
-                window.location.href = "receiving.html"; // Redirect to receiving tab
+        button.addEventListener("click", function () { //add click listener to select buttons 
+            const quantity = prompt("How many would you like to order?"); //assign quantity to user input to prompt
+            if (quantity && !isNaN(quantity) && Number(quantity) > 0) { //if user inputs valid number
+                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`); //displays quantity
+                const date = new Date();  //get current date and time
+                window.location.href = "receiving.html"; //opens receiving tab 
             } else if (quantity !== null) {
-                alert("Please enter a valid number.");
+                alert("Please enter a valid number."); //else alerts invalid input 
             }
         });
     });
-}
+  }
 
-function deleteButton() {
+  function deleteButton () {
     const deleteButtons = document.querySelectorAll(".delete");
 
     deleteButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const confirmDelete = confirm("Are you sure you want to delete this link?");
-            if (confirmDelete) {
-                const linkRow = button.closest(".link-row"); // Get the specific row containing the button
-                linkRow.remove(); // Remove row
+        button.addEventListener("click", function () { //add click lisyener to delete buttons 
+            const confirmDelete = confirm("Are you sure you want to delete this link?"); //confirmation screen 
+            if (confirmDelete) { //if user clicks confirm, 
+                const linkRow = button.closest(".link-row"); //sets linkRow to the specific row containing the button 
+                linkRow.remove(); //removes row 
                 alert("Link deleted");
             }
         });
     });
-}
+  }
 
-function loadOrderMorePage(part) {
+  
+  function loadOrderMorePage(part) {
+    document.getElementById("image").src = part1.imgSrc; 
+    document.getElementById("name").textContent = part1.name;
 
-    document.getElementById("image").src = part.imgSrc; // Set image source
-    document.getElementById("name").textContent = part.name; // Set name
 
-    const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
-    container.innerHTML = ""; // Clear existing content
-    
+    const container = document.querySelector('.scrollable-links'); //set container to scrollable-links section 
+    container.innerHTML = ""; //clear existing content
+  
+    //create row for each store link of part 
     part.storeLinks.forEach(linkUrl => {
-      const row = createLinkRow(linkUrl); // Create row for each link
-      container.appendChild(row); // Add row to container
+      const row = createLinkRow(linkUrl); //call createLinkRow function passing url 
+      container.appendChild(row); //add row to container 
     });
+   
+    //call button functions 
+    submitButton(); 
+    selectButton(); 
+    deleteButton(); 
 
-    // Call button functions
-    submitButton();
-    selectButton();
-    deleteButton();
-}
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadOrderMorePage(currentPart); // Load part1 data
-});
+  // function addToReceiving(part, date) {
+  //   // const model = part.model; 
+  //   // const name = part.name; 
+  //   // const date = date; 
+
+  //   const image = createElement('img'); 
+  //   image.src = part.image; 
+
+  //   const row = createElement('div');
+  //   row.classList.add('item-row')
+  //   document.createElement('img'); 
+
+  //   const name = document.createElement('label');  
+  //   name.textContent = "name name name"; 
+  //   name.htmlFor = "name"; 
+
+  //   const dateQuantity = document.createElement('label');  
+  //   dateQuantity.textContent= "date date date"; 
+  //   dateQuantity.htmlFor = "ordered-date"; 
+
+  //   const receivedButton = document.createElement('button');  
+  //   receivedButton.textContent = 'Received';
+  //   receivedButton.classList.add('received');  
+  //   receivedButton.title='Confirm order received'; 
+
+  //   const cancelButton = document.createElement('button'); 
+  //   cancelButton.textContent = 'Cancel';
+  //   cancelButton.classList.add('cancel'); 
+  //   cancelButton.title='Cancel order';  
+    
+  //   row.appendChild(name, dateQuantity, receivedButton, cancelButton); 
+
+
+  // }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    loadOrderMorePage(part1);
+  });

@@ -1,97 +1,42 @@
-function createReceivingRow(incomingOrder) {
-    const row = document.createElement('div'); 
-    row.classList.add('item-row'); 
+const serverLocation = `http://localhost:3000`;
 
-    const image = document.createElement('img'); 
-    image.src = incomingOrder.imgSrc; 
-    row.appendChild(image); 
 
-    const itemDetails = document.createElement('div'); 
-    itemDetails.classList.add('item-details'); 
-
-    const name = document.createElement('label'); 
-    name.classList.add('name'); 
-    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name; 
-    itemDetails.appendChild(name); 
-
-    const orderedDate = document.createElement('label'); 
-    orderedDate.textContent = "Ordered: " + incomingOrder.orderedDate; // Set ordered date text
-    orderedDate.classList.add('ordered-date'); 
-    itemDetails.appendChild(orderedDate); 
-
-    row.appendChild(itemDetails); 
-
-    const receivedButton = document.createElement('button'); 
-    receivedButton.textContent = "Received"; 
-    receivedButton.classList.add('received');
-    receivedButton.title = 'Confirm order received'; 
-    row.appendChild(receivedButton); 
-
-    const cancelButton = document.createElement('button'); 
-    cancelButton.textContent = "Cancel"; 
-    cancelButton.classList.add('cancel');
-    cancelButton.title = 'Cancel order'; 
-    row.appendChild(cancelButton); 
-
-    return row; // Return the created row
-}
-
-function receivedButton() {
-    const receivedButtons = document.querySelectorAll(".received");
-
-    receivedButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const orderConfirmed = confirm("Confirm order received and move to history?"); // Confirmation window
-            if (orderConfirmed) {                    
-                const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-                itemRow.remove(); // Remove row
-                alert("Order marked as received.");
-                //WRITE TO DATABASE!!!!!!!! (WITH DATE)
-
-            }
-        });
-    });
-}
-
-function cancelButton() {
-    const cancelButtons = document.querySelectorAll(".cancel");
-
-    cancelButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-            const confirmDelete = confirm("Are you sure you want to cancel this order?"); // Confirmation window
-            if (confirmDelete) {
-                itemRow.remove(); // Remove row
-                alert("Order cancelled.");
-                //WRITE TO DATABASE!!!!!!!! (WITH DATE)
-            }
-        });
-    });
-}
-
-function loadReceivingPage(incomingOrder) {
-    const container = document.querySelector('.item-row-container'); // Get item-row-container
-    container.innerHTML = ""; // Clear existing content
-
-    incomingOrder.forEach(order => {
-        const row = createReceivingRow(order); // Create row for each incoming order
-        container.appendChild(row); // Add row to container
-    });
-
-    // Call button functions
-    receivedButton();
-    cancelButton();
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const incomingOrder = [ // TEMP ARRAY
-        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", orderedDate: "May 5 2025" },
-        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", orderedDate: "May 4 2024" },
-        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", orderedDate: "May 3 2023" },
-        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", orderedDate: "May 2 2022" },
-        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", orderedDate: "May 1 2021" },
-        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", orderedDate: "April 30 2020" }
-    ];
 
-    loadReceivingPage(incomingOrder); // Load receiving page with incoming orders
+    //ADD LOGIC TO FORWARD TO ORDER HISTORY TAB 
+    let orderStatus = "";
+
+    const itemRowContainer = document.querySelector('.item-row-container');
+    if (itemRowContainer) { //add click listener to buttons 
+        itemRowContainer.addEventListener('click', (e) => {
+            const clicked = e.target; //assigns clicked element to clicked variable 
+            const row = clicked.closest(".item-row"); //set row variable to the row containing clicked button 
+
+
+            //handle "Received" button click
+            if (clicked.classList.contains('received')) { //if clicked button is part of received class (receiving button)
+                const orderConfirmed = confirm("Confirm order received and move to history?"); //confirmation window 
+                if (orderConfirmed) { //if user confirms, removes row from receiving 
+                    const date = new Date();  //get current date and time
+                    orderStatus = "received";
+                    row.remove();
+                }
+            }
+
+            //handle "Cancel" button click
+            if (clicked.classList.contains('cancel')) { //if clicked button is part of cancel class (cancel button) 
+                const confirmDelete = confirm("Are you sure you want to cancel this order?"); //confirmation window 
+                if (confirmDelete) { //if user confirms, removes row from receiving
+                    orderStatus = "cancelled"
+                    const date = new Date();  //get current date and time
+                    row.remove();
+                    alert("Order canceled.");
+                }
+            } //end of if
+
+            const date = new Date(); //get current date and time
+            //FORWARD TO ORDER HISTORY PASSING ITEM, ORDERSTATUS (CANCELLED OR RECEIVED) AND DATE 
+        });
+    }
 });

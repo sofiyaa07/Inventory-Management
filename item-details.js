@@ -13,33 +13,35 @@ function saveChanges() {
     changedPart.model = document.getElementById("model").value;
     changedPart.location = document.getElementById("location").value;
     changedPart.notes = document.getElementById("notes").textContent;
-    changedPart.imgSrc = document.getElementById("image").src;
+    changedPart.imsSrc = document.getElementById("image").src;
 
-    changePartInDatabase();
-}
+    try {
+        // fetch from backend server (if /update)
+        fetch(`${serverLocation}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            partName: currentPart.name,
+            body: JSON.stringify(changedPart),
+        })
+        
+        window.alert("Changes saved!");
 
-function changePartInDatabase() {
-    for (let i = 0; i < parts.length; i++) {
-        if (parts[i] == currentPart) {
-            parts[i] = changedPart;
-
-            // remove parts[i] from csv
-            // append changedPart
-        }
     }
 
-    
+    catch {
+        window.alert("Error: Changes not saved");
+    }
 
-    window.alert("Changes saved!");
 }
 
 
 function loadItemDetails() {
-    const name = currentPart.name; 
-    document.getElementById("name").textContent = name.substring(0, name.indexOf(','));
+    document.getElementById("name").textContent = currentPart.name;
     document.getElementById("stock").value = currentPart.stock; 
     document.getElementById("threshold").value = currentPart.threshold; 
-    document.getElementById("model").value = name.substring(name.indexOf(',')+1); 
+    document.getElementById("model").value = currentPart.model; 
     document.getElementById("location").value = currentPart.location; 
     document.getElementById("notes").textContent = currentPart.notes; 
     document.getElementById("image").src = currentPart.imgSrc; 
