@@ -11,7 +11,7 @@ function createReceivingRow(incomingOrder) {
 
     const name = document.createElement('label'); 
     name.classList.add('name'); 
-    name.textContent = "(+" + incomingOrder.quantity + ") " + incomingOrder.name; 
+    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name; 
     itemDetails.appendChild(name); 
 
     const orderedDate = document.createElement('label'); 

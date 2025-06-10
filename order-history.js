@@ -20,7 +20,14 @@ function createOrderRow(orders) {
     itemDetails.appendChild(orderedDate); 
 
     const receivedDate = document.createElement('label'); 
-    receivedDate.textContent = "Received: " + orders.receivedDate; // Set received date text
+
+    if (orders.status === "received") {
+        receivedDate.textContent = "Received: "; 
+    } else if (orders.status === "cancelled") {
+        receivedDate.textContent = "Cancelled: "; 
+    }
+    
+    receivedDate.textContent = receivedDate.textContent + orders.receivedDate; // Set received date text
     receivedDate.classList.add('received-date'); 
     itemDetails.appendChild(receivedDate); 
 
@@ -40,12 +47,12 @@ function loadOrderHistory(orders) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const orders = [ // TEMP ARRAY
-        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", receivedDate: "June 5 2025", orderedDate: "May 5 2025" },
-        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", receivedDate: "June 4 2024", orderedDate: "May 4 2025" },
-        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", receivedDate: "June 3 2023", orderedDate: "May 3 2025" },
-        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", receivedDate: "June 2 2022", orderedDate: "May 2 2025" },
-        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", receivedDate: "June 1 2021", orderedDate: "May 1 2025" },
-        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", receivedDate: "May 31 2020", orderedDate: "April 30 2025" }
+        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", receivedDate: "June 5 2025", orderedDate: "May 5 2025", status: "cancelled" },
+        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", receivedDate: "June 4 2024", orderedDate: "May 4 2025", status: "received" },
+        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", receivedDate: "June 3 2023", orderedDate: "May 3 2025", status: "cancelled" },
+        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", receivedDate: "June 2 2022", orderedDate: "May 2 2025", status: "received" },
+        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", receivedDate: "June 1 2021", orderedDate: "May 1 2025", status: "cancelled" },
+        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", receivedDate: "May 31 2020", orderedDate: "April 30 2025", status: "received" }
     ];
 
     loadOrderHistory(orders); // Load order history page with orders
