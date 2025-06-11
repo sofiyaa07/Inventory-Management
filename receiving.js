@@ -30,6 +30,7 @@ function createReceivingRow(incomingOrder) {
     receivedButton.classList.add('received');
     receivedButton.title = 'Confirm order received'; 
     receivedButton.setAttribute('data-name', incomingOrder.name); 
+    receivedButton.setAttribute('data-date', incomingOrder.orderedDate);
     row.appendChild(receivedButton); 
 
     const cancelButton = document.createElement('button');
@@ -58,10 +59,10 @@ function receivedButton() {
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
                 let arrivedPart = {};
-                arrivedPart.name = "banana"
-                    arrivedPart.quantity = "123"
-                    arrivedPart.imgSrc = "banana.avif"
-                    arrivedPart.orderedDate = "Tuesday"
+                arrivedPart.name = button.getAttribute('data-name');
+                    arrivedPart.quantity = button.getAttribute('data-name');
+                    arrivedPart.imgSrc = button.getAttribute('data-name');
+                    arrivedPart.orderedDate = button.getAttribute('data-date');
                     // arrivedPart.receivedDate = today's date
                     arrivedPart.status = "received";
 
