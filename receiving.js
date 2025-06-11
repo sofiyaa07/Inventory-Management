@@ -34,7 +34,6 @@ function createReceivingRow(incomingOrder) {
     receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
     receivedButton.setAttribute('data-image', incomingOrder.imgSrc); 
     receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate); 
-    receivedButton.set
     
     row.appendChild(receivedButton); 
 
@@ -60,8 +59,8 @@ function receivedButton() {
         button.addEventListener("click", function () {
             const partName = button.getAttribute('data-name'); 
             const partQuantity = button.getAttribute('data-quantity'); 
-            const partImage = button.getAttribute(data-image); 
-            const partOrderDate = button.getAttribute(data-ordered-date); 
+            const partImage = button.getAttribute('data-image'); 
+            const partOrderDate = button.getAttribute('data-ordered-date'); 
             const status = "received"; 
             
             const date = new Date(); 
@@ -70,7 +69,7 @@ function receivedButton() {
             let year = date.getFullYear(); 
             const receivedDate = `${day}-${month}-${year}`;
 
-            const orderConfirmed = confirm(`Confirm order received for ${partQuantity}x ${partName} and move to history?`); // Confirmation window
+            const orderConfirmed = confirm(`Confirm order received for (${partQuantity}x) ${partName} and move to history?`); // Confirmation window
             if (orderConfirmed) {                    
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
@@ -118,8 +117,8 @@ function cancelButton() {
         button.addEventListener("click", function () {
             const partName = button.getAttribute('data-name'); 
             const partQuantity = button.getAttribute('data-quantity'); 
-            const partImage = button.getAttribute(data-image); 
-            const partOrderDate = button.getAttribute(data-ordered-date); 
+            const partImage = button.getAttribute('data-image'); 
+            const partOrderDate = button.getAttribute('data-ordered-date'); 
             const status = "cancelled"; 
 
             const date = new Date(); 
@@ -129,7 +128,7 @@ function cancelButton() {
             const receivedDate = `${day}-${month}-${year}`;
 
             const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-            const confirmDelete = confirm(`Are you sure you want to cancel order for ${partQuantity}x ${partName}`); // Confirmation window
+            const confirmDelete = confirm(`Are you sure you want to cancel order for (${partQuantity}x) ${partName}`); // Confirmation window
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
                 alert (`Order for ${partName} cancelled.`);  
