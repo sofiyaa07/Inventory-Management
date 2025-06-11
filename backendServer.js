@@ -36,22 +36,6 @@ app.post("/save", (request, response) => {
     });
 });
 
-app.post("/order", (request, response) => {
-    const data = request.body; // stores the data that's sent
-
-    // parameters: file path, the thing to be written, and a callback function
-    // callback -> calls this function when file runs, in this case, checks for error
-    fs.appendFile("orderHistory.txt", data, (err) => { // testing with a 2nd file for now
-        if (err) {
-            console.error('Error writing file:', err);
-            return response.status(500).send('Failed to write data');
-        }
-
-        // if no error, sends the message that the data was saved
-        response.send('Data saved successfully');
-    });
-});
-
 // whenever data needs to be read from the csv 
 app.get('/load', (request, response) => {
     // utf8: encoding of the data (how it encodes, no idea)
@@ -84,6 +68,69 @@ app.post('/update', (request, response) => {
 
     fs.writeFileSync(filePath, lines.join('\n'), 'utf8');
     res.send('Part updated successfully');
+});
+
+
+
+// order history stuff
+app.post("/ordered", (request, response) => { // < this doesn't work
+    const data = request.body; // stores the data that's sent
+
+    // parameters: file path, the thing to be written, and a callback function
+    // callback -> calls this function when file runs, in this case, checks for error
+    fs.readFile("orderHistory.txt", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        let tempArr = []; // turns orderHistory into an arary
+        tempArr = JSON.parse(fileData);
+
+        tempArr.push(data); // adds the new object into the array
+
+        // adds the new array into orderHistory
+        fs.writeFile("orderHistory.txt", JSON.stringify(tempArr, null, 4), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return response.status(500).send('Failed to write data');
+            }
+            response.send("Order history updated");
+        });
+
+    });
+});
+
+// whenever data needs to be read from orderHistory.txt << this works
+app.get('/order-history', (request, response) => {
+    // utf8: encoding of the data (how it encodes, no idea)
+    fs.readFile("orderHistory.txt", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        const historyObj = JSON.parse(fileData);
+        response.json(historyObj); // responds with an object
+    });
+});
+
+
+
+
+// receiving and order-more 
+// whenever data needs to be read from incomingOrders.txt << this works
+app.get('/incoming-orders', (request, response) => {
+    // utf8: encoding of the data (how it encodes, no idea)
+    fs.readFile("incomingOrders.txt", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        const incomingObj = JSON.parse(fileData);
+        response.json(incomingObj); // responds with an object
+    });
 });
 
 

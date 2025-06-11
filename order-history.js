@@ -1,42 +1,47 @@
+let orders = [];
+
+const serverLocation = 'http://localhost:3000';
+
+
 function createOrderRow(orders) {
-    const row = document.createElement('div'); 
-    row.classList.add('item-row'); 
+    const row = document.createElement('div');
+    row.classList.add('item-row');
 
-    const image = document.createElement('img'); 
-    image.src = orders.imgSrc; 
-    row.appendChild(image); 
+    const image = document.createElement('img');
+    image.src = orders.imgSrc;
+    row.appendChild(image);
 
-    const itemDetails = document.createElement('div'); 
-    itemDetails.classList.add('item-details'); 
+    const itemDetails = document.createElement('div');
+    itemDetails.classList.add('item-details');
 
-    const name = document.createElement('label'); 
-    name.classList.add('name'); 
-    name.textContent = "(+" + orders.quantity + ") " + orders.name; 
-    itemDetails.appendChild(name); 
+    const name = document.createElement('label');
+    name.classList.add('name');
+    name.textContent = "(+" + orders.quantity + ") " + orders.name;
+    itemDetails.appendChild(name);
 
-    const orderedDate = document.createElement('label'); 
+    const orderedDate = document.createElement('label');
     orderedDate.textContent = "Ordered: " + orders.orderedDate; // Set ordered date text
-    orderedDate.classList.add('ordered-date'); 
-    itemDetails.appendChild(orderedDate); 
+    orderedDate.classList.add('ordered-date');
+    itemDetails.appendChild(orderedDate);
 
-    const receivedDate = document.createElement('label'); 
+    const receivedDate = document.createElement('label');
 
     if (orders.status === "received") {
-        receivedDate.textContent = "Received: "; 
+        receivedDate.textContent = "Received: ";
     } else if (orders.status === "cancelled") {
-        receivedDate.textContent = "Cancelled: "; 
+        receivedDate.textContent = "Cancelled: ";
     }
-    
-    receivedDate.textContent += orders.receivedDate; // Set received date text
-    receivedDate.classList.add('received-date'); 
-    itemDetails.appendChild(receivedDate); 
 
-    row.appendChild(itemDetails); 
+    receivedDate.textContent += orders.receivedDate; // Set received date text
+    receivedDate.classList.add('received-date');
+    itemDetails.appendChild(receivedDate);
+
+    row.appendChild(itemDetails);
     return row; // Return the created row
 }
 
 function loadOrderHistory(orders) {
-    const container = document.querySelector('.item-row-container'); // Get item-row-container
+    const container = document.querySelector('.item-box'); // Get item-row-container
     container.innerHTML = ""; // Clear existing content
 
     orders.forEach(order => {
@@ -45,15 +50,30 @@ function loadOrderHistory(orders) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const orders = [ // TEMP ARRAY
-        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", receivedDate: "June 5 2025", orderedDate: "May 5 2025", status: "cancelled" },
-        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", receivedDate: "June 4 2024", orderedDate: "May 4 2025", status: "received" },
-        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", receivedDate: "June 3 2023", orderedDate: "May 3 2025", status: "received" },
-        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", receivedDate: "June 2 2022", orderedDate: "May 2 2025", status: "received" },
-        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", receivedDate: "June 1 2021", orderedDate: "May 1 2025", status: "cancelled" },
-        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", receivedDate: "May 31 2020", orderedDate: "April 30 2025", status: "received" }
-    ];
+function getOrderHistory() {
+    return fetch(`${serverLocation}/order-history`) // returns a promise (feedback)
+        .then(response => response.json()) // parses data into object array (?)
+        .then(data => {
+            // sets parts to nothing, then adds
+            orders.length = 0;
+            orders.push(...data); // ... takes each item in array and uses the function on it
+            // (kinda like a loop, but simplified)
 
-    loadOrderHistory(orders); // Load order history page with orders
+            console.log("order history updated", orders);
+        })
+
+        // error handling
+        .catch(error => {
+            console.error("Error fetching array:", error);
+        });
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    getOrderHistory().then(() => {
+        console.log(orders);
+        loadOrderHistory(orders); // Load order history page with orders
+
+    });
 });
