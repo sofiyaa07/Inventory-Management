@@ -1,37 +1,41 @@
+let incomingOrders = [] // TEMP ARRAY;
+
+const serverLocation = 'http://localhost:3000';
+
 function createReceivingRow(incomingOrder) {
-    const row = document.createElement('div'); 
-    row.classList.add('item-row'); 
+    const row = document.createElement('div');
+    row.classList.add('item-row');
 
-    const image = document.createElement('img'); 
-    image.src = incomingOrder.imgSrc; 
-    row.appendChild(image); 
+    const image = document.createElement('img');
+    image.src = incomingOrder.imgSrc;
+    row.appendChild(image);
 
-    const itemDetails = document.createElement('div'); 
-    itemDetails.classList.add('item-details'); 
+    const itemDetails = document.createElement('div');
+    itemDetails.classList.add('item-details');
 
-    const name = document.createElement('label'); 
-    name.classList.add('name'); 
-    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name; 
-    itemDetails.appendChild(name); 
+    const name = document.createElement('label');
+    name.classList.add('name');
+    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name;
+    itemDetails.appendChild(name);
 
-    const orderedDate = document.createElement('label'); 
+    const orderedDate = document.createElement('label');
     orderedDate.textContent = "Ordered: " + incomingOrder.orderedDate; // Set ordered date text
-    orderedDate.classList.add('ordered-date'); 
-    itemDetails.appendChild(orderedDate); 
+    orderedDate.classList.add('ordered-date');
+    itemDetails.appendChild(orderedDate);
 
-    row.appendChild(itemDetails); 
+    row.appendChild(itemDetails);
 
-    const receivedButton = document.createElement('button'); 
-    receivedButton.textContent = "Received"; 
+    const receivedButton = document.createElement('button');
+    receivedButton.textContent = "Received";
     receivedButton.classList.add('received');
-    receivedButton.title = 'Confirm order received'; 
-    row.appendChild(receivedButton); 
+    receivedButton.title = 'Confirm order received';
+    row.appendChild(receivedButton);
 
-    const cancelButton = document.createElement('button'); 
-    cancelButton.textContent = "Cancel"; 
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = "Cancel";
     cancelButton.classList.add('cancel');
-    cancelButton.title = 'Cancel order'; 
-    row.appendChild(cancelButton); 
+    cancelButton.title = 'Cancel order';
+    row.appendChild(cancelButton);
 
     return row; // Return the created row
 }
@@ -42,12 +46,40 @@ function receivedButton() {
     receivedButtons.forEach(button => {
         button.addEventListener("click", function () {
             const orderConfirmed = confirm("Confirm order received and move to history?"); // Confirmation window
-            if (orderConfirmed) {                    
+            if (orderConfirmed) {
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
                 alert("Order marked as received.");
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
+                let arrivedPart = {};
+                arrivedPart.name = "banana"
+                    arrivedPart.quantity = "123"
+                    arrivedPart.imgSrc = "banana.avif"
+                    arrivedPart.orderedDate = "Tuesday"
+                    // arrivedPart.receivedDate = today's date
+                    arrivedPart.status = "received";
+
+
+                try {
+                    // fetch info from the server (backendServer.js)
+                    fetch(`${serverLocation}/ordered`, {
+                        // sends the data to the serverLocation
+                        method: 'POST',
+                        headers: { // i have no idea what this does but i was told to add it
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(arrivedPart),
+                    });
+
+                    window.alert("Changes saved!");
+
+
+                }
+                catch { // in case of file reading error
+                    window.alert("Error: Changes not saved");
+
+                }
             }
         });
     });
@@ -83,15 +115,29 @@ function loadReceivingPage(incomingOrder) {
     cancelButton();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const incomingOrder = [ // TEMP ARRAY
-        { name: "Arduino Uno REV3", quantity: '5', imgSrc: "Arduino.jpg", orderedDate: "May 5 2025" },
-        { name: "Brduino Uno REV3", quantity: '4', imgSrc: "Arduino.jpg", orderedDate: "May 4 2024" },
-        { name: "Crduino Uno REV3", quantity: '3', imgSrc: "Arduino.jpg", orderedDate: "May 3 2023" },
-        { name: "Drduino Uno REV3", quantity: '2', imgSrc: "Arduino.jpg", orderedDate: "May 2 2022" },
-        { name: "Erduino Uno REV3", quantity: '1', imgSrc: "Arduino.jpg", orderedDate: "May 1 2021" },
-        { name: "Frduino Uno REV3", quantity: '50', imgSrc: "Arduino.jpg", orderedDate: "April 30 2020" }
-    ];
+function getIncomingOrders() {
+    return fetch(`${serverLocation}/incoming-orders`) // returns a promise (feedback)
+        .then(response => response.json()) // parses data into object array (?)
+        .then(data => {
+            // sets parts to nothing, then adds
+            incomingOrders.length = 0;
+            incomingOrders.push(...data); // ... takes each item in array and uses the function on it
+            // (kinda like a loop, but simplified)
 
-    loadReceivingPage(incomingOrder); // Load receiving page with incoming orders
+            console.log("order history updated", incomingOrders);
+        })
+
+        // error handling
+        .catch(error => {
+            console.error("Error fetching array:", error);
+        });
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    getIncomingOrders().then(() => {
+        loadReceivingPage(incomingOrders) // Load receiving page with incoming orders
+
+    });
 });
