@@ -25,12 +25,15 @@ function createReceivingRow(incomingOrder) {
     receivedButton.textContent = "Received"; 
     receivedButton.classList.add('received');
     receivedButton.title = 'Confirm order received'; 
+    receivedButton.setAttribute('data-name', incomingOrder.name); 
     row.appendChild(receivedButton); 
 
     const cancelButton = document.createElement('button'); 
     cancelButton.textContent = "Cancel"; 
     cancelButton.classList.add('cancel');
     cancelButton.title = 'Cancel order'; 
+    cancelButton.setAttribute('data-name', incomingOrder.name); 
+
     row.appendChild(cancelButton); 
 
     return row; // Return the created row
@@ -41,11 +44,13 @@ function receivedButton() {
 
     receivedButtons.forEach(button => {
         button.addEventListener("click", function () {
-            const orderConfirmed = confirm("Confirm order received and move to history?"); // Confirmation window
+            const partName = button.getAttribute('data-name'); 
+            const orderConfirmed = confirm(`Confirm order received for ${partName} and move to history?`); // Confirmation window
             if (orderConfirmed) {                    
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
-                alert("Order marked as received.");
+                alert (`Order for ${partName} marked as received.`);  
+
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
             }
@@ -58,11 +63,12 @@ function cancelButton() {
 
     cancelButtons.forEach(button => {
         button.addEventListener("click", function () {
+            const partName = button.getAttribute('data-name'); 
             const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-            const confirmDelete = confirm("Are you sure you want to cancel this order?"); // Confirmation window
+            const confirmDelete = confirm(`Are you sure you want to cancel order for ${partName}`); // Confirmation window
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
-                alert("Order cancelled.");
+                alert (`Order for ${partName} cancelled.`);  
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
             }
         });
