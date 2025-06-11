@@ -1,19 +1,3 @@
-import Part from './part.js';
-
-
-const part1 = new Part(
-    "Arduino Mega 2560",
-    "ARD_A000067",
-    "shelf2[1][0]",
-    10, //stock 
-    "Important part", //notes
-    ["https://store.arduino.cc/products/arduino-mega-2560-rev3",
-        "https://www.amazon.com/Arduino-A000067-2560-REV3-ATmega2560/dp/B0046AMGW0",
-        "https://www.sparkfun.com/products/11061"], //links    
-      "arduinoMega.jpg", //picture
-    3
-);
-
 const currentPart = JSON.parse(localStorage.getItem("currentPart"));
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
@@ -108,7 +92,6 @@ function deleteButton() {
             if (confirmDelete) {
                 const linkRow = button.closest(".link-row"); // Get the specific row containing the button
                 linkRow.remove(); // Remove row
-                alert("Link deleted");
             }
         });
     });
