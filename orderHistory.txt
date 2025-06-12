@@ -6,5 +6,21 @@
         "receivedDate": "June 5 2025",
         "orderedDate": "May 5 2025",
         "status": "cancelled"
+    },
+    {
+        "name": "Green Wire",
+        "quantity": "123",
+        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
+        "orderedDate": "12-6-2025",
+        "receivedDate": "12-6-2025",
+        "status": "received"
+    },
+    {
+        "name": "Green Wire",
+        "quantity": "123",
+        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
+        "orderedDate": "12-6-2025",
+        "receivedDate": "12-6-2025",
+        "status": "cancelled"
     }
 ]

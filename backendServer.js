@@ -143,7 +143,7 @@ app.post("/add-incoming-order", (request, response) => { // < this doesn't work
 
         tempArr.push(data); // adds the new object into the array
 
-        // adds the new array into orderHistory
+        // adds the new array into incomingOrders
         fs.writeFile("incomingOrders.txt", JSON.stringify(tempArr, null, 4), (err) => {
             if (err) {
                 console.error('Error writing file:', err);

@@ -1,6 +1,12 @@
-import Part from './part.js';
 
+// The way this is set up, all getters have to be called with an underscore in front
+// -> because it's being passed as a plain object, the getters and setters from part.js
+// don't work
+// ex. currentPart.name doesn't work, currentPart._name does
 const currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
+const serverLocation = 'http://localhost:3000';
+
+
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
     const row = document.createElement('div'); // Create div element
@@ -81,10 +87,17 @@ function selectButton() {
 
                 let orderedPart = {};
 
-                orderedPart.name = currentPart.name;
+                orderedPart.name = currentPart._name;
                 orderedPart.quantity = quantity;
-                orderedPart.imgSrc = currentPart.imgSrc;
-                orderedPart.orderedDate = "June 17";
+                orderedPart.imgSrc = currentPart._imgSrc;
+
+                const date = new Date();
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+                const dateOrdered = `${day}-${month}-${year}`;
+
+                orderedPart.orderedDate = dateOrdered;
 
 
                 writeToIncomingOrders(orderedPart);
@@ -112,14 +125,14 @@ function deleteButton() {
 
 function loadOrderMorePage(part) {
 
-    document.getElementById("image").src = part.imgSrc; // Set image source
-    document.getElementById("name").textContent = part.name; // Set name
+    document.getElementById("image").src = part._imgSrc; // Set image source
+    document.getElementById("name").textContent = part._name; // Set name
 
     const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
     container.innerHTML = ""; // Clear existing content
 
-    if (part.storeLinks && part.storeLinks.length > 0) {
-        part.storeLinks.forEach(linkUrl => {
+    if (part._storeLinks && part._storeLinks.length > 0) {
+        part._storeLinks.forEach(linkUrl => {
             const row = createLinkRow(linkUrl); // Create row for each link
             container.appendChild(row); // Add row to container
         });
@@ -136,7 +149,9 @@ function loadOrderMorePage(part) {
     deleteButton();
 }
 
-function writeToIncomingOrders() {
+function writeToIncomingOrders(orderedPart) {
+    console.log(orderedPart);
+
     try {
         // fetch info from the server (backendServer.js)
         fetch(`${serverLocation}/add-incoming-order`, {

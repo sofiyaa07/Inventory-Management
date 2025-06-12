@@ -14,12 +14,27 @@ export function getPartArray() {
         .then(response => response.json()) // parses data into object array (?)
         .then(data => {
             // data: the part array that was read
-            const mapped = data.map(obj =>
-                new Part( // maps data to become Part objects specifically
-                    obj._name, obj._model, obj._location, obj._stock,
-                    obj._notes, obj._storeLinks, obj._imgSrc, obj._threshold
+            const mapped = data.map(obj => { // for each object in the data...
+                
+                // converts store links into an array (before creating new parts)
+                const links = obj._storeLinks;
+                // the other breakpoint is '[space]|[space]' -- not just '|'
+                const breakpoint = ' | ';
+                const linksArr = links.split(breakpoint);
+
+                return new Part( // maps data to become Part objects specifically
+                    obj._name, 
+                    obj._model, 
+                    obj._location, 
+                    obj._stock,
+                    obj._notes, 
+                    linksArr, 
+                    obj._imgSrc, 
+                    obj._threshold
                 )
-            );
+            });
+
+
             // sets parts to nothing, then adds
             parts.length = 0;
             parts.push(...mapped); // ... takes each item in array and uses the function on it
