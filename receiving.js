@@ -28,28 +28,28 @@ function createReceivingRow(incomingOrder) {
     const receivedButton = document.createElement('button');
     receivedButton.textContent = "Received";
     receivedButton.classList.add('received');
-    receivedButton.title = 'Confirm order received'; 
+    receivedButton.title = 'Confirm order received';
 
     //store part data in button 
-    receivedButton.setAttribute('data-name', incomingOrder.name); 
+    receivedButton.setAttribute('data-name', incomingOrder.name);
     receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
-    receivedButton.setAttribute('data-image', incomingOrder.imgSrc); 
-    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate); 
-    
-    row.appendChild(receivedButton); 
+    receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
+    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+
+    row.appendChild(receivedButton);
 
     const cancelButton = document.createElement('button');
     cancelButton.textContent = "Cancel";
     cancelButton.classList.add('cancel');
-    cancelButton.title = 'Cancel order'; 
+    cancelButton.title = 'Cancel order';
 
     //store part data in button 
-    cancelButton.setAttribute('data-name', incomingOrder.name); 
-    cancelButton.setAttribute('data-quantity', incomingOrder.quantity); 
-    receivedButton.setAttribute('data-image', incomingOrder.imgSrc); 
-    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate); 
+    cancelButton.setAttribute('data-name', incomingOrder.name);
+    cancelButton.setAttribute('data-quantity', incomingOrder.quantity);
+    cancelButton.setAttribute('data-image', incomingOrder.imgSrc);
+    cancelButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
 
-    row.appendChild(cancelButton); 
+    row.appendChild(cancelButton);
 
     return row; // Return the created row
 }
@@ -73,42 +73,25 @@ function receivedButton() {
             let year = date.getFullYear(); 
             const receivedDate = `${day}-${month}-${year}`;
 
-            const orderConfirmed = confirm(`Confirm order received for (${partQuantity}x) ${partName} and move to history?`); // Confirmation window
-            if (orderConfirmed) {                    
+            const orderConfirmed = confirm(`Confirm order received for ${partQuantity}x ${partName} and move to history?`); // Confirmation window
+            if (orderConfirmed) {
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
-                alert (`Order for ${partName} marked as received.`);  
+                alert(`Order for ${partName} marked as received.`);
 
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
                 let arrivedPart = {};
-                arrivedPart.name = "banana"
-                    arrivedPart.quantity = "123"
-                    arrivedPart.imgSrc = "banana.avif"
-                    arrivedPart.orderedDate = "Tuesday"
-                    // arrivedPart.receivedDate = today's date
-                    arrivedPart.status = "received";
+                arrivedPart.name = partName;
+                arrivedPart.quantity = partQuantity;
+                arrivedPart.imgSrc = partImage;
+                arrivedPart.orderedDate = partOrderDate;
+                arrivedPart.receivedDate = receivedDate
+                arrivedPart.status = status;
 
+                addToOrderHistory(arrivedPart);
+                removeFromIncomingOrders(arrivedPart);
 
-                try {
-                    // fetch info from the server (backendServer.js)
-                    fetch(`${serverLocation}/ordered`, {
-                        // sends the data to the serverLocation
-                        method: 'POST',
-                        headers: { // i have no idea what this does but i was told to add it
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(arrivedPart),
-                    });
-
-                    window.alert("Changes saved!");
-
-
-                }
-                catch { // in case of file reading error
-                    window.alert("Error: Changes not saved");
-
-                }
             }
         });
     });
@@ -121,11 +104,11 @@ function cancelButton() {
         button.addEventListener("click", function () {
 
             //retrieve part data in button 
-            const partName = button.getAttribute('data-name'); 
-            const partQuantity = button.getAttribute('data-quantity'); 
-            const partImage = button.getAttribute('data-image'); 
-            const partOrderDate = button.getAttribute('data-ordered-date'); 
-            const status = "cancelled"; 
+            const partName = button.getAttribute('data-name');
+            const partQuantity = button.getAttribute('data-quantity');
+            const partImage = button.getAttribute('data-image');
+            const partOrderDate = button.getAttribute('data-ordered-date');
+            const status = "cancelled";
 
             //format date of cancellation
             let day = date.getDate(); 
@@ -137,9 +120,23 @@ function cancelButton() {
             const confirmDelete = confirm(`Are you sure you want to cancel order for (${partQuantity}x) ${partName}`); // Confirmation window
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
-                alert (`Order for ${partName} cancelled.`);  
+                alert(`Order for ${partName} cancelled.`);
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
             }
+
+            let arrivedPart = {};
+            arrivedPart.name = partName;
+            arrivedPart.quantity = partQuantity;
+            arrivedPart.imgSrc = partImage;
+            arrivedPart.orderedDate = partOrderDate;
+            arrivedPart.receivedDate = receivedDate;
+            arrivedPart.status = status;
+
+            console.log(arrivedPart);
+
+            addToOrderHistory(arrivedPart);
+            removeFromIncomingOrders(arrivedPart);
+
         });
     });
 }
@@ -177,6 +174,54 @@ function getIncomingOrders() {
 
 }
 
+function addToOrderHistory(arrivedPart) {
+    try {
+        // fetch info from the server (backendServer.js)
+        fetch(`${serverLocation}/ordered`, {
+            // sends the data to the serverLocation
+            method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(arrivedPart),
+        });
+
+    }
+    catch { // in case of file reading error
+        window.alert("Error: Changes not saved");
+
+    }
+
+}
+
+function removeFromIncomingOrders(arrivedPart) {
+    let compObj = {};
+    compObj.name = arrivedPart.name;
+    compObj.quantity = arrivedPart.quantity;
+    compObj.imgSrc = arrivedPart.imgSrc;
+    compObj.orderedDate = arrivedPart.orderedDate;
+
+
+    try {
+        // fetch info from the server (backendServer.js)
+        fetch(`${serverLocation}/delete-incoming-order`, {
+            // sends the data to the serverLocation
+            method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(compObj),
+        });
+
+        console.log("Successfully removed item");
+
+    }
+    catch { // in case of file reading error
+        window.alert("Error: Changes not saved");
+
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     getIncomingOrders().then(() => {
@@ -184,3 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 });
+
+
+// for some reason, received orders works, but not cancelled orders

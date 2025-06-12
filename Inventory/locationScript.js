@@ -96,7 +96,6 @@ function stockShelves(shelf, numCol) {
         return 0;
     }
 
-
     // 2. takes the location of EACH PART -- if the location != the next location,
     // adds a blank space
     let currentCol = 0;
@@ -151,31 +150,6 @@ function stockShelves(shelf, numCol) {
         }
 
     }
-
-
-    // // // fills the rest of the shelf with blank units
-    // if (shelfId ==)
-    // const numberOfCellsPerShelf = [64, 64, 68, 68, 68, 68, 68, 68]
-    // console.log(totalCells);
-
-    // if (amountOfIterations < numberOfCellsPerShelf[getShelf(shelf[0])]) {
-    //     const numShelvesToBeFilled = numberOfCellsPerShelf[getShelf(shelf[0])] - totalCells;
-
-    //     console.log("Filling "+numShelvesToBeFilled+" Shelves");
-
-    //     for (let i = 0; i < numShelvesToBeFilled; i++) {
-    //         const placement = `${getShelf(shelf[i])}${String.fromCharCode(currentCol + 65)}${currentRow}`;
-    //         addBlankUnit(placement);
-
-    //         currentCol++;
-    //         if (currentCol >= numCol) {
-    //             currentCol = 0;
-    //             currentRow++; // increments row since going left to right, up down
-    //         }
-    //     }
-    // }
-
-    // ABVE DOESN"T WORK
 
 }
 

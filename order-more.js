@@ -1,4 +1,6 @@
-const currentPart = JSON.parse(localStorage.getItem("currentPart"));
+import Part from './part.js';
+
+const currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
     const row = document.createElement('div'); // Create div element
@@ -14,7 +16,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") {
         const domain = new URL(linkUrl).hostname.replace('www.', ''); // Remove www. from link
         link.textContent = domain; // Set text to domain
     } catch (e) {
-        link.textContent = linkName; 
+        link.textContent = linkName;
     }
 
     const selectButton = document.createElement('button'); // Create select button
@@ -47,12 +49,12 @@ function submitButton() {
                     const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain
                     const newRow = createLinkRow(newLinkInput.value, domain); // Create new row
                     const container = document.querySelector('.scrollable-links');
-                    
+
                     const noLinksMessage = container.querySelector('.no-links-message'); //if "no links" is displayed, remove message when submitting a new link
                     if (noLinksMessage) {
-                        noLinksMessage.remove(); 
+                        noLinksMessage.remove();
                     }
-                    
+
                     container.appendChild(newRow); // Add new row to container
                     newLinkInput.value = ""; // Clear input field
 
@@ -75,6 +77,17 @@ function selectButton() {
             const quantity = prompt("How many would you like to order?");
             if (quantity && !isNaN(quantity) && Number(quantity) > 0) {
                 alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`);
+                // creates a new object out of item info
+
+                let orderedPart = {};
+
+                orderedPart.name = currentPart.name;
+                orderedPart.quantity = quantity;
+                orderedPart.imgSrc = currentPart.imgSrc;
+                orderedPart.orderedDate = "June 17";
+
+
+                writeToIncomingOrders(orderedPart);
                 window.location.href = "receiving.html"; // Redirect to receiving tab
             } else if (quantity !== null) {
                 alert("Please enter a valid number.");
@@ -104,11 +117,11 @@ function loadOrderMorePage(part) {
 
     const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
     container.innerHTML = ""; // Clear existing content
-    
-    if (part.storeLinks && part.storeLinks.length > 0 ) {
+
+    if (part.storeLinks && part.storeLinks.length > 0) {
         part.storeLinks.forEach(linkUrl => {
-        const row = createLinkRow(linkUrl); // Create row for each link
-        container.appendChild(row); // Add row to container
+            const row = createLinkRow(linkUrl); // Create row for each link
+            container.appendChild(row); // Add row to container
         });
     } else {
         const noLinksMessage = document.createElement('p');
@@ -121,6 +134,28 @@ function loadOrderMorePage(part) {
     submitButton();
     selectButton();
     deleteButton();
+}
+
+function writeToIncomingOrders() {
+    try {
+        // fetch info from the server (backendServer.js)
+        fetch(`${serverLocation}/add-incoming-order`, {
+            // sends the data to the serverLocation
+            method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderedPart),
+        });
+
+        window.alert("Changes saved!");
+
+
+    }
+    catch { // in case of file reading error
+        window.alert("Error: Changes not saved");
+
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
