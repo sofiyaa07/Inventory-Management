@@ -1,37 +1,32 @@
 <!DOCTYPE html>
+    
+    <head>
+        <title>Order History</title>
+        <link rel="stylesheet" href="styleMockup.css">
 
-<!-- MAKE THIS LOOK DIFFERENT FROM RECEIVING PAGE!!! THEY LOOK THE SAME -->
- 
-<head>
-    <title>Order History</title>
-    <link rel="stylesheet" href="styleMockup.css">
+    </head>
 
-</head>
+    <body>
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <a href="#" onclick="history.back()" class="nav">Back</a>
+            <a href="main-menu.html" class="nav">Home</a>
+            <a href="receiving.html" class="nav">Receiving</a>
 
-<body>
-    <!-- Navigation Tabs -->
-    <div class="tabs">
-        <a href="#" onclick="history.back()" class="nav">Back</a>
-        <a href="main-menu.html" class="nav">Home</a>
-        <a href="receiving.html" class="nav">Receiving</a>
-
-        <input type="search" placeholder="Search..." class="nav">
-    </div>
-
-    <!-- Change Log Section -->
-    <section id="changeLog">
-        <div class="item-box">
-        <!-- Individual Item Rows -->
-            <div class="item-row-container"> 
-            </div>
-
+            <input type="search" placeholder="Search..." class="nav">
         </div>
-    </section>
 
+        <!-- Change Log Section -->
+        <section id="changeLog">
+            <div class="item-box">
+            <!-- Individual Item Rows -->
+                <div class="item-row-container"> 
+                </div>
 
-    <script type="module" src="order-history.js"></script>
+            </div>
+        </section>
 
+        <script type="module" src="order-history.js"></script>
 
-</body>
-
+    </body>
 </html>

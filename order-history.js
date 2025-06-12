@@ -26,10 +26,14 @@ function createOrderRow(orders) {
 
     const receivedDate = document.createElement('label');
 
+
     if (orders.status === "received") {
         receivedDate.textContent = "Received: ";
     } else if (orders.status === "cancelled") {
         receivedDate.textContent = "Cancelled: ";
+        receivedDate.style.color = "red";
+        orderedDate.style.color = "red";
+        name.style.color = "red";
     }
 
     receivedDate.textContent += orders.receivedDate; // Set received date text

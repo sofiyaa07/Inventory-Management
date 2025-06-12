@@ -30,6 +30,7 @@ function createReceivingRow(incomingOrder) {
     receivedButton.classList.add('received');
     receivedButton.title = 'Confirm order received'; 
 
+    //store part data in button 
     receivedButton.setAttribute('data-name', incomingOrder.name); 
     receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
     receivedButton.setAttribute('data-image', incomingOrder.imgSrc); 
@@ -42,6 +43,7 @@ function createReceivingRow(incomingOrder) {
     cancelButton.classList.add('cancel');
     cancelButton.title = 'Cancel order'; 
 
+    //store part data in button 
     cancelButton.setAttribute('data-name', incomingOrder.name); 
     cancelButton.setAttribute('data-quantity', incomingOrder.quantity); 
     receivedButton.setAttribute('data-image', incomingOrder.imgSrc); 
@@ -57,13 +59,15 @@ function receivedButton() {
 
     receivedButtons.forEach(button => {
         button.addEventListener("click", function () {
+
+            //retrieve part data from buttons
             const partName = button.getAttribute('data-name'); 
             const partQuantity = button.getAttribute('data-quantity'); 
             const partImage = button.getAttribute('data-image'); 
             const partOrderDate = button.getAttribute('data-ordered-date'); 
             const status = "received"; 
             
-            const date = new Date(); 
+            //format date of reception 
             let day = date.getDate(); 
             let month = date.getMonth() + 1; 
             let year = date.getFullYear(); 
@@ -115,13 +119,15 @@ function cancelButton() {
 
     cancelButtons.forEach(button => {
         button.addEventListener("click", function () {
+
+            //retrieve part data in button 
             const partName = button.getAttribute('data-name'); 
             const partQuantity = button.getAttribute('data-quantity'); 
             const partImage = button.getAttribute('data-image'); 
             const partOrderDate = button.getAttribute('data-ordered-date'); 
             const status = "cancelled"; 
 
-            const date = new Date(); 
+            //format date of cancellation
             let day = date.getDate(); 
             let month = date.getMonth() + 1; 
             let year = date.getFullYear(); 

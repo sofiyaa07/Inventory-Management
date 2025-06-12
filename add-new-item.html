@@ -1,61 +1,58 @@
 <!DOCTYPE html>
 
-<head>
-    <title>New Item</title>
-    <link rel="stylesheet" href="styleMockup.css">
+    <head>
+        <title>New Item</title>
+        <link rel="stylesheet" href="styleMockup.css">
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <section id="addItem">
-        <div class="tabs">
-            <a href="#" onclick="history.back()" class="nav">Back</a>
-        </div>
-        <div class="item-box">
+        <section id="addItem">
+            <div class="tabs">
+                <a href="#" onclick="history.back()" class="nav">Back</a>
+            </div>
+            <div class="item-box">
 
-            <div class="content-row">
-                <div class="upload-image">
-                    <h2>Upload Image</h2>
-                    <!-- <input type="file" id="imageInput" accept="image/*" style="cursor: pointer;"> -->
-                    <input type="url" id="url-image-input" style="cursor: pointer;" placeholder="Paste image url here">
-                </div>
+                <div class="content-row">
+                    <div class="upload-image">
+                        <h2>Upload Image</h2>
+                        <!-- <input type="file" id="imageInput" accept="image/*" style="cursor: pointer;"> -->
+                        <input type="url" id="url-image-input" style="cursor: pointer;" placeholder="Paste image url here">
+                    </div>
 
-                <div class="right-panel">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" placeholder="Add name here...">
+                    <div class="right-panel">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" placeholder="Add name here...">
 
-                    <label for="stock">Stock:</label>
-                    <input type="number" id="stock" name="stock" placeholder="0">
+                        <label for="stock">Stock:</label>
+                        <input type="number" id="stock" name="stock" placeholder="0">
 
-                    <label for="threshold">Threshold:</label>
-                    <input type="number" id="threshold" name="threshold" placeholder="0">
+                        <label for="threshold">Threshold:</label>
+                        <input type="number" id="threshold" name="threshold" placeholder="0">
 
-                    <label for="model">Model:</label>
-                    <input type="text" id="model" name="model" placeholder="Add model here...">
+                        <label for="model">Model:</label>
+                        <input type="text" id="model" name="model" placeholder="Add model here...">
 
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" placeholder="Add location here, [SHELF#][COLUMN][ROW] (ex. 1A0 -- shelf 1, 1st column, 1st row)">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" placeholder="Add location here, [SHELF#][COLUMN][ROW] (ex. 1A0 -- shelf 1, 1st column, 1st row)">
 
-                    <label>Notes</label>
-                    <textarea id="notes" placeholder="Add any notes here..."></textarea>
+                        <label>Notes</label>
+                        <textarea id="notes" placeholder="Add any notes here..."></textarea>
 
-                    <label>Store Links</label>
-                    <textarea id="store-links" placeholder="Add any links here, seperated by | characters (ex. link1.com|link2.com)"></textarea>
+                        <label>Store Links</label>
+                        <textarea id="store-links" placeholder="Add any links here, seperated by | characters (ex. link1.com|link2.com)"></textarea>
 
-                    <button id="save-item-info">Save Changes</button>
+                        <button id="save-item-info">Save Changes</button>
 
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!--scripts-->
-    <script type="module" src="add-new-item.js"></script>
+        <!--scripts-->
+        <script type="module" src="add-new-item.js"></script>
 
-
-
-</body>
-
+    </body>
 </html>
