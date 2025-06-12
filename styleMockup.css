@@ -301,3 +301,7 @@ form {
 #save-item-info:hover {
     background-color: green;
 }
+
+#image {
+    object-fit: contain;
+}

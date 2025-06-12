@@ -50,7 +50,7 @@ function refreshList() {
         const p = document.createElement("p");
         const div = document.createElement("div");
         const img = document.createElement("img");
-        img.src = parts[i].imgSrc; // replace with parts[i].imgSrc
+        img.src = sortedParts[i].imgSrc; // replace with parts[i].imgSrc
         const text = document.createTextNode(sortedParts[i].name);
         p.appendChild(text); // adds text to <p>
         div.appendChild(img) // adds img to <div>
