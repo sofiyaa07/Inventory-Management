@@ -111,7 +111,7 @@ function cancelButton() {
             const receivedDate = `${day}-${month}-${year}`;
 
             const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-            const confirmDelete = confirm(`Are you sure you want to cancel order for ${partQuantity}x ${partName}`); // Confirmation window
+            const confirmDelete = confirm(`Are you sure you want to cancel order for (${partQuantity}x) ${partName}`); // Confirmation window
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
                 alert(`Order for ${partName} cancelled.`);
