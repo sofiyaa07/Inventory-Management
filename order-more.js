@@ -105,7 +105,6 @@ function deleteButton() {
             if (confirmDelete) {
                 const linkRow = button.closest(".link-row"); // Get the specific row containing the button
                 linkRow.remove(); // Remove row
-                alert("Link deleted");
             }
         });
     });

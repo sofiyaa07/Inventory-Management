@@ -28,18 +28,26 @@ function createReceivingRow(incomingOrder) {
     const receivedButton = document.createElement('button');
     receivedButton.textContent = "Received";
     receivedButton.classList.add('received');
-    receivedButton.title = 'Confirm order received'; 
-    receivedButton.setAttribute('data-name', incomingOrder.name); 
-    receivedButton.setAttribute('data-date', incomingOrder.orderedDate);
-    row.appendChild(receivedButton); 
+    receivedButton.title = 'Confirm order received';
+
+    receivedButton.setAttribute('data-name', incomingOrder.name);
+    receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
+    receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
+    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+
+    row.appendChild(receivedButton);
 
     const cancelButton = document.createElement('button');
     cancelButton.textContent = "Cancel";
     cancelButton.classList.add('cancel');
-    cancelButton.title = 'Cancel order'; 
-    cancelButton.setAttribute('data-name', incomingOrder.name); 
+    cancelButton.title = 'Cancel order';
 
-    row.appendChild(cancelButton); 
+    cancelButton.setAttribute('data-name', incomingOrder.name);
+    cancelButton.setAttribute('data-quantity', incomingOrder.quantity);
+    receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
+    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+
+    row.appendChild(cancelButton);
 
     return row; // Return the created row
 }
@@ -49,22 +57,33 @@ function receivedButton() {
 
     receivedButtons.forEach(button => {
         button.addEventListener("click", function () {
-            const partName = button.getAttribute('data-name'); 
-            const orderConfirmed = confirm(`Confirm order received for ${partName} and move to history?`); // Confirmation window
-            if (orderConfirmed) {                    
+            const partName = button.getAttribute('data-name');
+            const partQuantity = button.getAttribute('data-quantity');
+            const partImage = button.getAttribute('data-image');
+            const partOrderDate = button.getAttribute('data-ordered-date');
+            const status = "received";
+
+            const date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const receivedDate = `${day}-${month}-${year}`;
+
+            const orderConfirmed = confirm(`Confirm order received for ${partQuantity}x ${partName} and move to history?`); // Confirmation window
+            if (orderConfirmed) {
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
-                alert (`Order for ${partName} marked as received.`);  
+                alert(`Order for ${partName} marked as received.`);
 
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
                 let arrivedPart = {};
-                arrivedPart.name = button.getAttribute('data-name');
-                    arrivedPart.quantity = button.getAttribute('data-name');
-                    arrivedPart.imgSrc = button.getAttribute('data-name');
-                    arrivedPart.orderedDate = button.getAttribute('data-date');
-                    // arrivedPart.receivedDate = today's date
-                    arrivedPart.status = "received";
+                arrivedPart.name = partName;
+                arrivedPart.quantity = partQuantity;
+                arrivedPart.imgSrc = partImage;
+                arrivedPart.orderedDate = partOrderDate;
+                arrivedPart.receivedDate = receivedDate
+                arrivedPart.status = status;
 
 
                 try {
@@ -96,14 +115,55 @@ function cancelButton() {
 
     cancelButtons.forEach(button => {
         button.addEventListener("click", function () {
-            const partName = button.getAttribute('data-name'); 
+            const partName = button.getAttribute('data-name');
+            const partQuantity = button.getAttribute('data-quantity');
+            const partImage = button.getAttribute('data-image');
+            const partOrderDate = button.getAttribute('data-ordered-date');
+            const status = "cancelled";
+
+            const date = new Date();
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            const receivedDate = `${day}-${month}-${year}`;
+
             const itemRow = button.closest(".item-row"); // Get the specific row containing the button
-            const confirmDelete = confirm(`Are you sure you want to cancel order for ${partName}`); // Confirmation window
+            const confirmDelete = confirm(`Are you sure you want to cancel order for ${partQuantity}x ${partName}`); // Confirmation window
             if (confirmDelete) {
                 itemRow.remove(); // Remove row
-                alert (`Order for ${partName} cancelled.`);  
+                alert(`Order for ${partName} cancelled.`);
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
             }
+
+            let arrivedPart = {};
+            arrivedPart.name = partName;
+            arrivedPart.quantity = partQuantity;
+            arrivedPart.imgSrc = partImage;
+            arrivedPart.orderedDate = partOrderDate;
+            arrivedPart.receivedDate = receivedDate
+            arrivedPart.status = status;
+
+
+            try {
+                // fetch info from the server (backendServer.js)
+                fetch(`${serverLocation}/ordered`, {
+                    // sends the data to the serverLocation
+                    method: 'POST',
+                    headers: { // i have no idea what this does but i was told to add it
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(arrivedPart),
+                });
+
+                window.alert("Changes saved!");
+
+
+            }
+            catch { // in case of file reading error
+                window.alert("Error: Changes not saved");
+
+            }
+
         });
     });
 }
