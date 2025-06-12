@@ -68,6 +68,7 @@ img {
     flex-direction: column;
     gap: 5px;
     flex-grow: 1;
+    height: fit-content; 
 }
 
 
@@ -183,6 +184,7 @@ input[type="submit"]:hover {
     background-color: green;
 }
 
+
 .upload-image {
     border: 2px dashed #ccc;
     padding: 30px;
@@ -203,12 +205,6 @@ h2 {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-}
-
-
-.search-button:hover {
-    background-color: aliceblue;
-    color: darkblue;
 }
 
 .submit-link {
@@ -237,7 +233,7 @@ h2 {
     gap: 10px
 }
 
-.item-row:hover {
+.item-row:hover, .search-button:hover {
     background-color: aliceblue;
     color: darkblue;
 }
@@ -300,7 +296,6 @@ form {
 #save-item-info {
     margin-top: 20px;
     background-color: #a4d4a4;
-
 }
 
 #save-item-info:hover {
