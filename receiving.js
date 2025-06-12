@@ -44,8 +44,8 @@ function createReceivingRow(incomingOrder) {
 
     cancelButton.setAttribute('data-name', incomingOrder.name);
     cancelButton.setAttribute('data-quantity', incomingOrder.quantity);
-    receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
-    receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+    cancelButton.setAttribute('data-image', incomingOrder.imgSrc);
+    cancelButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
 
     row.appendChild(cancelButton);
 
@@ -85,26 +85,9 @@ function receivedButton() {
                 arrivedPart.receivedDate = receivedDate
                 arrivedPart.status = status;
 
+                addToOrderHistory(arrivedPart);
+                removeFromIncomingOrders(arrivedPart);
 
-                try {
-                    // fetch info from the server (backendServer.js)
-                    fetch(`${serverLocation}/ordered`, {
-                        // sends the data to the serverLocation
-                        method: 'POST',
-                        headers: { // i have no idea what this does but i was told to add it
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(arrivedPart),
-                    });
-
-                    window.alert("Changes saved!");
-
-
-                }
-                catch { // in case of file reading error
-                    window.alert("Error: Changes not saved");
-
-                }
             }
         });
     });
@@ -140,29 +123,13 @@ function cancelButton() {
             arrivedPart.quantity = partQuantity;
             arrivedPart.imgSrc = partImage;
             arrivedPart.orderedDate = partOrderDate;
-            arrivedPart.receivedDate = receivedDate
+            arrivedPart.receivedDate = receivedDate;
             arrivedPart.status = status;
 
+            console.log(arrivedPart);
 
-            try {
-                // fetch info from the server (backendServer.js)
-                fetch(`${serverLocation}/ordered`, {
-                    // sends the data to the serverLocation
-                    method: 'POST',
-                    headers: { // i have no idea what this does but i was told to add it
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(arrivedPart),
-                });
-
-                window.alert("Changes saved!");
-
-
-            }
-            catch { // in case of file reading error
-                window.alert("Error: Changes not saved");
-
-            }
+            addToOrderHistory(arrivedPart);
+            removeFromIncomingOrders(arrivedPart);
 
         });
     });
@@ -201,6 +168,54 @@ function getIncomingOrders() {
 
 }
 
+function addToOrderHistory(arrivedPart) {
+    try {
+        // fetch info from the server (backendServer.js)
+        fetch(`${serverLocation}/ordered`, {
+            // sends the data to the serverLocation
+            method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(arrivedPart),
+        });
+
+    }
+    catch { // in case of file reading error
+        window.alert("Error: Changes not saved");
+
+    }
+
+}
+
+function removeFromIncomingOrders(arrivedPart) {
+    let compObj = {};
+    compObj.name = arrivedPart.name;
+    compObj.quantity = arrivedPart.quantity;
+    compObj.imgSrc = arrivedPart.imgSrc;
+    compObj.orderedDate = arrivedPart.orderedDate;
+
+
+    try {
+        // fetch info from the server (backendServer.js)
+        fetch(`${serverLocation}/delete-incoming-order`, {
+            // sends the data to the serverLocation
+            method: 'POST',
+            headers: { // i have no idea what this does but i was told to add it
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(compObj),
+        });
+
+        console.log("Successfully removed item");
+
+    }
+    catch { // in case of file reading error
+        window.alert("Error: Changes not saved");
+
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     getIncomingOrders().then(() => {
@@ -208,3 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 });
+
+
+// for some reason, received orders works, but not cancelled orders

@@ -25,7 +25,7 @@ app.post("/save", (request, response) => {
 
     // parameters: file path, the thing to be written, and a callback function
     // callback -> calls this function when file runs, in this case, checks for error
-    fs.appendFile("Part Database - Sheet2.csv", formattedData, (err) => { // testing with a 2nd file for now
+    fs.appendFile("Part Database - Sheet2.csv", formattedData, (err) => { // testing
         if (err) {
             console.error('Error writing file:', err);
             return response.status(500).send('Failed to write data');
@@ -38,7 +38,7 @@ app.post("/save", (request, response) => {
 
 // whenever data needs to be read from the csv 
 app.get('/load', (request, response) => {
-    // utf8: encoding of the data (how it encodes, no idea)
+    // utf8: encoding of the data (how it encodes, no idea)S
     fs.readFile("Part Database - Sheet2.csv", 'utf8', (err, fileData) => {
         if (err) { // error check
             console.error('Error reading file:', err);
@@ -73,8 +73,12 @@ app.post('/update', (request, response) => {
 
 
 // order history stuff
+
+// takes info from the file, then rewrites it
 app.post("/ordered", (request, response) => { // < this doesn't work
     const data = request.body; // stores the data that's sent
+
+    console.log(data);
 
     // parameters: file path, the thing to be written, and a callback function
     // callback -> calls this function when file runs, in this case, checks for error
@@ -122,8 +126,7 @@ app.get('/order-history', (request, response) => {
 
 
 // receiving and order-more
-// same thing but with different file path 
-
+// same thing but with different file path
 app.post("/add-incoming-order", (request, response) => { // < this doesn't work
     const data = request.body; // stores the data that's sent
 
@@ -139,6 +142,43 @@ app.post("/add-incoming-order", (request, response) => { // < this doesn't work
         tempArr = JSON.parse(fileData);
 
         tempArr.push(data); // adds the new object into the array
+
+        // adds the new array into orderHistory
+        fs.writeFile("incomingOrders.txt", JSON.stringify(tempArr, null, 4), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return response.status(500).send('Failed to write data');
+            }
+            response.send("Receiving updated");
+        });
+
+    });
+});
+
+
+app.post("/delete-incoming-order", (request, response) => { // < this doesn't work
+    const data = request.body; // stores the data that's sent
+
+    // parameters: file path, the thing to be written, and a callback function
+    // callback -> calls this function when file runs, in this case, checks for error
+    fs.readFile("incomingOrders.txt", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        let tempArr = []; // turns orderHistory into an arary
+        tempArr = JSON.parse(fileData);
+
+        // decipher this later
+
+        // Remove the first matching object (deep equality)
+        const index = tempArr.findIndex(item => JSON.stringify(item) === JSON.stringify(data));
+        if (index !== -1) {
+            tempArr.splice(index, 1);
+        } else {
+            return response.status(404).send('Order not found');
+        }
 
         // adds the new array into orderHistory
         fs.writeFile("incomingOrders.txt", JSON.stringify(tempArr, null, 4), (err) => {
