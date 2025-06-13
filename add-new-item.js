@@ -1,4 +1,11 @@
+/*
+* Scripts used in add-new-item.html
+* Takes information put into html elements, makes a Part out of them, and ships it to backend
+*/
+
+
 import Part from './part.js';
+import { getPartArray } from './partArray.js';
 
 // only does anything for inventory-by-location
 const placement = sessionStorage.getItem("emptyLocation");
@@ -38,6 +45,7 @@ function saveItemInfo() {
 
         window.alert("Changes saved!");
 
+        getPartArray();
 
     }
     catch { // in case of file reading error

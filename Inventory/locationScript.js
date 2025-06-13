@@ -1,5 +1,10 @@
-/* things to add:
-    - need to change how the functions at the bottom reads the array (new format is 1A1, ex)
+/*
+* Scripts used in all html files that start with location
+* Takes parts from partArray.js to fill out the html elements
+* Parts are sorted based on the shelves.
+* Any additional shelves need to have their numCol and ids (i value in fillShelves) hard coded
+* Currently only supports shelves 0-8, styling for more shelves needs to be hard coded in css and html pages
+* If shelves > 9 are added, need to change the get methods at bottom to accommadate for double digits
 */
 
 // need a part array to work (placehodler under)

@@ -1,10 +1,11 @@
 [
     {
-        "name": "Blue Wire",
+        "name": "Black Wire",
         "quantity": "123",
-        "imgSrc": "https://m.media-amazon.com/images/I/51x0jgJAneL.__AC_SX300_SY300_QL70_ML2_.jpg",
+        "imgSrc": "",
         "orderedDate": "13-6-2025",
         "receivedDate": "13-6-2025",
+        "selectedStore": "https://www.homedepot.ca/product/onward-black-steel-wire/1001289810",
         "status": "received"
     }
 ]

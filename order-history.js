@@ -1,3 +1,11 @@
+/*
+* Scripts for order-history.html
+* Uses backendServer to get information on order history
+* Tracks order date and general information
+* Cancelled orders also show up
+*/
+
+
 let orders = [];
 
 const serverLocation = 'http://localhost:3000';
@@ -17,14 +25,14 @@ function createOrderRow(orders) {
     const name = document.createElement('label');
     name.classList.add('name');
     name.textContent = "(+" + orders.quantity + ") " + orders.name; //display name of part and quantity of order 
-    itemDetails.appendChild(name); 
+    itemDetails.appendChild(name);
 
     const orderedDate = document.createElement('label');
     orderedDate.textContent = "Ordered: " + orders.orderedDate + " from " + orders.selectedStore; // display order date and link used to order
     orderedDate.classList.add('ordered-date');
     itemDetails.appendChild(orderedDate);
 
-    const receivedDate = document.createElement('label'); 
+    const receivedDate = document.createElement('label');
 
     if (orders.status === "received") { //if part has been received, display this, otherwise display cancelled
         receivedDate.textContent = "Received: ";
@@ -72,6 +80,21 @@ function getOrderHistory() {
 
 }
 
+function clearOrderHistory() {
+    try {
+        fetch(`${serverLocation}/clear-order-history`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+    }
+    catch (error) {
+        window.alert("Error clearing order history: ", error);
+
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
     getOrderHistory().then(() => {
@@ -79,4 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
         loadOrderHistory(orders); // Load order history page with orders
 
     });
+
+    // event listener for clear history button
+    document.getElementById("clear-history").addEventListener("click", clearOrderHistory);
+
+
 });

@@ -1,8 +1,1 @@
-[
-    {
-        "name": "Black Wire",
-        "quantity": "123",
-        "imgSrc": "https://m.media-amazon.com/images/I/51-Cq1fuvzL._AC_SX679_.jpg",
-        "orderedDate": "13-6-2025"
-    }
-]
+[]

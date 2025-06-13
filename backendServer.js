@@ -1,3 +1,14 @@
+/*
+* Server that needs to be set up seperately from front-end, and before html is loaded
+* Relies on node.js file reading and writing, and promises
+* In VSCode, type "node backendServer.js" into terminal to run it
+* Most files rely on this to get info about parts
+* There are only around 3 or 4 unique functions, many are just reskinned with different file paths and request formats
+* Nothing special needs to be downloaded, other than node.js
+*/
+
+
+
 import express from 'express'; // sets up express to make server stuff easier
 import fs from 'fs'; // sets up node file stuff
 import { csvToObjects, addObjectInfoToCSV } from './helper-methods.js';
@@ -13,9 +24,6 @@ app.use(cors());
 app.use(express.json());
 
 import Part from "./part.js";
-
-
-// a lot of these are basically the same, with just a few formatting and path differences
 
 
 
@@ -148,6 +156,21 @@ app.post("/ordered", (request, response) => { // < this doesn't work
     });
 });
 
+
+// deletes everything in orderHistory.txt (entire text file turns into [])
+app.post("/clear-order-history", (request, response) => { // < this doesn't work
+
+    fs.writeFile("orderHistory.txt", "[]", (err) => {
+        if (err) {
+            console.error('Error writing file:', err);
+            return response.status(500).send('Failed to write data');
+        }
+        response.send("Order history cleared");
+    });
+
+});
+
+
 // whenever data needs to be read from orderHistory.txt << this works
 app.get('/order-history', (request, response) => {
     // utf8: encoding of the data (how it encodes, no idea)
@@ -169,6 +192,23 @@ app.get('/order-history', (request, response) => {
 
 
 // receiving and order-more----------------------------------------------------------
+
+// whenever data needs to be read from incomingOrders.txt << this works
+app.get('/incoming-orders', (request, response) => {
+    // utf8: encoding of the data (how it encodes, no idea)
+    fs.readFile("incomingOrders.txt", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        if (fileData != "") { // failsafe
+            const incObj = JSON.parse(fileData);
+            response.json(incObj); // responds with an object
+        }
+
+    });
+});
 
 
 // same thing but with different file path
@@ -217,8 +257,13 @@ app.post("/delete-incoming-order", (request, response) => { // < this doesn't wo
 
         // decipher this later
 
-        // Remove the first matching object (deep equality)
-        const index = tempArr.findIndex(item => JSON.stringify(item) === JSON.stringify(data));
+        // gets rid of the item in the tempArr with the same properties as data
+        const index = tempArr.findIndex(item =>
+            item.name === data.name &&
+            item.quantity === data.quantity &&
+            item.imgSrc === data.imgSrc &&
+            item.orderedDate === data.orderedDate
+        );
         if (index !== -1) {
             tempArr.splice(index, 1);
         } else {

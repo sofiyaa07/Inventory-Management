@@ -1,3 +1,10 @@
+/*
+* Scripts for order-more.html
+* Uses sessionStorage to get info on part to be viewed
+* Allows adding and removing of links, and redirects to receiving page automatically
+* On above point: if it's better removed, remove this line of code in "selectButton()": window.location.href = "receiving.html";
+*/
+
 
 // The way this is set up, all getters have to be called with an underscore in front
 // -> because it's being passed as a plain object, the getters and setters from part.js
@@ -7,10 +14,8 @@ let currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 const serverLocation = 'http://localhost:3000';
 let changedPart = {};
 changedPart.name = currentPart._name;
-
-
-
 import { getPartArray } from "./partArray.js";
+
 
 //NEEDS TO REMOVE IN DATABASE WHEN DELETING A LINK 
 
@@ -75,55 +80,55 @@ function submitButton() {
                     // Add button functions 
                     selectButton();
                     deleteButton();
+
+
+                    // only does something if the link is valid
+                    // backend stuff -----------------------------------------------------------------------------------
+                    // assigns name and storeLinks (only things necessary)
+
+                    // concatenates currentPart's store links and the new link
+                    changedPart.storeLinks = []
+                    changedPart.storeLinks.push(...currentPart._storeLinks);
+                    changedPart.storeLinks.push(newLinkInput.value);
+
+
+                    try {
+                        // fetch from backend server (if /update)
+                        fetch(`${serverLocation}/update-links`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(changedPart),
+                        })
+                            .then(response => response.json()) // parses data into object array (?)
+                            .then(data => { // data returns as a properly formatted OBJECT
+
+                                // sets session storage, and then changes currentPart
+                                sessionStorage.setItem("currentPart", JSON.stringify(data));
+                                currentPart = data;
+                                getPartArray();
+                                window.alert("Changes saved!");
+                                loadOrderMorePage(); // updates page
+
+                                console.log("updated");
+                            })
+
+                    } // end of try
+                    catch (error) {
+                        window.alert("Error changing item info: ", error);
+
+                    }
+
+                    newLinkInput.value = ""; // Clear input field after everything
+
+
+
                 } catch (e) {
                     alert("Please enter a valid URL."); // Alert for invalid input
                 }
             }
 
-
-            // backend stuff -----------------------------------------------------------------------------------
-            // assigns name and storeLinks (only things necessary)
-
-            // concatenates currentPart's store links and the new link
-            changedPart.storeLinks = []
-            changedPart.storeLinks.push(...currentPart._storeLinks);
-            changedPart.storeLinks.push(newLinkInput.value);
-
-
-            try {
-                // fetch from backend server (if /update)
-                fetch(`${serverLocation}/update-links`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(changedPart),
-                })
-                    .then(response => response.json()) // parses data into object array (?)
-                    .then(data => { // data returns as a properly formatted OBJECT
-
-                        // sets session storage, and then changes currentPart
-                        sessionStorage.setItem("currentPart", JSON.stringify(data));
-                        currentPart = data;
-                        getPartArray();
-
-                        window.alert("Changes saved!");
-
-                        loadOrderMorePage(); // updates page
-
-
-
-
-                        console.log("updated");
-                    })
-
-            }
-            catch (error) {
-                window.alert("Error changing item info: ", error);
-
-            }
-
-            newLinkInput.value = ""; // Clear input field after everything
 
 
 
@@ -152,6 +157,7 @@ function selectButton() {
                 orderedPart.selectedStore = button.getAttribute('selectedStore'); //retrieves store link in row containing clicked btton, stores in orderedPart
 
                 //get date of order
+                const date = new Date();
                 let day = date.getDate(); //get day, month, year and format 
                 let month = date.getMonth() + 1;
                 let year = date.getFullYear();

@@ -1,6 +1,7 @@
-/* things to add:
-
-
+/*
+* Scripts used in inventory-by-list.html
+* Takes parts from partArray.js to fill out the html elements
+* Ability to sort list, and easily check for low stock parts
 */
 
 // need a part array to work

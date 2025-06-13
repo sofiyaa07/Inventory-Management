@@ -1,3 +1,9 @@
+/*
+* Sort methods used in listScript.js
+* Most are directly copied from helper-methods.js, but this file is safe to import into frontend code
+* (other file has promises and stuff that only work in node.js)
+*/
+
 export function sortAlphaAsc(arr) {
     /*
     Input: array of part objects

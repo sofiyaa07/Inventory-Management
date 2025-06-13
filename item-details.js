@@ -1,4 +1,9 @@
-// btw this code breaks if you access item details BEFORE any of the list stuff
+/*
+* Scripts for item-details.html
+* Relies on sessionStorage to get parts to display
+* Should ideally not be run without sessionStorage, but will not crash, just won't display anything
+*/
+
 import { getPartArray } from "../partArray.js";
 
 // parses the string from local storage into an object

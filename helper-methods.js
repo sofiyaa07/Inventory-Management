@@ -1,3 +1,8 @@
+/*
+* A bunch of helper methods that only work in backend
+* Only really used in backendServer.js, might see some here and there in other files
+*/
+
 import fs from 'fs/promises';
 import Part from './part.js';
 
