@@ -6,6 +6,9 @@
 let currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 const serverLocation = 'http://localhost:3000';
 let changedPart = {};
+changedPart.name = currentPart._name;
+
+
 
 import { getPartArray } from "./partArray.js";
 
@@ -80,7 +83,6 @@ function submitButton() {
 
             // backend stuff -----------------------------------------------------------------------------------
             // assigns name and storeLinks (only things necessary)
-            changedPart.name = currentPart._name;
 
             // concatenates currentPart's store links and the new link
             changedPart.storeLinks = []
@@ -109,7 +111,7 @@ function submitButton() {
 
                         loadOrderMorePage(); // updates page
 
-                        
+
 
 
                         console.log("updated");
@@ -139,7 +141,7 @@ function selectButton() {
         button.addEventListener("click", function () { //add click listener to buttons 
             const quantity = prompt("How many would you like to order?"); //ask user for quantity of order
             if (quantity && !isNaN(quantity) && Number(quantity) > 0) { //if user inputs number and it is greater than 0, outputs 
-                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`); 
+                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`);
                 // creates a new object out of item info
 
                 let orderedPart = {};
@@ -175,6 +177,49 @@ function deleteButton() {
             const confirmDelete = confirm("Are you sure you want to delete this link?"); //ask user to confirm deletion 
             if (confirmDelete) {
                 const linkRow = button.closest(".link-row"); // Get the specific row containing the button
+
+                // turns the rows into an array, then checks for which row was clicked
+                const allRows = Array.from(document.querySelectorAll(".link-row"));
+                const linkIndex = allRows.indexOf(linkRow);
+
+                // adds all the store links not excluded to the chnagedPart
+                // (underscore is for the element at the index, it's not used)
+                changedPart.storeLinks = currentPart._storeLinks.filter((_, index) => index !== linkIndex);
+
+                // server shenanigans
+                try {
+                    fetch(`${serverLocation}/update-links`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(changedPart)
+                    })
+                        .then(response => response.json()) // parses data into object array (?)
+                        .then(data => { // data returns as a properly formatted OBJECT
+
+                            // sets session storage, and then changes currentPart
+                            sessionStorage.setItem("currentPart", JSON.stringify(data));
+                            currentPart = data;
+                            getPartArray();
+
+                            window.alert("Changes saved!");
+
+                            loadOrderMorePage(); // updates page
+
+
+
+
+                            console.log("updated");
+                        })
+
+                }
+                catch (error) {
+                    window.alert("Error changing item info: ", error);
+
+                }
+
+
                 linkRow.remove(); // Remove row
             }
         });
@@ -197,7 +242,7 @@ function loadOrderMorePage(part) {
     } else { //if part doesn't have store links, display "no links available" until user inputs one 
         const noLinksMessage = document.createElement('p');
         noLinksMessage.textContent = "No store links available.";
-        noLinksMessage.classList.add('no-links-message'); 
+        noLinksMessage.classList.add('no-links-message');
         container.appendChild(noLinksMessage);
     }
 

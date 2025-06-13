@@ -122,7 +122,6 @@ app.post('/update', (request, response) => {
 app.post("/ordered", (request, response) => { // < this doesn't work
     const data = request.body; // stores the data that's sent
 
-    console.log(data);
 
     // parameters: file path, the thing to be written, and a callback function
     // callback -> calls this function when file runs, in this case, checks for error
@@ -254,13 +253,11 @@ app.post('/update-links', (request, response) => {
         // csvObject: the entire csv as objects, finds the index of the part to be updated
         // callback function searches all the objects' names, and compares to updatedPart
         const partToChange = csvObject.findIndex(part => part.name == updatedPart.name);
-        console.log(updatedPart.storeLinks);
 
         let formattedLinks = "";
         // join turns the array into a string, and speerates with the |
         formattedLinks += updatedPart.storeLinks.join(" | ");
 
-        console.log(csvObject[partToChange]);
 
         // changes the part at the index
         csvObject[partToChange] = new Part( // it looks kinda bad, but it's just setting it equal
@@ -299,6 +296,8 @@ app.post('/update-links', (request, response) => {
             const breakpoint = ' | ';
             csvObject[partToChange].storeLinks = links.split(breakpoint);
 
+            console.log(csvObject[partToChange]);
+
             response.json(csvObject[partToChange]);
         });
 
@@ -307,22 +306,6 @@ app.post('/update-links', (request, response) => {
 });
 
 
-// whenever data needs to be read from incomingOrders.txt << this works
-app.get('/incoming-orders', (request, response) => {
-    // utf8: encoding of the data (how it encodes, no idea)
-    fs.readFile("incomingOrders.txt", 'utf8', (err, fileData) => {
-        if (err) { // error check
-            console.error('Error reading file:', err);
-            return response.status(500).send('Failed to read data');
-        }
-
-        if (fileData != "") {
-            const historyObj = JSON.parse(fileData);
-            response.json(historyObj); // responds with an object
-        }
-
-    });
-});
 
 
 // logs the port
