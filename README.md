@@ -2,7 +2,7 @@
 An computer engineering inventory manager that displays stock of parts. Parts are organized by location and associated with ordering threshold, supplier's purchase links, and notes. Node.js is required to run the code.
 ## Table of Contents
 - [Usage](#usage)
-- [CSV and File Setup](#CSV and File Setup)
+- [CSV and File Setup](#csv-and-file-setup)
 
 ## Usage
 To run the project in VSCode, set up the server by typing "node backendServer.js" in the terminal.
