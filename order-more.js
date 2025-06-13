@@ -7,6 +7,8 @@ let currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 const serverLocation = 'http://localhost:3000';
 let changedPart = {};
 
+import { getPartArray } from "./partArray.js";
+
 //NEEDS TO REMOVE IN DATABASE WHEN DELETING A LINK 
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
