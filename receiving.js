@@ -37,6 +37,7 @@ function createReceivingRow(incomingOrder) {
     receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
     receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
     receivedButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+    receivedButton.setAttribute('data-selected-store', incomingOrder.selectedStore); 
 
     row.appendChild(receivedButton);
 
@@ -51,6 +52,7 @@ function createReceivingRow(incomingOrder) {
     cancelButton.setAttribute('data-quantity', incomingOrder.quantity);
     cancelButton.setAttribute('data-image', incomingOrder.imgSrc);
     cancelButton.setAttribute('data-ordered-date', incomingOrder.orderedDate);
+    cancelButton.setAttribute('data-selected-store', incomingOrder.selectedStore); 
 
     row.appendChild(cancelButton);
 
@@ -68,6 +70,7 @@ function receivedButton() {
             const partQuantity = button.getAttribute('data-quantity'); 
             const partImage = button.getAttribute('data-image'); 
             const partOrderDate = button.getAttribute('data-ordered-date'); 
+            const partStore = button.getAttribute('data-selected-store'); 
             const status = "received"; //change order status to received
             
             //format date of reception 
@@ -90,7 +93,8 @@ function receivedButton() {
                 arrivedPart.quantity = partQuantity;
                 arrivedPart.imgSrc = partImage;
                 arrivedPart.orderedDate = partOrderDate;
-                arrivedPart.receivedDate = receivedDate
+                arrivedPart.receivedDate = receivedDate; 
+                arrivedPart.selectedStore = partStore; 
                 arrivedPart.status = status;
 
                 addToOrderHistory(arrivedPart); //pass arrivedPart to order history
@@ -113,6 +117,7 @@ function cancelButton() {
             const partQuantity = button.getAttribute('data-quantity');
             const partImage = button.getAttribute('data-image');
             const partOrderDate = button.getAttribute('data-ordered-date');
+            const partStore = button.getAttribute('data-selected-store'); 
             const status = "cancelled"; //change status to cancelled 
 
             //format date of cancellation
@@ -135,6 +140,7 @@ function cancelButton() {
             arrivedPart.imgSrc = partImage;
             arrivedPart.orderedDate = partOrderDate;
             arrivedPart.receivedDate = receivedDate;
+            arrivedPart.selectedStore = partStore; 
             arrivedPart.status = status;
 
             console.log(arrivedPart);

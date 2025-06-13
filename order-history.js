@@ -20,7 +20,7 @@ function createOrderRow(orders) {
     itemDetails.appendChild(name); 
 
     const orderedDate = document.createElement('label');
-    orderedDate.textContent = "Ordered: " + orders.orderedDate; // Set ordered date text
+    orderedDate.textContent = "Ordered: " + orders.orderedDate + " from " + orders.selectedStore; // display order date and link used to order
     orderedDate.classList.add('ordered-date');
     itemDetails.appendChild(orderedDate);
 

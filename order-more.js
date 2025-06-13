@@ -6,7 +6,7 @@
 const currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 const serverLocation = 'http://localhost:3000';
 
-
+//NEEDS TO REMOVE IN DATABASE WHEN DELETING A LINK 
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
     const row = document.createElement('div'); // Create div element
@@ -29,6 +29,7 @@ function createLinkRow(linkUrl, linkName = "Store Link") {
     selectButton.textContent = '✓';
     selectButton.classList.add('select'); // Add to select class
     selectButton.title = 'Select link'; // Set title
+    selectButton.setAttribute('selectedStore', linkUrl);  //stores linkUrl in button to access later
 
     const deleteButton = document.createElement('button'); // Create delete button
     deleteButton.textContent = 'x';
@@ -92,6 +93,7 @@ function selectButton() {
                 orderedPart.name = currentPart._name;
                 orderedPart.quantity = quantity;
                 orderedPart.imgSrc = currentPart._imgSrc;
+                orderedPart.selectedStore = button.getAttribute('selectedStore'); //retrieves store link in row containing clicked btton, stores in orderedPart
 
                 //get date of order
                 let day = date.getDate(); //get day, month, year and format 
@@ -110,6 +112,7 @@ function selectButton() {
     });
 }
 
+//NEEDS TO REMOVE FROM DATABASE WHEN REMOVING A LINK  
 function deleteButton() {
     const deleteButtons = document.querySelectorAll(".delete"); //assign deleteButtons to elements under class "delete"
 
@@ -143,7 +146,7 @@ function loadOrderMorePage(part) {
         noLinksMessage.classList.add('no-links-message'); 
         container.appendChild(noLinksMessage);
     }
-    
+
     // Call button functions
     submitButton();
     selectButton();
