@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>Item Details</title>
+    <link rel="stylesheet" href="styleMockup.css">
+    
+</head>
+<body>
+
+    <section id="itemDetails">
+        <!-- navigation bar -->
+        <div class="tabs"> 
+            <a href="#" onclick="history.back()" class="nav">Back</a>
+            <a href="order-more.html" class="nav">Order More</a>
+        </div>
+
+        <!-- container for part info  -->
+        <div class="item-box"> 
+            <div class="content-row">
+                <img src="" id="image">
+
+                <!-- div for part details -->
+                <div class="right-panel">
+
+                    <h2 id="name">[NO ITEM SELECTED: GO BACK]</h2>
+
+                    <label for="stock">Stock:</label>
+                    <input type="number" id="stock" name="stock" value="">
+
+                    <label for="threshold">Threshold:</label>
+                    <input type="number" id="threshold" name="threshold" value="">
+    
+                    <label for="model">Model:</label>
+                    <input type="text" id="model" name="model" value="">
+    
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" value="">
+    
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" placeholder="Add any notes here..."></textarea>       
+
+                    <button id="save-item-info">Save Changes</button>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- scripts -->
+    <script type="module" src="item-details.js"></script>
+
+</body>
+
+</html>

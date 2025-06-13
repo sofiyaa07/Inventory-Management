@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+
+}
+
+/* universal styles*/
+
+.pop-background {
+    background-color: white;
+    margin: 5vh;
+    margin-top: 0;
+    border: 3px solid black;
+}
+
+body {
+    background-color: rgb(200, 221, 245);
+    margin-top: 20px;
+    /* dumb solution that will probably break something else */
+    overflow-x: hidden; /* sneakily hides a lot of formatting errors oops */
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* top button styling here */
+.page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.page-specific-button { /* make buttons go on other side */
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10vh;
+}
+
+.tabs {
+    margin-left: 5vh;
+}
+
+.nav-butt {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid black;
+
+}
+
+.vert-container {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    border: 3px solid black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* scrollbar stuff */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(239, 239, 239);
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(152, 152, 152);
+}
+
+
+/* home */
+.button-menu {
+    display: flex;
+    justify-content: center;
+    /* center items horizontally */
+    align-items: center;
+    gap: 5vh;
+    /* space between buttons */
+    height: 90vh;
+    padding: 10vh;
+}
+
+
+.button-menu a {
+    /* changes the stuff to be flexboxed, then centers */
+    display: flex;
+    flex-direction: column;
+    /* changes to vertical aligment */
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    vertical-align: middle;
+    background-color: white;
+    height: 80%;
+    width: 80%;
+    text-align: center;
+    position: relative;
+
+    border: 3px solid black;
+}
+
+
+.button-menu img {
+    max-height: 50%;
+}

@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Black Wire",
+        "quantity": "123",
+        "imgSrc": "",
+        "orderedDate": "13-6-2025",
+        "receivedDate": "13-6-2025",
+        "selectedStore": "https://www.homedepot.ca/product/onward-black-steel-wire/1001289810",
+        "status": "received"
+    }
+]

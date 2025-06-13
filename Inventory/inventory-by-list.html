@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventory By List</title>
+    <link href="../style.css" type="text/css" rel="stylesheet">
+    <link href="list-style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="page-container tabs"> <!--for the universal buttons-->
+        <div class="page-container">
+            <a href="../main-menu.html" class="nav-butt">Home</a>
+            <a href="location-back-shelves.html" class="nav-butt">Location</a>
+        </div>
+
+        <div class="page-specific-button"> <!--page specfic buttons-->
+            <a href="../add-new-item.html" class="nav-butt add-part">New part</a>
+            <button id="search-button">Search</button>
+            <input id="search-bar" type="search" placeholder="Search...">
+            <button id="sort-alpha">A-Z</button>
+            <button id="sort-desc-alpha">Z-A</button>
+            <button id="sort-stock">+</button>
+            <button id="sort-desc-stock">-</button>
+            
+
+        </div>
+    </div>
+
+    <div class="pop-background">
+
+
+
+        <div class="page-container">
+            <!--this is a comment-->
+            <div class="list" id="inv-list">
+
+            </div>
+
+
+            <div class="list" id="low-stock-container">
+
+            </div>
+
+
+        </div>
+
+
+
+    </div> <!--end of the large background-->
+
+
+
+
+    <script type="module" src="listScript.js"></script>
+
+
+</body>
+
+</html>
