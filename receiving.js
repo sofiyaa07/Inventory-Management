@@ -3,9 +3,10 @@ let incomingOrders = [] // TEMP ARRAY;
 const serverLocation = 'http://localhost:3000';
 
 function createReceivingRow(incomingOrder) {
-    const row = document.createElement('div');
+    const row = document.createElement('div'); //create row to display order info 
     row.classList.add('item-row');
 
+    //rest of elements 
     const image = document.createElement('img');
     image.src = incomingOrder.imgSrc;
     row.appendChild(image);
@@ -15,22 +16,23 @@ function createReceivingRow(incomingOrder) {
 
     const name = document.createElement('label');
     name.classList.add('name');
-    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name;
+    name.textContent = "(Incoming: " + incomingOrder.quantity + ") " + incomingOrder.name; //display order name and quantity 
     itemDetails.appendChild(name);
 
     const orderedDate = document.createElement('label');
-    orderedDate.textContent = "Ordered: " + incomingOrder.orderedDate; // Set ordered date text
+    orderedDate.textContent = "Ordered: " + incomingOrder.orderedDate; // Display ordered date 
     orderedDate.classList.add('ordered-date');
     itemDetails.appendChild(orderedDate);
 
     row.appendChild(itemDetails);
 
-    const receivedButton = document.createElement('button');
+    const receivedButton = document.createElement('button'); //create button to indicate order received
     receivedButton.textContent = "Received";
     receivedButton.classList.add('received');
     receivedButton.title = 'Confirm order received';
 
-    //store part data in button 
+    //store info (name, quantity, image url, ordered date) from the part in current row in received button 
+    //allows info to be passed to order history after button is clicked 
     receivedButton.setAttribute('data-name', incomingOrder.name);
     receivedButton.setAttribute('data-quantity', incomingOrder.quantity);
     receivedButton.setAttribute('data-image', incomingOrder.imgSrc);
@@ -38,6 +40,7 @@ function createReceivingRow(incomingOrder) {
 
     row.appendChild(receivedButton);
 
+    //create cancel order button 
     const cancelButton = document.createElement('button');
     cancelButton.textContent = "Cancel";
     cancelButton.classList.add('cancel');
@@ -55,17 +58,17 @@ function createReceivingRow(incomingOrder) {
 }
 
 function receivedButton() {
-    const receivedButtons = document.querySelectorAll(".received");
+    const receivedButtons = document.querySelectorAll(".received"); //assign receivedButtons to all elements with class name "received"
 
-    receivedButtons.forEach(button => {
-        button.addEventListener("click", function () {
+    receivedButtons.forEach(button => { //repeat for each button
+        button.addEventListener("click", function () { //add click listener to received buttons 
 
-            //retrieve part data from buttons
+            //retrieve data from part in the row containing clicked button 
             const partName = button.getAttribute('data-name'); 
             const partQuantity = button.getAttribute('data-quantity'); 
             const partImage = button.getAttribute('data-image'); 
             const partOrderDate = button.getAttribute('data-ordered-date'); 
-            const status = "received"; 
+            const status = "received"; //change order status to received
             
             //format date of reception 
             let day = date.getDate(); 
@@ -74,13 +77,14 @@ function receivedButton() {
             const receivedDate = `${day}-${month}-${year}`;
 
             const orderConfirmed = confirm(`Confirm order received for ${partQuantity}x ${partName} and move to history?`); // Confirmation window
-            if (orderConfirmed) {
+            if (orderConfirmed) { //if user confirms order 
                 const itemRow = button.closest(".item-row"); // Get the specific row containing the button
                 itemRow.remove(); // Remove row
                 alert(`Order for ${partName} marked as received.`);
 
                 //WRITE TO DATABASE!!!!!!!! (WITH DATE)
 
+                //set values from part in row containing button clicked to arrivedPart
                 let arrivedPart = {};
                 arrivedPart.name = partName;
                 arrivedPart.quantity = partQuantity;
@@ -89,18 +93,19 @@ function receivedButton() {
                 arrivedPart.receivedDate = receivedDate
                 arrivedPart.status = status;
 
-                addToOrderHistory(arrivedPart);
-                removeFromIncomingOrders(arrivedPart);
+                addToOrderHistory(arrivedPart); //pass arrivedPart to order history
+                removeFromIncomingOrders(arrivedPart); //remove this part from receiving page
 
             }
         });
     });
 }
 
+//this function is pretty much the same as receivedButton but asks to confirm cancellation and sets status to cancelled before passing to order history 
 function cancelButton() {
-    const cancelButtons = document.querySelectorAll(".cancel");
+    const cancelButtons = document.querySelectorAll(".cancel"); //assign cancelButtons to all elements with class name "cancel"
 
-    cancelButtons.forEach(button => {
+    cancelButtons.forEach(button => { //add click listener to each button
         button.addEventListener("click", function () {
 
             //retrieve part data in button 
@@ -108,7 +113,7 @@ function cancelButton() {
             const partQuantity = button.getAttribute('data-quantity');
             const partImage = button.getAttribute('data-image');
             const partOrderDate = button.getAttribute('data-ordered-date');
-            const status = "cancelled";
+            const status = "cancelled"; //change status to cancelled 
 
             //format date of cancellation
             let day = date.getDate(); 
@@ -142,10 +147,10 @@ function cancelButton() {
 }
 
 function loadReceivingPage(incomingOrder) {
-    const container = document.querySelector('.item-row-container'); // Get item-row-container
+    const container = document.querySelector('.item-row-container'); // Assign container to item-row-container
     container.innerHTML = ""; // Clear existing content
 
-    incomingOrder.forEach(order => {
+    incomingOrder.forEach(order => { //repeats for each order
         const row = createReceivingRow(order); // Create row for each incoming order
         container.appendChild(row); // Add row to container
     });

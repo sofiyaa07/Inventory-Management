@@ -44,19 +44,19 @@ function createLinkRow(linkUrl, linkName = "Store Link") {
 }
 
 function submitButton() {
-    const submitButton = document.querySelector('.submit-link input[type="submit"]');
+    const submitButton = document.querySelector('.submit-link input[type="submit"]'); //assign submit button to submit link form 
     if (submitButton) {
-        submitButton.addEventListener('click', () => {
+        submitButton.addEventListener('click', () => { //add click listener to button 
             const newLinkInput = document.getElementById('addLink'); // Get user input
-            if (newLinkInput.value) {
+            if (newLinkInput.value) { //if there is a value in the input
                 try {
                     //add code to update array; 
 
-                    const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain
+                    const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain from link
                     const newRow = createLinkRow(newLinkInput.value, domain); // Create new row
-                    const container = document.querySelector('.scrollable-links');
+                    const container = document.querySelector('.scrollable-links'); //assign container to scrollable-links div 
 
-                    const noLinksMessage = container.querySelector('.no-links-message'); //if "no links" is displayed, remove message when submitting a new link
+                    const noLinksMessage = container.querySelector('.no-links-message'); //if "no links" is displayed, remove message after submitting a link
                     if (noLinksMessage) {
                         noLinksMessage.remove();
                     }
@@ -64,7 +64,7 @@ function submitButton() {
                     container.appendChild(newRow); // Add new row to container
                     newLinkInput.value = ""; // Clear input field
 
-                    // Add buttons
+                    // Add button functions 
                     selectButton();
                     deleteButton();
                 } catch (e) {
@@ -76,13 +76,13 @@ function submitButton() {
 }
 
 function selectButton() {
-    const selectButtons = document.querySelectorAll(".select");
+    const selectButtons = document.querySelectorAll(".select"); //assign selectButtons to elements with class "select" 
 
     selectButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const quantity = prompt("How many would you like to order?");
-            if (quantity && !isNaN(quantity) && Number(quantity) > 0) {
-                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`);
+        button.addEventListener("click", function () { //add click listener to buttons 
+            const quantity = prompt("How many would you like to order?"); //ask user for quantity of order
+            if (quantity && !isNaN(quantity) && Number(quantity) > 0) { //if user inputs number and it is greater than 0, outputs 
+                alert(`You've ordered ${quantity} of this item! Forwarding to receiving tab...`); 
                 // creates a new object out of item info
 
                 let orderedPart = {};
@@ -91,30 +91,29 @@ function selectButton() {
                 orderedPart.quantity = quantity;
                 orderedPart.imgSrc = currentPart._imgSrc;
 
-                const date = new Date();
-                let day = date.getDate();
+                //get date of order
+                let day = date.getDate(); //get day, month, year and format 
                 let month = date.getMonth() + 1;
                 let year = date.getFullYear();
                 const dateOrdered = `${day}-${month}-${year}`;
 
-                orderedPart.orderedDate = dateOrdered;
+                orderedPart.orderedDate = dateOrdered; //assign to part 
 
-
-                writeToIncomingOrders(orderedPart);
+                writeToIncomingOrders(orderedPart); //write to receiving page 
                 window.location.href = "receiving.html"; // Redirect to receiving tab
             } else if (quantity !== null) {
-                alert("Please enter a valid number.");
+                alert("Please enter a valid number."); //if quantity is not a number and not null, outputs error 
             }
         });
     });
 }
 
 function deleteButton() {
-    const deleteButtons = document.querySelectorAll(".delete");
+    const deleteButtons = document.querySelectorAll(".delete"); //assign deleteButtons to elements under class "delete"
 
     deleteButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const confirmDelete = confirm("Are you sure you want to delete this link?");
+        button.addEventListener("click", function () { //add click listener to buttons  
+            const confirmDelete = confirm("Are you sure you want to delete this link?"); //ask user to confirm deletion 
             if (confirmDelete) {
                 const linkRow = button.closest(".link-row"); // Get the specific row containing the button
                 linkRow.remove(); // Remove row
@@ -131,15 +130,15 @@ function loadOrderMorePage(part) {
     const container = document.querySelector('.scrollable-links'); // Get scrollable-links container
     container.innerHTML = ""; // Clear existing content
 
-    if (part._storeLinks && part._storeLinks.length > 0) {
+    if (part._storeLinks && part._storeLinks.length > 0) { //if part has store links, 
         part._storeLinks.forEach(linkUrl => {
             const row = createLinkRow(linkUrl); // Create row for each link
             container.appendChild(row); // Add row to container
         });
-    } else {
+    } else { //if part doesn't have store links, display "no links available" until user inputs one 
         const noLinksMessage = document.createElement('p');
         noLinksMessage.textContent = "No store links available.";
-        noLinksMessage.classList.add('no-links-message'); // Optional: Add a class for styling
+        noLinksMessage.classList.add('no-links-message'); 
         container.appendChild(noLinksMessage);
     }
 

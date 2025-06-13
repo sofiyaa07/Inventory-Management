@@ -4,8 +4,8 @@ const serverLocation = 'http://localhost:3000';
 
 
 function createOrderRow(orders) {
-    const row = document.createElement('div');
-    row.classList.add('item-row');
+    const row = document.createElement('div'); //create a row to display part into 
+    row.classList.add('item-row'); //add to item-row class 
 
     const image = document.createElement('img');
     image.src = orders.imgSrc;
@@ -16,22 +16,21 @@ function createOrderRow(orders) {
 
     const name = document.createElement('label');
     name.classList.add('name');
-    name.textContent = "(+" + orders.quantity + ") " + orders.name;
-    itemDetails.appendChild(name);
+    name.textContent = "(+" + orders.quantity + ") " + orders.name; //display name of part and quantity of order 
+    itemDetails.appendChild(name); 
 
     const orderedDate = document.createElement('label');
     orderedDate.textContent = "Ordered: " + orders.orderedDate; // Set ordered date text
     orderedDate.classList.add('ordered-date');
     itemDetails.appendChild(orderedDate);
 
-    const receivedDate = document.createElement('label');
+    const receivedDate = document.createElement('label'); 
 
-
-    if (orders.status === "received") {
+    if (orders.status === "received") { //if part has been received, display this, otherwise display cancelled
         receivedDate.textContent = "Received: ";
     } else if (orders.status === "cancelled") {
         receivedDate.textContent = "Cancelled: ";
-        receivedDate.style.color = "red";
+        receivedDate.style.color = "red"; //if cancelled, change text to red 
         orderedDate.style.color = "red";
         name.style.color = "red";
     }
@@ -40,7 +39,7 @@ function createOrderRow(orders) {
     receivedDate.classList.add('received-date');
     itemDetails.appendChild(receivedDate);
 
-    row.appendChild(itemDetails);
+    row.appendChild(itemDetails); //append item details to row 
     return row; // Return the created row
 }
 

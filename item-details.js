@@ -41,8 +41,6 @@ function saveChanges() {
 }
 
 
-
-
 function loadItemDetails() { // just takes the part from local storage
     document.getElementById("name").textContent = currentPart._name;
     document.getElementById("stock").value = currentPart._stock; 
