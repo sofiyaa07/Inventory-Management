@@ -48,12 +48,14 @@ function submitButton() {
     if (submitButton) {
         submitButton.addEventListener('click', () => { //add click listener to button 
             const newLinkInput = document.getElementById('addLink'); // Get user input
+            //newLinkInput is the site URL 
             if (newLinkInput.value) { //if there is a value in the input
                 try {
+
                     //add code to update array; 
 
                     const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain from link
-                    const newRow = createLinkRow(newLinkInput.value, domain); // Create new row
+                    const newRow = createLinkRow(newLinkInput.value, domain); // Create new row, passing url and domain 
                     const container = document.querySelector('.scrollable-links'); //assign container to scrollable-links div 
 
                     const noLinksMessage = container.querySelector('.no-links-message'); //if "no links" is displayed, remove message after submitting a link
@@ -141,7 +143,7 @@ function loadOrderMorePage(part) {
         noLinksMessage.classList.add('no-links-message'); 
         container.appendChild(noLinksMessage);
     }
-
+    
     // Call button functions
     submitButton();
     selectButton();
