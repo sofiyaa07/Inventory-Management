@@ -8,11 +8,11 @@ An computer engineering inventory manager that displays stock of parts. Parts ar
 To run the project in VSCode, set up the server by typing "node backendServer.js" in the terminal.
 
 ## CSV and File Setup
-Text files (incomingOrders.txt and orderHistory.txt) should NOT be manually changed
-There is no import CSV feature; part information needs to be added directly into the code's folder or through tools built into the application
-Example format for the CSV is here: https://docs.google.com/spreadsheets/d/1ckMXOloboJZIwcYEKx5_3PeeJXEMpKf7E4uuoFA3v4I/edit?usp=sharing, or viewable in Part Database - Sheet2.csv
+- Text files (incomingOrders.txt and orderHistory.txt) should NOT be manually changed
+- There is no import CSV feature; part information needs to be added directly into the code's folder or through tools built into the application
+- Example format for the CSV is here: https://docs.google.com/spreadsheets/d/1ckMXOloboJZIwcYEKx5_3PeeJXEMpKf7E4uuoFA3v4I/edit?usp=sharing, or viewable in Part Database - Sheet2.csv
 
-Additional notes:
+Additional notes (IMPORTANT!):
 - CSV does not need to be updated after being imported, you are able to update it using the application
 - Example CSV has all the required 
 - Location formatting should be [Shelf #][Column][Row] (e.g. 1A1 for shelf 1, column 1, row 1)
