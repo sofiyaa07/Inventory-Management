@@ -61,16 +61,18 @@ function receivedButton() {
         button.addEventListener("click", function () {
 
             //retrieve part data from buttons
-            const partName = button.getAttribute('data-name'); 
-            const partQuantity = button.getAttribute('data-quantity'); 
-            const partImage = button.getAttribute('data-image'); 
-            const partOrderDate = button.getAttribute('data-ordered-date'); 
-            const status = "received"; 
-            
+            const partName = button.getAttribute('data-name');
+            const partQuantity = button.getAttribute('data-quantity');
+            const partImage = button.getAttribute('data-image');
+            const partOrderDate = button.getAttribute('data-ordered-date');
+            const status = "received";
+
             //format date of reception 
-            let day = date.getDate(); 
-            let month = date.getMonth() + 1; 
-            let year = date.getFullYear(); 
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
             const receivedDate = `${day}-${month}-${year}`;
 
             const orderConfirmed = confirm(`Confirm order received for ${partQuantity}x ${partName} and move to history?`); // Confirmation window
@@ -111,9 +113,11 @@ function cancelButton() {
             const status = "cancelled";
 
             //format date of cancellation
-            let day = date.getDate(); 
-            let month = date.getMonth() + 1; 
-            let year = date.getFullYear(); 
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
             const receivedDate = `${day}-${month}-${year}`;
 
             const itemRow = button.closest(".item-row"); // Get the specific row containing the button

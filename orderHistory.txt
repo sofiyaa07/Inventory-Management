@@ -1,26 +1,10 @@
 [
     {
-        "name": "Arduino Uno REV3",
-        "quantity": "5",
-        "imgSrc": "Arduino.jpg",
-        "receivedDate": "June 5 2025",
-        "orderedDate": "May 5 2025",
-        "status": "cancelled"
-    },
-    {
-        "name": "Green Wire",
+        "name": "Blue Wire",
         "quantity": "123",
-        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
-        "orderedDate": "12-6-2025",
-        "receivedDate": "12-6-2025",
+        "imgSrc": "https://m.media-amazon.com/images/I/51x0jgJAneL.__AC_SX300_SY300_QL70_ML2_.jpg",
+        "orderedDate": "13-6-2025",
+        "receivedDate": "13-6-2025",
         "status": "received"
-    },
-    {
-        "name": "Green Wire",
-        "quantity": "123",
-        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
-        "orderedDate": "12-6-2025",
-        "receivedDate": "12-6-2025",
-        "status": "cancelled"
     }
 ]

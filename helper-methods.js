@@ -100,7 +100,7 @@ export function sortStockDiff(arr) {
 export function csvToObjects(csvStr) {
     /*
     Input: String from CSV file, with desired keys in first row and corresponding values for each object in the rows after
-    Return: list of part objects
+    Return: list of part objects, as an array
     */
     // Each part object is separated by a new line, use trim to get rid of spaces
     const parts = csvStr.trim().split('\n');
@@ -161,9 +161,10 @@ async function writeToCSV(filePath, str) {
     }
 }
 
-export function addObjectInfoToCSV(obj, filePath) {
+export function addObjectInfoToCSV(obj) {
     /*
     Input: Part Object and CSV filePath
+    Return: Object as a string, formatted as it would be in the CSV
     */
     let vals = Object.values(obj).map(value => value.toString());
     // Convert to String

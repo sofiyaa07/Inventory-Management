@@ -3,9 +3,11 @@
 // -> because it's being passed as a plain object, the getters and setters from part.js
 // don't work
 // ex. currentPart.name doesn't work, currentPart._name does
-const currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
+let currentPart = JSON.parse(sessionStorage.getItem("currentPart"));
 const serverLocation = 'http://localhost:3000';
+let changedPart = {};
 
+import { getPartArray } from "./partArray.js";
 
 
 function createLinkRow(linkUrl, linkName = "Store Link") {
@@ -49,7 +51,7 @@ function submitButton() {
         submitButton.addEventListener('click', () => {
             const newLinkInput = document.getElementById('addLink'); // Get user input
             if (newLinkInput.value) {
-                try {
+                try { // frontend stuff
                     //add code to update array; 
 
                     const domain = new URL(newLinkInput.value).hostname.replace('www.', ''); // Extract domain
@@ -62,7 +64,6 @@ function submitButton() {
                     }
 
                     container.appendChild(newRow); // Add new row to container
-                    newLinkInput.value = ""; // Clear input field
 
                     // Add buttons
                     selectButton();
@@ -71,7 +72,59 @@ function submitButton() {
                     alert("Please enter a valid URL."); // Alert for invalid input
                 }
             }
+
+
+            // backend stuff -----------------------------------------------------------------------------------
+            // assigns name and storeLinks (only things necessary)
+            changedPart.name = currentPart._name;
+
+            // concatenates currentPart's store links and the new link
+            changedPart.storeLinks = []
+            changedPart.storeLinks.push(...currentPart._storeLinks);
+            changedPart.storeLinks.push(newLinkInput.value);
+
+
+            try {
+                // fetch from backend server (if /update)
+                fetch(`${serverLocation}/update-links`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(changedPart),
+                })
+                    .then(response => response.json()) // parses data into object array (?)
+                    .then(data => { // data returns as a properly formatted OBJECT
+
+                        // sets session storage, and then changes currentPart
+                        sessionStorage.setItem("currentPart", JSON.stringify(data));
+                        currentPart = data;
+                        getPartArray();
+
+                        window.alert("Changes saved!");
+
+                        loadOrderMorePage(); // updates page
+
+                        
+
+
+                        console.log("updated");
+                    })
+
+            }
+            catch (error) {
+                window.alert("Error changing item info: ", error);
+
+            }
+
+            newLinkInput.value = ""; // Clear input field after everything
+
+
+
         });
+
+
+
     }
 }
 
@@ -174,5 +227,6 @@ function writeToIncomingOrders(orderedPart) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(currentPart);
     loadOrderMorePage(currentPart); // Load part1 data
 });

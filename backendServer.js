@@ -1,6 +1,3 @@
-// import file writing and reading from helper-methods
-// (do later)
-
 import express from 'express'; // sets up express to make server stuff easier
 import fs from 'fs'; // sets up node file stuff
 import { csvToObjects, addObjectInfoToCSV } from './helper-methods.js';
@@ -14,6 +11,12 @@ app.use(cors());
 // middleware (it's a middleman)
 // parses strings sent over by front end back into objects
 app.use(express.json());
+
+import Part from "./part.js";
+
+
+// a lot of these are basically the same, with just a few formatting and path differences
+
 
 
 // whenever data is sent to the backend to be saved
@@ -50,29 +53,70 @@ app.get('/load', (request, response) => {
     });
 });
 
-// edit part info by deleting the row of edited part, then append new info
+
+
+
+// item-details-------------------------------------------------------------------------
+
+// edit part info by deleting the row of edited part, then append new info (into csv)
 app.post('/update', (request, response) => {
-    const name = request.partName;
     const updatedPart = request.body;
+    console.log(updatedPart);
 
-    // split csv string at every new line
-    const lines = fs.readFileSync("Part Database - Sheet2.csv", 'utf8').split('\n');
-    // look for part's row by name (column 1)
-    const partLine = lines.filter(line => {
-        const columns = line.split(',');
-        return columns[0] !== name;
+    fs.readFile("Part Database - Sheet2.csv", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        let csvObject = csvToObjects(fileData); // from helper-methods
+
+        // csvObject: the entire csv as objects, finds the index of the part to be updated
+        // callback function searches all the objects' names, and compares to updatedPart
+        const partToChange = csvObject.findIndex(part => part.name == updatedPart.name);
+        console.log(updatedPart.name);
+
+
+        // NOT READING PROPERTIS CORRECTLY
+        // changes the part at the index
+        csvObject[partToChange] = new Part( // it looks kinda bad, but it's just setting it equal
+            csvObject[partToChange].name,
+            updatedPart.model,
+            updatedPart.location,
+            Number(updatedPart.stock),
+            updatedPart.notes,
+            csvObject[partToChange].storeLinks,
+            updatedPart.imgSrc,
+            Number(updatedPart.threshold)
+        );
+
+        console.log(csvObject[partToChange]);
+
+        let formattedData = "name,model,location,stock,notes,storeLinks,imgSrc,threshold";
+
+        // reformats data
+        for (let i = 0; i < csvObject.length; i++) {
+            formattedData += "\n" + addObjectInfoToCSV(csvObject[i]);
+
+        }
+
+        fs.writeFile("Part Database - Sheet2.csv", formattedData, (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return response.status(500).send('Failed to write data');
+            }
+            response.json(csvObject[partToChange]);
+        });
+
     });
-    // add old name to updated part details
-    const newLine = name + ',' + updatedPart.join(',');
-    lines.push(newLine);
 
-    fs.writeFileSync(filePath, lines.join('\n'), 'utf8');
-    res.send('Part updated successfully');
 });
 
 
 
-// order history stuff
+
+
+// order history stuff--------------------------------------------------------------------
 
 // takes info from the file, then rewrites it
 app.post("/ordered", (request, response) => { // < this doesn't work
@@ -125,7 +169,9 @@ app.get('/order-history', (request, response) => {
 
 
 
-// receiving and order-more
+// receiving and order-more----------------------------------------------------------
+
+
 // same thing but with different file path
 app.post("/add-incoming-order", (request, response) => { // < this doesn't work
     const data = request.body; // stores the data that's sent
@@ -191,6 +237,75 @@ app.post("/delete-incoming-order", (request, response) => { // < this doesn't wo
 
     });
 });
+
+// updates csv but specifically only links (still takes the entire object as a parameter)
+// responds with the object too, so page can update immediately
+app.post('/update-links', (request, response) => {
+    const updatedPart = request.body;
+
+    fs.readFile("Part Database - Sheet2.csv", 'utf8', (err, fileData) => {
+        if (err) { // error check
+            console.error('Error reading file:', err);
+            return response.status(500).send('Failed to read data');
+        }
+
+        let csvObject = csvToObjects(fileData); // from helper-methods
+
+        // csvObject: the entire csv as objects, finds the index of the part to be updated
+        // callback function searches all the objects' names, and compares to updatedPart
+        const partToChange = csvObject.findIndex(part => part.name == updatedPart.name);
+        console.log(updatedPart.storeLinks);
+
+        let formattedLinks = "";
+        // join turns the array into a string, and speerates with the |
+        formattedLinks += updatedPart.storeLinks.join(" | ");
+
+        console.log(csvObject[partToChange]);
+
+        // changes the part at the index
+        csvObject[partToChange] = new Part( // it looks kinda bad, but it's just setting it equal
+            // this is really messy, but everything is the same except for storeLinks
+            csvObject[partToChange].name,
+            csvObject[partToChange].model,
+            csvObject[partToChange].location,
+            Number(csvObject[partToChange].stock),
+            csvObject[partToChange].notes,
+
+            formattedLinks,
+
+            csvObject[partToChange].imgSrc,
+            Number(csvObject[partToChange].threshold)
+        );
+
+
+
+        let formattedData = "name,model,location,stock,notes,storeLinks,imgSrc,threshold";
+
+        // reformats data
+        for (let i = 0; i < csvObject.length; i++) {
+            formattedData += "\n" + addObjectInfoToCSV(csvObject[i]);
+
+        }
+
+        fs.writeFile("Part Database - Sheet2.csv", formattedData, (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return response.status(500).send('Failed to write data');
+            }
+            // makes sure response is properly formmatted as an object
+
+            const links = csvObject[partToChange].storeLinks;
+            // the other breakpoint is '[space]|[space]' -- not just '|'
+            const breakpoint = ' | ';
+            csvObject[partToChange].storeLinks = links.split(breakpoint);
+
+            response.json(csvObject[partToChange]);
+        });
+
+    });
+
+});
+
 
 // whenever data needs to be read from incomingOrders.txt << this works
 app.get('/incoming-orders', (request, response) => {
