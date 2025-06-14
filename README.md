@@ -11,7 +11,7 @@ There are no special security features, in theory anyone can access the server i
 
 
 Notes:
-- Avoid putting commas when adding or chaning a part, it breaks the CSV and will make information display improperly
+- Avoid putting commas when adding or changing a part's details, it breaks the CSV and will make information display improperly
 
 ## Important CSV and File Setup
 - Text files (incomingOrders.txt and orderHistory.txt) should NOT be manually changed
