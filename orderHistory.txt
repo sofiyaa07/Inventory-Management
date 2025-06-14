@@ -1,11 +1,20 @@
 [
     {
         "name": "Black Wire",
-        "quantity": "123",
-        "imgSrc": "",
+        "quantity": "100",
+        "imgSrc": "https://m.media-amazon.com/images/I/51-Cq1fuvzL._AC_SX679_.jpg",
         "orderedDate": "13-6-2025",
         "receivedDate": "13-6-2025",
         "selectedStore": "https://www.homedepot.ca/product/onward-black-steel-wire/1001289810",
         "status": "received"
+    },
+    {
+        "name": "Green Wire",
+        "quantity": "100",
+        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
+        "orderedDate": "13-6-2025",
+        "receivedDate": "13-6-2025",
+        "selectedStore": "https://www.digikey.ca/en/products/detail/alpha-wire/7024-RD005/4928173?gclsrc=aw.ds&gad_source=1&gad_campaignid=17336435733&gclid=Cj0KCQjwmK_CBhCEARIsAMKwcD4fjnYPFiRs5qTkHOetBpH4qngJICWutALsqZTcpI-hRLCiWpeTt_UaAv0AEALw_wcB",
+        "status": "cancelled"
     }
 ]
