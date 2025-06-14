@@ -9,6 +9,10 @@ To run the project in VSCode, set up the server by typing "node backendServer.js
 We haven't figured out how to do server setup, but the code should work  
 There are no special security features, in theory anyone can access the server if it's running  
 
+
+Notes:
+- Avoid putting commas when adding or chaning a part, it breaks the CSV and will make information display improperly
+
 ## Important CSV and File Setup
 - Text files (incomingOrders.txt and orderHistory.txt) should NOT be manually changed
 - There is no import CSV feature; part information needs to be added directly into the code's folder or through tools built into the application
