@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "name": "Green Wire",
+        "quantity": "25",
+        "imgSrc": "https://m.media-amazon.com/images/I/61f7KcAWZNL._AC_SX679_.jpg",
+        "selectedStore": "https://www.amazon.ca/BINNEKER-Gauge-Electric-Stranded-Copper/dp/B0C54VYJFW/ref=sr_1_7?crid=2RZZOYM143MQB&dib=eyJ2IjoiMSJ9.o0gxtr7AVGISlkuzyswBUd6OiJKzjq_DBYGpJb7582YKKMxjqqi6PasH0BHUX1JfVSMA-ybPiZqvpltNPLOWY9zxIaBrh1IvQRvrvI9Xvy58bzxLIhPqqllQKczDDkd8IGYDd0LSVbG7lKHK1zUNavpvXFTC7duGFGsBkAOnm0m_9D8c-hBGc0eF2EBZSaIBdX8d6NmC3moFAQfwfS14iv7C6alGF-hO4zO63-zoMlkC8Ujby4sSe5FIGIFhUvibzzWNKgPow6ikobXF_gYwSrtkBlHtCfHHbmgVoVtBieI.pMpqzNwMxVAw_Db8oygQT8DVekAQb8Ce6KdNNJm0cJw&dib_tag=se&keywords=wire%2Belectric%2Bgreen&qid=1748435288&sprefix=wire%2Belectric%2Bgreen%2Caps%2C89&sr=8-7&th=1",
+        "orderedDate": "13-6-2025"
+    }
+]
