@@ -19,7 +19,7 @@ Additional notes:
 - Example CSV has all the required formatting
 - Location formatting should be [Shelf #][Column][Row] (e.g. 1A1 for shelf 1, column 1, row 1)
   - Shelves are: Miscellaneous shelf (doesn't exist in person, recommended for any parts without fixed locations, shelf 0), blue shelves at front (left 1, right 2), grey shelves at front (left 3, middle 4, right 5), large storage at back (left 6, middle 7, right 8)
-  - Rows are not fixed, they are only suggestions. If needed, it is possible to add more rows than the physical shelves have, but not columns
+  - Rows are not fixed, they are only suggestions. If needed, it is possible to add more rows than the physical shelves have, but not columns (though there is a max of ~200 units per shelf)
   - If a location is invalid, it WILL NOT show up in the location view, but WILL show up in the list view
 - Store links should all be written in one line, and each link should be seperated by " | " (space, vertical line, space)
 - The CSV MUST be named "Part Database - Sheet2", or if not, code from backendServer.js must be changed
