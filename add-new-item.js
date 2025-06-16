@@ -20,38 +20,57 @@ function loadItemDetails() {
 
 // takes all the info from the page into a new part on the csv
 function saveItemInfo() {
-    currentPart.name = document.getElementById("name").value;
-    currentPart.stock = document.getElementById("stock").value;
-    currentPart.threshold = document.getElementById("threshold").value;
-    currentPart.model = document.getElementById("model").value;
-    currentPart.location = document.getElementById("location").value;
-    currentPart.notes = document.getElementById("notes").value;
-    currentPart.imgSrc = document.getElementById("url-image-input").value;
-    currentPart.storeLinks = document.getElementById("store-links").value;
+    const currName = document.getElementById("name").value;
+    const currStock = document.getElementById("stock").value;
+    const currThreshold = document.getElementById("threshold").value;
+    const currModel = document.getElementById("model").value;
+    const currLocation = document.getElementById("location").value;
+    const currNotes = document.getElementById("notes").value;
+    const currImgSrc = document.getElementById("url-image-input").value;
+    const currStoreLinks = document.getElementById("store-links").value;
 
-    console.log(currentPart);
-
-    try { 
-
-        // fetch info from the server (backendServer.js)
-        fetch(`${serverLocation}/save`, {
-            // sends the data to the serverLocation
-            method: 'POST',
-            headers: { // i have no idea what this does but i was told to add it
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(currentPart),
-        });
-
-        window.alert("Changes saved!");
-
-        getPartArray();
-
+    // super duper uber tedious comma checking because if they're included,
+    // the CSV completely dies, and it has to be changed manually
+    if (currName.includes(",") || currStock.includes(",") || currThreshold.includes(",") || currModel.includes(",") ||
+        currLocation.includes(",") || currNotes.includes(",") || currImgSrc.includes(",") || currStoreLinks.includes(",")) {
+        window.alert("Please remove commas from input fields before saving");
     }
-    catch { // in case of file reading error
-        window.alert("Error: Changes not saved");
+    else {
+        currentPart.name = currName;
+        currentPart.stock = currStock;
+        currentPart.threshold = currThreshold;
+        currentPart.model = currModel;
+        currentPart.location = currLocation;
+        currentPart.notes = currNotes;
+        currentPart.imgSrc = currImgSrc;
+        currentPart.storeLinks = currStoreLinks;
 
+        console.log(currentPart);
+
+        try {
+
+            // fetch info from the server (backendServer.js)
+            fetch(`${serverLocation}/save`, {
+                // sends the data to the serverLocation
+                method: 'POST',
+                headers: { // i have no idea what this does but i was told to add it
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(currentPart),
+            });
+
+            window.alert("Changes saved!");
+
+            getPartArray();
+
+        }
+        catch { // in case of file reading error
+            window.alert("Error: Changes not saved");
+
+        }
     }
+
+
 
 }
 
