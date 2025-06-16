@@ -14,6 +14,7 @@ a:hover {
 .tabs {
     display: flex;
     gap: 0px;
+    width: 100%;
 }
 
 .nav {
@@ -292,7 +293,7 @@ form {
 }
 
 
-/* daniel code, for item-details.html */
+/* daniel code, for item-details.html and other misc stuff */
 #save-item-info {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -317,6 +318,26 @@ form {
 }
 
 #clear-history:hover {
+    background-color: aliceblue;
+    color: darkblue;
+}
+
+.page-specific-button { /* make buttons go on other side */
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+#change-name {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#change-name:hover {
     background-color: aliceblue;
     color: darkblue;
 }

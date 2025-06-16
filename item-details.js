@@ -27,16 +27,20 @@ function saveChanges() {
     // super duper uber tedious comma checking because if they're included,
     // the CSV completely dies, and it has to be changed manually
     if (currStock.includes(",") || currThreshold.includes(",") || currModel.includes(",") ||
-        currLocation.includes(",") || currNotes.includes(",") || currImgSrc.includes(",") || currStoreLinks.includes(",")) {
+        currLocation.includes(",") || currNotes.includes(",") || currImgSrc.includes(",")) {
         window.alert("Please remove commas from input fields before saving");
     }
     else {
+        changedPart.name = document.getElementById("name").innerHTML;
         changedPart.stock = currStock;
         changedPart.threshold = currThreshold;
         changedPart.model = currModel;
         changedPart.location = currLocation;
         changedPart.notes = currNotes;
         changedPart.imgSrc = currImgSrc;
+        changedPart.storeLinks = currentPart._storeLinks;
+        changedPart.originalName = currentPart._name;
+
 
         try {
             // fetch from backend server (if /update)
@@ -72,6 +76,67 @@ function saveChanges() {
 
 }
 
+// called when the change name button is clicked
+// prompts the user for a name, checks its validity, then changes the name
+// using the same update function
+function changeName() {
+    let changedName = prompt("Please enter the new name:", "New name here");
+
+    if (changedName == null || changedName == "") {
+        window.alert("Name not saved");
+
+    }
+    else if (changedName.includes(",")) {
+        window.alert("Name not saved: Please remove commas")
+    }
+    else {
+
+        // same as saveChanges
+        changedPart.name = changedName;
+        changedPart.stock = document.getElementById("stock").value;
+        changedPart.threshold = document.getElementById("threshold").value;
+        changedPart.model = document.getElementById("model").value;
+        changedPart.location = document.getElementById("location").value;
+        changedPart.notes = document.getElementById("notes").value;
+        changedPart.imgSrc = document.getElementById("url-image-input").value;
+        changedPart.storeLinks = currentPart._storeLinks;
+        changedPart.originalName = currentPart._name;
+
+
+        try {
+            // fetch from backend server (if /update)
+            fetch(`${serverLocation}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(changedPart),
+            })
+                .then(response => response.json()) // parses data into object array (?)
+                .then(data => {
+                    // sets session storage, and then changes currentPart
+                    sessionStorage.setItem("currentPart", JSON.stringify(data));
+                    currentPart = data;
+                    getPartArray();
+
+                    window.alert("Changes saved!");
+
+                    loadItemDetails(); // updates page
+
+
+                    console.log("updated");
+                })
+
+        }
+        catch (error) {
+            window.alert("Error changing item info: ", error);
+
+        }
+    }
+
+}
+
+
 function loadItemDetails() { // just takes the part from local storage
     document.getElementById("name").textContent = currentPart._name;
     document.getElementById("stock").value = currentPart._stock;
@@ -87,6 +152,9 @@ function loadItemDetails() { // just takes the part from local storage
 document.addEventListener("DOMContentLoaded", () => { // waits until page is fully loaded
     // action listener for the search button
     document.getElementById("save-item-info").addEventListener("click", saveChanges);
+    document.getElementById("change-name").addEventListener("click", changeName);
+    console.log(currentPart._storeLinks);
+
 
     // load items
     loadItemDetails();

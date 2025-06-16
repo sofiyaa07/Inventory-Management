@@ -66,7 +66,7 @@ app.get('/load', (request, response) => {
 
 // item-details-------------------------------------------------------------------------
 
-// edit part info by deleting the row of edited part, then append new info (into csv)
+// edit part info by turning csv into an array, editing the array, then writing the array into csv
 app.post('/update', (request, response) => {
     const updatedPart = request.body;
     console.log(updatedPart);
@@ -81,22 +81,38 @@ app.post('/update', (request, response) => {
 
         // csvObject: the entire csv as objects, finds the index of the part to be updated
         // callback function searches all the objects' names, and compares to updatedPart
-        const partToChange = csvObject.findIndex(part => part.name == updatedPart.name);
-        console.log(updatedPart.name);
+        // Use originalName to find the correct part, fallback to storeLinks if needed
+        let partToChange = csvObject.findIndex(part => part.name === updatedPart.originalName);
+
+        if (partToChange === -1) {
+            // fallback: try matching by storeLinks
+            partToChange = csvObject.findIndex(part => part.storeLinks === updatedPart.storeLinks);
+            console.log("CHANGING NAME");
+        } else {
+            console.log("NOT CHANGING NAME");
+        }
 
 
-        // NOT READING PROPERTIS CORRECTLY
+        // formats links
+        let formattedLinks = "";
+        // join turns the array into a string, and speerates with the |
+        formattedLinks += updatedPart.storeLinks.join(" | ");
+
+
         // changes the part at the index
         csvObject[partToChange] = new Part( // it looks kinda bad, but it's just setting it equal
-            csvObject[partToChange].name,
+            updatedPart.name, // only changes when name is being changed specifically
             updatedPart.model,
             updatedPart.location,
             Number(updatedPart.stock),
             updatedPart.notes,
-            csvObject[partToChange].storeLinks,
+            formattedLinks,
             updatedPart.imgSrc,
             Number(updatedPart.threshold)
         );
+
+        console.log(updatedPart.name);
+
 
         console.log(csvObject[partToChange]);
 
@@ -113,15 +129,19 @@ app.post('/update', (request, response) => {
                 console.error('Error writing file:', err);
                 return response.status(500).send('Failed to write data');
             }
+
+            // reformats links to be sent back
+            const links = csvObject[partToChange].storeLinks;
+            // the other breakpoint is '[space]|[space]' -- not just '|'
+            const breakpoint = ' | ';
+            csvObject[partToChange].storeLinks = links.split(breakpoint);
+
             response.json(csvObject[partToChange]);
         });
 
     });
 
 });
-
-
-
 
 
 // order history stuff--------------------------------------------------------------------
