@@ -11,7 +11,8 @@ There are no special security features, in theory anyone can access the server i
 
 
 Notes:
-- Avoid putting commas when adding or changing a part's details, it breaks the CSV and will make information display improperly
+- Avoid putting commas when adding or changing a part's details, as it can mess with the CSV (there is built in prevention though)
+- Parts with the same name will be considered the same part. Make them unique, please
 
 ## Important CSV and File Setup
 - Text files (incomingOrders.txt and orderHistory.txt) should NOT be manually changed
@@ -26,5 +27,6 @@ Additional notes:
     - Shelf 0 does not care about location, it just places units in whatever order they appear first in the CSV
   - Rows are not fixed, they are only suggestions. If needed, it is possible to add more rows than the physical shelves have, but not columns (though there is a max of ~300 units per shelf)
   - If a location is invalid, it WILL NOT show up in the location view, but WILL show up in the list view
+  - Duplicate locations will cause the program to display information improperly. The last filled cell in the location view should be the cell with the duplicate location. There will be an error message when the page loads to help you find the problem
 - Store links should all be written in one line, and each link should be seperated by " | " (space, vertical line, space)
 - The CSV MUST be named "Part Database - Sheet2", or if not, code from backendServer.js must be changed
