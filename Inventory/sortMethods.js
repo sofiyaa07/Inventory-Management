@@ -1,5 +1,5 @@
 /*
-* Sort methods used in listScript.js
+* Sort methods used in listScript.js and partArray.js
 * Most are directly copied from helper-methods.js, but this file is safe to import into frontend code
 * (other file has promises and stuff that only work in node.js)
 */
@@ -99,6 +99,42 @@ export function sortByName(arr, searchString) {
             newArr.push(arr[i]);
         }
     }
-    
+
     return newArr;
+}
+
+export function sortByLocation(arr) {
+    /*
+    Input: array of part objects with location info in [SHELF#][COLUMN][ROW] format
+    Return: same array, sorted in ascending order, bsaed on location
+        Priority goes to shelf#, then column, then row
+    */
+
+    let sortedArr = arr.sort((a, b) => { // gets all the shelf, column and row numbers
+        let shelfA = a.location.charAt(0);
+        let shelfB = b.location.charAt(0);
+        // account for two digit row #s 
+        let rowA = a.location.substring(2)
+        let rowB = b.location.substring(2)
+        let colA = a.location.charAt(1);
+        let colB = b.location.charAt(1);
+
+        // return difference of shelves 
+        if (shelfA !== shelfB) {
+            return shelfA - shelfB;
+        }
+
+        // if same shelf, compare rows
+        if (rowA !== rowB) {
+            return rowA - rowB;
+        }
+
+        // if all else equal, compare columns
+        return colA.localeCompare(colB);
+
+
+    });
+
+    return sortedArr;
+
 }

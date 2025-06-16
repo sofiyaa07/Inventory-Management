@@ -150,6 +150,8 @@ function stockShelves(shelf, numCol) {
 
         amountOfIterations++;
         if (amountOfIterations > maxIterations) {
+            // error message
+            window.alert("Error: parts are not being displayed properly\nError is in "+shelfId);
             console.log("LOOP IS STUPID AND BROKE");
             break;
         }
